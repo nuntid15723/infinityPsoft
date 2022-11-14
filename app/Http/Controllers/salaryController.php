@@ -30,6 +30,13 @@ class salaryController extends Controller
         // $sum_salary = $users->sum('salary');
         $lastatus = Roundsalary::orderBy('id', 'DESC')->first();
         $roundhistory = Roundsalary::get();
+        foreach ($roundhistory as $key => $value) {
+            $showsalary = Salary::where('roundsalaries_id', $value->id)->sum('amount');
+            $downsalary = Salary::where('roundsalaries_id', $value->id)->sum('sumdown');
+            $roundhistory[$key]['round_salary'] = $showsalary;
+            $roundhistory[$key]['round_salarydown'] = $downsalary;
+        }
+        // dd($roundhistory);
         // dd($lastatus->rlname);
         $sum_salary = 0;
         $amount_sum = 0;
@@ -55,10 +62,10 @@ class salaryController extends Controller
             $amount_salary = ($count_salary - $count_salaryfall);
             // dd( $showsalary);
         } elseif (!empty($lastatus)) {
-            $showsalary = Salary::where('roundsalaries_id', $lastatus->id)->get();
+            $showsalary = Salary::where('roundsalaries_id', $value->id)->get();
             $roundsum_salary = $showsalary->sum('salary');
             $roundamount_sum = $showsalary->sum('sumdown');
-            // dd($roundamount_sum);
+            // dd($showsalary);
         } else {
             $showsalary = NULL;
         }
@@ -178,7 +185,7 @@ class salaryController extends Controller
         $round->rlname = $date;
 
         $round->save();
-        $users = User::whereNotIn('roleid', [0,2])->get();
+        $users = User::whereNotIn('roleid', [0, 2])->get();
         // dd($users);
         foreach ($users as $key => $value) {
             $salary = new Salary;

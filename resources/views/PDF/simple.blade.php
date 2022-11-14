@@ -339,11 +339,11 @@
                 <td width="25%" align="left" style=" border-left: 1px solid black;">
                     <div style="font-size: 18px; margin-left: 0.5rem;">
                         @if ($showsalary->leave_much != 0.0)
-                            หักลาป่วย,ลากิจ,อื่นๆ
+                            หักลาเกิน,เข้างานสาย,อื่นๆ
                         @elseif ($showsalary->work_late != 0.0)
-                            หักลาป่วย,ลากิจ,อื่นๆ
+                            หักลาเกิน,เข้างานสาย,อื่นๆ
                         @elseif ($showsalary->not_work != 0.0)
-                            หักลาป่วย,ลากิจ,อื่นๆ
+                            หักลาเกิน,เข้างานสาย,อื่นๆ
                         @endif
                     </div>
                 </td>
@@ -421,7 +421,8 @@
                     <div style="font-size: 20px; font-weight: bold; margin-top:10px">
                 </td>
                 <td colspan="1" style="width: 30%">
-                    <div style="font-size: 20px;font-weight: bold; margin-left: 4.0rem; margin-top: 18px">เงินได้สุทธิ / Net to Pay</div>
+                    <div style="font-size: 20px;font-weight: bold; margin-left: 4.0rem; margin-top: 18px">เงินได้สุทธิ
+                        / Net to Pay</div>
                 <td colspan="3" align="center" style="width: 30%">
                     <div style="font-size: 22px; font-weight: bold; margin-top:18px">
                         {{ number_format($showsalary->salary - $showsalary->sumdown, 2) }}

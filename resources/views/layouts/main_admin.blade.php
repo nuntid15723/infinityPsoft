@@ -485,6 +485,11 @@
                                 href="{{ route('addEmployee1') }}"><i class="feather icon-circle"
                                     style="font-size: 1.2rem;"></i><span class="menu-item">เพิ่มพนักงาน</span></a>
                         </li>
+                        <li class="{{ Request::routeIs('employeesetting') ? 'active' : '' }} nav-item"><a
+                                href="{{ route('employeesetting') }}"><i class="feather icon-circle"
+                                    style="font-size: 1.2rem;"></i><span class="menu-item"
+                                    data-i18n="Shop">รายชื่อพนักงานลาออก</span></a>
+                        </li>
                     </ul>
                 </li>
                 <li class="{{ Request::routeIs('work') ? 'active' : '' }} nav-item"><a href="{{ route('work') }}"><i
@@ -560,11 +565,6 @@
                         href="{{ route('departsetting') }}"><i class="fa fa-gear"style="margin-top: 3px;"></i><span
                             class="menu-title" data-i18n="Todo"style="font-size: 18px; ">ตั้งค่า</span></a>
                     <ul class="menu-content">
-                        <li class="{{ Request::routeIs('employeesetting') ? 'active' : '' }} nav-item"><a
-                                href="{{ route('employeesetting') }}"><i class="feather icon-circle"
-                                    style="font-size: 1.2rem;"></i><span class="menu-item"
-                                    data-i18n="Shop">ประวัติพนักงาน</span></a>
-                        </li>
                         <li class="{{ Request::routeIs('departsetting') ? 'active' : '' }} nav-item"><a
                                 href="{{ route('departsetting') }}"><i class="feather icon-circle"
                                     style="font-size: 1.2rem;"></i><span class="menu-item"

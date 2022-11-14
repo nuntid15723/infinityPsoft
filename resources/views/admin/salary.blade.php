@@ -193,9 +193,8 @@
 
                                                                     <input type="text"
                                                                         style="font-family: 'Kanit', sans-serif; font-weight:500;"
-                                                                         placeholder="ประกันสังคม"
-                                                                        class="form-control" onkeyup="fncSum();"
-                                                                        id="salary-tax" name="tax"
+                                                                        placeholder="ประกันสังคม" class="form-control"
+                                                                        onkeyup="fncSum();" id="salary-tax" name="tax"
                                                                         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                                                                     {{-- <input type="text" id="test_sala" value=""> --}}
@@ -211,10 +210,12 @@
                                                             <input
                                                                 type="text"style="margin-top: -5px; color:red; border: 0px;background-color: white;font-size: 20px;text-align: end;"
                                                                 name="taxfall" class="form-control"
-                                                                @foreach ($showsalary as $lastatu )
+                                                                @if ($showsalary || $showsalary) @foreach ($showsalary as $lastatu)
                                                                  @if ($lastatu->id)
-                                                                  value="{{ $lastatu->id }}" @endif @endforeach
-                                                                id="taxfall" placeholder="เงินค่าประกันสังคม" readonly>
+                                                                  value="{{ $lastatu->id }}" @endif
+                                                                @endforeach
+                                                            id="taxfall" placeholder="เงินค่าประกันสังคม" readonly>
+                                                            @endif
                                                         </p>
                                                         {{-- @php
                                                             dd($lastatu->taxfall);
@@ -684,10 +685,12 @@
                                                                                                                 ยกเลิก
                                                                                                             @endif
                                                                                                         </td>
-                                                                                                        <td>{{ $roundamount_sum }}
+                                                                                                        <td>
+                                                                                                            {{ $history->round_salarydown }}
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{ $roundsum_salary - $roundamount_sum }}
+                                                                                                            {{$history->round_salary}}
+
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 @endforeach
