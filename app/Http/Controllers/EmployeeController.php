@@ -27,15 +27,24 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     //
+
+    //     $departmentList = Department::all();
+    //     $users = User::whereNotIn('roleid',[0,2])->get();
+    //     $users_not = User::whereNotIn('roleid',[1,3])->get();
+    //     // $sum_salary = $users->sum('salary');
+    //     return view('admin.employee.Employee', compact('users', 'departmentList','users_not'));
+    // }
     public function index()
     {
         //
-
         $departmentList = Department::all();
-        $users = User::whereNotIn('roleid',[0,2])->get();
+        $users = User::whereNotIn('roleid',[0,2])->where('emtype',0)->get();
         $users_not = User::whereNotIn('roleid',[1,3])->get();
-        // $sum_salary = $users->sum('salary');
-        return view('admin.employee.Employee', compact('users', 'departmentList','users_not'));
+        $users_admin = User::where('emtype',1)->get();
+        return view('admin.employee.Employee', compact('users', 'departmentList','users_not','users_admin'));
     }
     public function index1()
     {

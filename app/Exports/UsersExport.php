@@ -57,7 +57,8 @@ class UsersExport implements FromView, ShouldAutoSize
     public function view(): View
     {
         return view('admin.employee.employeeex', [
-            'users' => User::all()
+            'users' => User::whereNotIn('roleid',[0,2])->get()
+            // 'users' => User::all()
         ]);
     }
     // public function export()

@@ -246,6 +246,18 @@
             background-color: #0ba008;
             font-size: 15px;
         }
+
+        div.dataTables_wrapper div.dataTables_filter label,
+        div.dataTables_wrapper div.dataTables_length label {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        div.dataTables_wrapper div.dataTables_info {
+            padding-top: 0.85em;
+            white-space: nowrap;
+            font-size: 1.2rem;
+        }
     </style>
     @yield('style')
 </head>

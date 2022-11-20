@@ -354,9 +354,11 @@
                                                             style="background-color: #164176;color: white;">ยืนยัน
                                                         </button>
                                                         {{-- <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button> --}}
+                                                        <a href="{{ route('stock') }}">
                                                         <button type="button"
                                                             class="btn btn-outline-secondary round mr-1 mb-1"data-dismiss="modal"
                                                             aria-label="Close">ยกเลิก</button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>

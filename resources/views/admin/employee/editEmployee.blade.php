@@ -653,7 +653,7 @@
                                                             style="background-color: #164176;color: white;">บันทึก
                                                         </button>
                                                         {{-- <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button> --}}
-                                                        <a href="{{ url('/employee') }}">
+                                                        <a href="{{ route('employee') }}">
                                                             <button type="button"
                                                                 class="btn btn-outline-secondary round mr-1 mb-1"
                                                                 aria-label="Close">ยกเลิก

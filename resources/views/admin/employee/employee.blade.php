@@ -471,6 +471,434 @@
                 </div>
             </div>
             <section id="nav-filled">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card overflow-hidden">
+                            <div class="card-content" style="font-family: 'Kanit', sans-serif; font-weight:500;">
+                                <div class="card-body">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab-fill" data-toggle="tab"
+                                                href="#home-fill" role="tab" aria-controls="home-fill"
+                                                aria-selected="true" style="font-size: 20px">
+                                                รายชื่อพนักงาน
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab-fill" data-toggle="tab"
+                                                href="#profile-fill" role="tab" aria-controls="profile-fill"
+                                                aria-selected="false" style="font-size: 20px">
+                                                ผู้ดูแลระบบ
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="messages-tab-fill" data-toggle="tab"
+                                                href="#messages-fill" role="tab" aria-controls="messages-fill"
+                                                aria-selected="false" style="font-size: 20px">
+                                                พ้นสภาพการเป็นพนักงาน
+                                            </a>
+                                        </li>
+                                        {{-- <li class="nav-item">
+                                            <a class="nav-link" id="settings-tab-fill" data-toggle="tab"
+                                                href="#settings-fill" role="tab" aria-controls="settings-fill"
+                                                aria-selected="false"style="font-size: 20px">
+
+                                            </a>
+                                        </li> --}}
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content pt-1"
+                                        style="font-family: 'Kanit', sans-serif; font-weight:400;">
+                                        <!-- Tab panes1 รายชื่อพนักงาน -->
+                                        <div class="tab-pane active" id="home-fill" role="tabpanel"
+                                            aria-labelledby="home-tab-fill">
+                                            <div class="card-content">
+                                                <div class="table-responsive mt-1 dataTables_scroll"
+                                                    style="overflow-x: hidden;">
+                                                    <section id="basic-datatable">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body card-dashboard">
+                                                                            <div class="table-responsive  ">
+                                                                                <table class="table zero-configuration "
+                                                                                    style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                    <thead class="thead-secondary ">
+                                                                                        <tr class="dataTables_scroll">
+                                                                                            <th
+                                                                                                style=" border-radius: 15px 0px 0px 0px;font-size: 1rem;">
+                                                                                                ลำดับ</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                รหัสพนักงาน</th>
+                                                                                            <th style=" font-size: 1rem;">
+                                                                                                ชื่อ-นามสกุล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เบอร์โทรศัพท์
+                                                                                            </th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                อีเมล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                สถานะ</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เงินเดือน
+                                                                                            </th>
+                                                                                            <th
+                                                                                                style=" border-radius: 0px 14px 0px 0px;font-size: 1rem;">
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @php
+                                                                                            $i = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($users as $cus)
+                                                                                            <tr>
+                                                                                                <td>{{ ++$i }}</td>
+                                                                                                <td>{{ $cus->emid }}</td>
+                                                                                                <td>
+                                                                                                    {{ $cus->fullname }}
+                                                                                                </td>
+                                                                                                <td>{{ $cus->phonenumber }}
+                                                                                                </td>
+                                                                                                <td>{{ Str::limit($cus->email, '20', '..') }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    @if ($cus->roleid == 1)
+                                                                                                        {{ 'ผ่านโปร' }}
+                                                                                                    @elseif($cus->roleid == 3)
+                                                                                                        {{ 'ทดลองงาน' }}
+                                                                                                    @endif
+                                                                                                </td>
+                                                                                                <td>{{ number_format($cus->salary) }}
+                                                                                                </td>
+                                                                                                <td style="padding: 0;">
+                                                                                                    <div class="d-flex"
+                                                                                                        style="justify-content: center;">
+                                                                                                        {{-- <div>{{ $cus->salary }} </div> --}}
+                                                                                                        <div
+                                                                                                            class="btn-group dropdown">
+                                                                                                            <div
+                                                                                                                class="btn-group">
+                                                                                                                <button
+                                                                                                                    class="btn btn-white"
+                                                                                                                    style="background-color: #FFD027 !important;height: 25px;width: 30px;padding: 0;border-radius: 5px;color:white"
+                                                                                                                    data-toggle="dropdown"
+                                                                                                                    aria-haspopup="true"
+                                                                                                                    aria-expanded="false">
+                                                                                                                    <i class="feather icon-edit"
+                                                                                                                        style="margin-left: 3px; margin-right: 0px">&nbsp;</i>
+                                                                                                                </button>
+                                                                                                                <div
+                                                                                                                    class="dropdown-menu">
+                                                                                                                    <button
+                                                                                                                        class="dropdown-item"
+                                                                                                                        type="button"
+                                                                                                                        onclick="getData({{ $cus->id }})"
+                                                                                                                        data-url="{{ route('users.show', $cus->fullname) }}"
+                                                                                                                        data-toggle="modal"
+                                                                                                                        data-target="#exampleModalCenter"
+                                                                                                                        style="width: 100%;font-size:1.1rem;">
+                                                                                                                        รายละเอียด
+                                                                                                                    </button>
+                                                                                                                    <a class="dropdown-item"
+                                                                                                                        href="{{ route('edit.employee', $cus->id) }}"
+                                                                                                                        style="font-size:1.1rem;">แก้ไข</a>
+                                                                                                                    {{-- <a class="dropdown-item"
+                                                                                                                        href="#"><b>ลบ</b></a> --}}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+
+                                                                                        </tr>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--End Tab panes1 -->
+                                        <!-- Tab panes2 -->
+                                        {{-- ผู้ดูแลระบบ --}}
+                                        <div class="tab-pane" id="profile-fill" role="tabpanel"
+                                            aria-labelledby="profile-tab-fill">
+                                            <p>
+                                            <div class="card-content">
+                                                <div class="table-responsive mt-1"style="overflow-x: hidden;">
+                                                    <section id="basic-datatable">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body card-dashboard">
+                                                                            <div class="table-responsive  ">
+                                                                                <table class="table zero-configuration"
+                                                                                    style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                    <thead class="thead-secondary ">
+                                                                                        <tr class="dataTables_scroll">
+                                                                                            <th
+                                                                                                style=" border-radius: 15px 0px 0px 0px;font-size: 1rem;">
+                                                                                                ลำดับ</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                รหัสพนักงาน</th>
+                                                                                            <th style=" font-size: 1rem;">
+                                                                                                ชื่อ-นามสกุล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เบอร์โทรศัพท์
+                                                                                            </th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                อีเมล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เงินเดือน
+                                                                                            </th>
+                                                                                            <th
+                                                                                                style=" border-radius: 0px 14px 0px 0px;font-size: 1rem;">
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @php
+                                                                                            $i = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($users_admin as $cus)
+                                                                                            <tr>
+                                                                                                <td>{{ ++$i }}
+                                                                                                </td>
+                                                                                                <td>{{ $cus->emid }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    {{ $cus->fullname }}
+                                                                                                </td>
+                                                                                                <td>{{ $cus->phonenumber }}
+                                                                                                </td>
+                                                                                                <td>{{ Str::limit($cus->email, '20', '..') }}
+                                                                                                </td>
+                                                                                                <td>{{ number_format($cus->salary) }}
+                                                                                                </td>
+                                                                                                <td style="padding: 0;">
+                                                                                                    <div class="d-flex"
+                                                                                                        style="justify-content: center;">
+                                                                                                        {{-- <div>{{ $cus->salary }} </div> --}}
+                                                                                                        <div
+                                                                                                            class="btn-group dropdown">
+                                                                                                            <div
+                                                                                                                class="btn-group">
+                                                                                                                <button
+                                                                                                                    class="btn btn-white"
+                                                                                                                    style="background-color: #FFD027 !important;height: 25px;width: 30px;padding: 0;border-radius: 5px;color:white"
+                                                                                                                    data-toggle="dropdown"
+                                                                                                                    aria-haspopup="true"
+                                                                                                                    aria-expanded="false">
+                                                                                                                    <i class="feather icon-edit"
+                                                                                                                        style="margin-left: 3px; margin-right: 0px">&nbsp;</i>
+                                                                                                                </button>
+                                                                                                                <div
+                                                                                                                    class="dropdown-menu">
+                                                                                                                    <button
+                                                                                                                        class="dropdown-item"
+                                                                                                                        type="button"
+                                                                                                                        onclick="getData({{ $cus->id }})"
+                                                                                                                        data-url="{{ route('users.show', $cus->fullname) }}"
+                                                                                                                        data-toggle="modal"
+                                                                                                                        data-target="#exampleModalCenter"
+                                                                                                                        style="width: 100%;font-size:1.1rem;">
+                                                                                                                        รายละเอียด
+                                                                                                                    </button>
+                                                                                                                    <a class="dropdown-item"
+                                                                                                                        href="{{ route('edit.employee', $cus->id) }}"
+                                                                                                                        style="font-size:1.1rem;">แก้ไข</a>
+                                                                                                                    {{-- <a class="dropdown-item"
+                                                                                                                        href="#"><b>ลบ</b></a> --}}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+
+                                                                                        </tr>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            </p>
+                                        </div>
+                                        <!--End Tab panes2 -->
+                                        <!-- Tab panes3 -->
+                                        {{-- พ้นสภาพการเป็นพนักงาน --}}
+                                        <div class="tab-pane" id="messages-fill" role="tabpanel"
+                                            aria-labelledby="messages-tab-fill">
+                                            <p>
+                                            <div class="card-content">
+                                                <div class="table-responsive mt-1 dataTables_scroll">
+                                                    <section id="basic-datatable">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body card-dashboard">
+
+                                                                            <div class="table-responsive  ">
+                                                                                <table class="table zero-configuration"
+                                                                                    style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                    <thead class="thead-secondary ">
+                                                                                        <tr class="dataTables_scroll">
+                                                                                            <th
+                                                                                                style=" border-radius: 15px 0px 0px 0px;font-size: 1rem;">
+                                                                                                ลำดับ</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                รหัสพนักงาน</th>
+                                                                                            <th style=" font-size: 1rem;">
+                                                                                                ชื่อ-นามสกุล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เบอร์โทรศัพท์
+                                                                                            </th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                อีเมล</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                สถานะ</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                เงินเดือน
+                                                                                            </th>
+                                                                                            <th
+                                                                                                style=" border-radius: 0px 14px 0px 0px;font-size: 1rem;">
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @php
+                                                                                            $i = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($users_not as $cus)
+                                                                                            <tr>
+                                                                                                <td>{{ ++$i }}
+                                                                                                </td>
+                                                                                                <td>{{ $cus->emid }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    {{ Str::limit($cus->fullname, '20', '..') }}
+                                                                                                </td>
+                                                                                                <td>{{ $cus->phonenumber }}
+                                                                                                </td>
+                                                                                                <td>{{ Str::limit($cus->email, '20', '..') }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    @if ($cus->roleid == 0)
+                                                                                                        {{ 'ไม่ผ่านโปร' }}
+                                                                                                    @elseif($cus->roleid == 2)
+                                                                                                        {{ 'ลาออก' }}
+                                                                                                    @endif
+                                                                                                </td>
+                                                                                                <td>{{ number_format($cus->salary) }}
+                                                                                                </td>
+                                                                                                <td style="padding: 0;">
+                                                                                                    <div class="d-flex"
+                                                                                                        style="justify-content: center;">
+                                                                                                        {{-- <div>{{ $cus->salary }} </div> --}}
+                                                                                                        <div
+                                                                                                            class="btn-group dropdown">
+                                                                                                            <div
+                                                                                                                class="btn-group">
+                                                                                                                <button
+                                                                                                                    class="btn btn-white"
+                                                                                                                    style="background-color: #FFD027 !important;height: 25px;width: 30px;padding: 0;border-radius: 5px;color:white"
+                                                                                                                    data-toggle="dropdown"
+                                                                                                                    aria-haspopup="true"
+                                                                                                                    aria-expanded="false">
+                                                                                                                    <i class="feather icon-edit"
+                                                                                                                        style="margin-left: 3px; margin-right: 0px">&nbsp;</i>
+                                                                                                                </button>
+                                                                                                                <div
+                                                                                                                    class="dropdown-menu">
+                                                                                                                    <button
+                                                                                                                        class="dropdown-item"
+                                                                                                                        type="button"
+                                                                                                                        onclick="getData({{ $cus->id }})"
+                                                                                                                        data-url="{{ route('users.show', $cus->fullname) }}"
+                                                                                                                        data-toggle="modal"
+                                                                                                                        data-target="#exampleModalCenter"
+                                                                                                                        style="width: 100%;font-size:1.1rem;">
+                                                                                                                        รายละเอียด
+                                                                                                                    </button>
+                                                                                                                    <a class="dropdown-item"
+                                                                                                                        href="{{ route('edit.employee', $cus->id) }}"
+                                                                                                                        style="font-size:1.1rem;">แก้ไข</a>
+                                                                                                                    {{-- <a class="dropdown-item"
+                                                                                                                        href="#"><b>ลบ</b></a> --}}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+
+                                                                                        </tr>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {{-- <section id="nav-filled">
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
@@ -515,7 +943,6 @@
                                                     </td>
                                                     <td style="padding: 0;">
                                                         <div class="d-flex" style="justify-content: center;">
-                                                            {{-- <div>{{ $cus->salary }} </div> --}}
                                                             <div class="btn-group dropdown">
                                                                 <div class="btn-group">
                                                                     <button class="btn btn-white"
@@ -537,8 +964,6 @@
                                                                         <a class="dropdown-item"
                                                                             href="{{ route('edit.employee', $cus->id) }}"
                                                                             style="font-size:1.1rem;">แก้ไข</a>
-                                                                        {{-- <a class="dropdown-item"
-                                                                            href="#"><b>ลบ</b></a> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -547,17 +972,6 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                {{-- <th>{{ $sum_salary }} </th> --}}
-                                                <th></th>
-
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -565,7 +979,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
         </div>
     </div>
 @endsection

@@ -255,7 +255,8 @@ class DashboardController extends Controller
     }
     public function work()
     {
-        $user = User::where('roleid', '!=', 2)->get();
+        // $user = User::where('roleid', '!=', 2)->get();
+        $user = User::whereNotIn('roleid',[0,2])->get();
         $lastdate = date('t'); // วันสุดท้ายของเดือน
         $data = [];
         // loop user
