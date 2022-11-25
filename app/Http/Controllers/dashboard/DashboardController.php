@@ -47,11 +47,11 @@ class DashboardController extends Controller
     public function index()
     {
         // $data = [];
-        $data['users'] = User::get();
+        $data['users'] = User::whereNotIn('roleid',[0,2])->get();
         $data['leaves'] = Leave::get();
-        $data['stock'] = Stock::get();
-        $leaves = Leave::where(DB::raw('YEAR(created_at)'), '=', date('Y'))->get();;
-        $user = User::get();
+        $data['stock'] = Stock::whereNotIn('ststatus',[0])->get();
+        $leaves = Leave::where(DB::raw('YEAR(created_at)'), '=', date('Y'))->where('pnid',1)->get();;
+        $user = User::whereNotIn('roleid',[0,2])->get();
         $stock = Stock::get();
         $data['count_users'] = $user->count();
         $data['count_leavesum'] = $leaves->count();

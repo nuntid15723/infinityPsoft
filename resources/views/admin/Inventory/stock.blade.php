@@ -84,10 +84,10 @@
                                     padding-right: 2rem !important;background-color: #2E8B57 !important;">
                                     {{-- <img src="{{ asset('images/excel3.png') }}" class="mr-1"
                                         style="box-shadow: 0px 1px 1px #fff;"> --}}
-                                        <a href="{{ route('stock.export') }}" style="color: #ffffff"><i
+                                    <a href="{{ route('stock.export') }}" style="color: #ffffff"><i
                                             class="bi bi-file-earmark-excel mr-1 "></i>Export</a>
                                     {{-- <i class="bi bi-file-earmark-excel mr-1 "></i>Export</button> --}}
-                                </a>
+                                    </a>
                                 </button>
                             </div>
                         </div>
@@ -148,17 +148,18 @@
                                                                             name="stimg"src="" width="200"
                                                                             height="200" class="img img-responsive">
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="row mt-1">
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;color:#525252;">
                                                                             รหัสทรัพย์สิน
                                                                             <input type='text' name="stId" disabled
+                                                                                style="border: 0px; background-color:#fff;"
                                                                                 id="Inventory-stid" class="form-control" />
                                                                         </div>
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;color:#525252;">
                                                                             ชื่อทรัพย์สิน
-                                                                            <input type='text' name="stname" disabled
+                                                                            <input type='text' name="stname" disabled style="border: 0px; background-color:#fff;"
                                                                                 id="Inventory-stname"
                                                                                 class="form-control" />
                                                                         </div>
@@ -167,7 +168,7 @@
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;color:#525252;">
                                                                             ประเภททรัพย์สิน
-                                                                            <select class="form-control" disabled
+                                                                            <select class="form-control" disabled style="border: 0px; background-color:#fff;"
                                                                                 name="sttype" id="Inventory-sttype">
                                                                                 @foreach ($inventoryList as $val)
                                                                                     <option value="{{ $val->id }}">
@@ -181,7 +182,7 @@
                                                                             วันที่ซื้อ <div class="form-group">
                                                                                 <div
                                                                                     class="position-relative has-icon-right">
-                                                                                    <input type='text' disabled
+                                                                                    <input type='text' disabled style="border: 0px; background-color:#fff;"
                                                                                         id="Inventory-stdaystart"
                                                                                         name="stdaystart"
                                                                                         class="form-control pickadate" />
@@ -197,8 +198,8 @@
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;">
                                                                             <label for="emtype"
-                                                                                style="font-size: 1.0rem !important;color:#525252;">เลือกประเภทผู้ใช้งาน</label>
-                                                                            <select class="form-control" disabled
+                                                                                style="font-size: 1.0rem !important;color:#525252;">สถานะการใช้งาน</label>
+                                                                            <select class="form-control" disabled style="border: 0px; background-color:#fff;"
                                                                                 name="ststatus" id="Inventory-ststatus">
                                                                                 <option value="0">เลิกใช้งาน</option>
                                                                                 <option value="1">ใช้งาน</option>
@@ -223,7 +224,7 @@
                                                                                 </option>
                                                                             @endforeach
                                                                         </select> --}}
-                                                                                <select class="form-control" disabled
+                                                                                <select class="form-control" disabled style="border: 0px; background-color:#fff;"
                                                                                     id="Inventory-stusers">
                                                                                     @foreach ($user as $val)
                                                                                         <option
@@ -370,7 +371,8 @@
                                                                 <fieldset
                                                                     class="form-group position-relative has-icon-left input-divider-left">
                                                                     <input type='text' name="repair_start"
-                                                                        class="form-control pickadate"
+                                                                        class="form-control" id="fromDate"
+                                                                        autocomplete="off"
                                                                         style="font-family: 'Kanit', sans-serif; font-weight:400"
                                                                         placeholder="เลือกวันที่เริ่มใช้งาน" />
                                                                     <div class="form-control-position">
@@ -388,7 +390,8 @@
                                                                 <fieldset
                                                                     class="form-group position-relative has-icon-left input-divider-left">
                                                                     <input type='text' name="repair_end"
-                                                                        class="form-control pickadate"
+                                                                        autocomplete="off" class="form-control"
+                                                                        id="toDate"
                                                                         style="font-family: 'Kanit', sans-serif; font-weight:400"
                                                                         placeholder="เลือกวันที่สิ้นสุด" />
                                                                     <div class="form-control-position">
@@ -442,7 +445,7 @@
                                                                 <select class="select2 form-control" value=""
                                                                     id="" name="repair_name">
                                                                     <option>เลือกผู้ใช้งาน</option>
-                                                                    @foreach ($user as $userlist)
+                                                                    @foreach ($user1 as $userlist)
                                                                         <option value="{{ $userlist->id }}"
                                                                             {{-- @if ($userlist->id == $stock->stusers) {{ 'selected' }} @endif --}}>
                                                                             {{ $userlist->fullname }}
@@ -576,7 +579,9 @@
                                                                                                     {{-- {{$stocklist->stdaystart}} --}}
                                                                                                     {{ Carbon::parse($stocklist->stdaystart)->thaidate('j M Y') }}
                                                                                                 </td>
-                                                                                                <td>{{ $stocklist->stname }}
+                                                                                                <td>
+                                                                                                    {{-- {{ $stocklist->stname }} --}}
+                                                                                                    {{ Str::limit($stocklist->stname, '20', '..') }}
                                                                                                 </td>
                                                                                                 <td>{{ $stocklist->inventory_name }}
                                                                                                 </td>
@@ -767,7 +772,9 @@
                                                                                                 <td>
                                                                                                     {{ Carbon::parse($stocklist->stdaystart)->thaidate('j M Y') }}
                                                                                                 </td>
-                                                                                                <td>{{ $stocklist->stname }}
+                                                                                                <td>
+                                                                                                    {{-- {{ $stocklist->stname }} --}}
+                                                                                                    {{ Str::limit($stocklist->stname, '20', '..') }}
                                                                                                 </td>
                                                                                                 <td>{{ $stocklist->inventory_name }}
                                                                                                 </td>
@@ -957,7 +964,9 @@
                                                                                                 <td>
                                                                                                     {{ Carbon::parse($stocklist->stdaystart)->thaidate('j M Y') }}
                                                                                                 </td>
-                                                                                                <td>{{ $stocklist->stname }}
+                                                                                                <td>
+                                                                                                    {{-- {{ $stocklist->stname }} --}}
+                                                                                                    {{ Str::limit($stocklist->stname, '20', '..') }}
                                                                                                 </td>
                                                                                                 <td>{{ $stocklist->inventory_name }}
                                                                                                 </td>
@@ -1077,6 +1086,27 @@
     </div>
 @endsection
 @section('script')
+    <script>
+        $(document).ready(function() {
+            $("#fromDate").datepicker({
+                language: 'th-th',
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+            }).on('changeDate', function(selected) {
+                var minDate = new Date(selected.date.valueOf());
+                $('#toDate').datepicker('setStartDate', minDate);
+            });
+
+            $("#toDate").datepicker({
+                language: 'th-th',
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+            }).on('changeDate', function(selected) {
+                var minDate = new Date(selected.date.valueOf());
+                $('#fromDate').datepicker('setEndDate', minDate);
+            });
+        });
+    </script>
     <script type="text/javascript">
         function getData(id) {
             var url = "{{ route('Inventory.show', ':id') }}";
@@ -1087,7 +1117,15 @@
                 $('#large').modal('show');
                 $('#Inventory-id').val(data.data.id);
                 $('#Inventory-stid').val(data.data.stid);
-                $('#Inventory-stimg').attr("src", "{{ asset('imgstock') }}" + "/" + data.data.stimg);
+                // $('#Inventory-stimg').attr("src", "{{ asset('imgstock') }}" + "/" + data.data.stimg);
+                if (data.data.stimg != null) {
+                    $('#Inventory-stimg').attr("src", "{{ asset('imgstock') }}" + "/" + data.data.stimg);
+                } else {
+                    $('#Inventory-stimg').attr("src",
+                        "https://i.pinimg.com/736x/c5/a7/98/c5a798e162782e1baa3c8a74693204fc.jpg?fbclid=IwAR0Dp9Ls0GZiN4vDiNzunssi3hG4Z6h3u3dpUl9qobIMDko44-kMRDms6WI"
+                        );
+
+                }
                 $('#Inventory-stname').val(data.data.stname);
                 $('#Inventory-sttype').val(data.data.sttype).change();
                 $('#Inventory-stdaystart').val(data.data.stdaystart);

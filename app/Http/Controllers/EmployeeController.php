@@ -148,7 +148,7 @@ class EmployeeController extends Controller
             $table->save();
             Alert::success('บันทึกเรียบร้อย');
             DB::commit();
-            return redirect()->routr('employee')->with('success', 'เพิ่มสำเสร็จ');
+            return redirect()->route('employee')->with('success', 'เพิ่มสำเสร็จ');
             // return response()->json([
             //     'successful' => true
             // ]);
@@ -194,8 +194,9 @@ class EmployeeController extends Controller
         // $departmentList = Department::get();
         $departmentList = Department::where('dpstatus', [1])->get();
         $user = User::find($id);
+        $imguse =  User::find($id)->where('');
         // dd($user);
-        return view('admin.employee.editEmployee', compact('user', 'departmentList'));
+        return view('admin.employee.editEmployee', compact('user', 'departmentList','imguse'));
     }
 
     /**

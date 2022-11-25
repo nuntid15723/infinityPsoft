@@ -644,7 +644,8 @@
                                                                                                         </td>
                                                                                                         <td>
                                                                                                             <div>
-                                                                                                                {{ $leaveDetall->fullname }}
+                                                                                                                {{ Str::limit($leaveDetall->fullname, '20', '..') }}
+                                                                                                                {{-- {{ $leaveDetall->fullname }} --}}
                                                                                                         </td>
                                                                                                         <td class="p-1">
                                                                                                             {{ $leaveDetall->dpname }}
@@ -812,7 +813,9 @@
                                                                                                             <td>{{ $List1->emid }}
                                                                                                             </td>
                                                                                                             <td>
-                                                                                                                {{ $List1->fullname }}
+                                                                                                                {{-- {{ $List1->fullname }} --}}
+                                                                                                                {{ Str::limit($List1->fullname, '20', '..') }}
+
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 class="p-1">
@@ -941,7 +944,9 @@
                                                                                                             <td>{{ $List2->emid }}
                                                                                                             </td>
                                                                                                             <td>
-                                                                                                                {{ $List2->fullname }}
+                                                                                                                {{-- {{ $List2->fullname }} --}}
+                                                                                                                {{ Str::limit($List2->fullname, '20', '..') }}
+
                                                                                                             </td>
                                                                                                             <td
                                                                                                                 class="p-1">

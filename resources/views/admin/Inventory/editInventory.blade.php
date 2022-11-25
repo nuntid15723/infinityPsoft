@@ -62,10 +62,20 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-sm-4"style="text-align: -moz-center;">
                                                         <div class="mb-0">
-                                                            <img id="stImg"
-                                                                src="{{ asset('imgstock/' . $stock->stimg) }}"
-                                                                class="img-fluid"
-                                                                style="max-width: 200px; max-height: 200px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                            <span>
+                                                                @if ($stock->stimg != null)
+                                                                    <img id="stImg"
+                                                                        src="{{ asset('imgstock/' . $stock->stimg) }}"
+                                                                        class="img-fluid"
+                                                                        style="max-width: 200px; max-height: 200px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                @else
+                                                                    <img id="stImg"
+                                                                        src="https://i.pinimg.com/736x/c5/a7/98/c5a798e162782e1baa3c8a74693204fc.jpg?fbclid=IwAR0Dp9Ls0GZiN4vDiNzunssi3hG4Z6h3u3dpUl9qobIMDko44-kMRDms6WI"
+                                                                        class="img-fluid"
+                                                                        style="max-width: 200px; max-height: 200px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                @endif
+                                                            </span>
+
                                                             <label for="Image" class="form-label"
                                                                 accept="image/*"></label>
                                                             <input class="form-control" name="stImg" type="file"
@@ -73,10 +83,6 @@
                                                                 accept="image/jpg, image/jpeg, image/png"
                                                                 style="width:200px;margin-top: 5px;">
                                                         </div>
-                                                        {{-- <h6
-                                                        style="margin-top: 20px;font-family: 'Kanit', sans-serif; font-weight:400; color: #970a0a;">
-                                                        กรุณาเลือกรูปทรัพย์สิน</h6> --}}
-
                                                     </div>
                                                     <div class="col-lg-6 col-sm-4"style="margin-top: 75px;">
                                                         <h5 style="font-size: 1.6rem;"> ชื่อ : <span
@@ -355,9 +361,9 @@
                                                         </button>
                                                         {{-- <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button> --}}
                                                         <a href="{{ route('stock') }}">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary round mr-1 mb-1"data-dismiss="modal"
-                                                            aria-label="Close">ยกเลิก</button>
+                                                            <button type="button"
+                                                                class="btn btn-outline-secondary round mr-1 mb-1"data-dismiss="modal"
+                                                                aria-label="Close">ยกเลิก</button>
                                                         </a>
                                                     </div>
                                                 </div>

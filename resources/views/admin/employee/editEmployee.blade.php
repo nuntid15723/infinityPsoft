@@ -166,10 +166,19 @@
                                                     <div class="col-lg-3 col-sm-3">
                                                         <div class="row">
                                                             <div class="col-lg-12 col-sm-12">
-                                                                <img id="cusImg"
-                                                                    src="{{ asset('imguse/' . $user->emimg) }}"
-                                                                    {{-- src="/imguse/{{ $user->emimg }}" alt="" --}} class="img-fluid"
-                                                                    style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                <span>
+                                                                    @if ($user->emimg != null)
+                                                                        <img id="cusImg"
+                                                                            src="{{ asset('imguse/' . $user->emimg) }}"
+                                                                            {{-- src="/imguse/{{ $user->emimg }}" alt="" --}} class="img-fluid"
+                                                                            style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                    @else
+                                                                        <img id="cusImg"
+                                                                            src="https://i.pinimg.com/564x/a5/e8/1f/a5e81f19cf2c587876fd1bb08ae0249f.jpg"
+                                                                            class="img-fluid"
+                                                                            style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                    @endif
+                                                                </span>
                                                                 <label for="Image" class="form-label"></label>
                                                                 <input class="form-control" type="file" id="cusImg"
                                                                     name="cusImg"
@@ -326,10 +335,19 @@
                                                     <div class="col-3">
                                                         <div class="row">
                                                             <div class="col-12">
+                                                                <span>
+                                                                    @if ($user->bankimg != null)
+                                                                        <img id="bankImg"
+                                                                            src="{{ asset('imgbank/' . $user->bankimg) }}"class="img-fluid"
+                                                                            style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                    @else
+                                                                        <img id="bankImg"
+                                                                            src="https://i.pinimg.com/564x/ba/67/aa/ba67aabe7229f0305424138d79e00335.jpg"
+                                                                            class="img-fluid"
+                                                                            style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                                    @endif
+                                                                </span>
 
-                                                                <img id="bankImg"
-                                                                    src="{{ asset('imgbank/' . $user->bankimg) }}"class="img-fluid"
-                                                                    style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
                                                                 <label for="Image" class="form-label"></label>
                                                                 <input class="form-control" type="file" id="bankImg"
                                                                     name="bankImg" accept="image/*"

@@ -497,11 +497,11 @@
                                 href="{{ route('addEmployee1') }}"><i class="feather icon-circle"
                                     style="font-size: 1.2rem;"></i><span class="menu-item">เพิ่มพนักงาน</span></a>
                         </li>
-                        <li class="{{ Request::routeIs('employeesetting') ? 'active' : '' }} nav-item"><a
+                        {{-- <li class="{{ Request::routeIs('employeesetting') ? 'active' : '' }} nav-item"><a
                                 href="{{ route('employeesetting') }}"><i class="feather icon-circle"
                                     style="font-size: 1.2rem;"></i><span class="menu-item"
                                     data-i18n="Shop">รายชื่อพนักงานลาออก</span></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="{{ Request::routeIs('work') ? 'active' : '' }} nav-item"><a href="{{ route('work') }}"><i

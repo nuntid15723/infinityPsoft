@@ -15,6 +15,7 @@ use Illuminate\Support\Carbon;
 use App\Models\History_repair;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
+
 class StockController extends Controller
 {
     public function __construct()
@@ -32,6 +33,7 @@ class StockController extends Controller
         // dd('fgfd');
         Carbon::parse()->thaidate();
         $user = User::get();
+        $user1 = User::whereNotIn('roleid', [2, 0])->get();
         $inventoryList = Inventory::get();
         $stock1 = Stock::join('inventories', 'inventories.id', '=', 'stocks.sttype')
             ->where('stocks.ststatus', [1])
@@ -47,7 +49,7 @@ class StockController extends Controller
             ->where('stocks.ststatus', [0])
             ->select("stocks.*", 'inventories.stname as inventory_name')->get();
         // dd($data['stock']);
-        return view('admin.Inventory.stock', compact('user', 'inventoryList', 'stock1', 'stock2', 'stock0'));
+        return view('admin.Inventory.stock', compact('user', 'user1', 'inventoryList', 'stock1', 'stock2', 'stock0'));
         // dd('dfsdf');
         // $data = Stock::all();
         // $data['inventoryList'] = Inventory::get();
@@ -166,10 +168,11 @@ class StockController extends Controller
             $html .= '<tr>';
             $html .= '<td>' . $i++ . '</td>';
             $html .= '<td>' . $value->repair_place . "</td>";
-            $html .= '<td>' . $value->repair_start . "</td>";
-            $html .= '<td>' . $value->repair_end . "</td>";
+            $html .= '<td>' . $value->repair_start = Carbon::parse($value->repair_start)->thaidate('j M Y') . "</td>";
+            $html .= '<td>' . $value->repair_end = Carbon::parse($value->repair_end)->thaidate('j M Y')  . "</td>";
             $html .= '<td>' .  number_format($value->repair_cost, 2) . "</td>";
             $html .= '<td>' . $value->fullname . "</td>";
+            // $html .= '<td>' .  $value->fullname = Str::limit($value->fullname, 20) . "</td>";
             $html .= '</tr>';
             $count++;
         }

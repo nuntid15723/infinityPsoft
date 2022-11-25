@@ -115,7 +115,6 @@
                                                     <select class="form-control" disabled name="emtype" id="user-emtype">
                                                         <option value="0">พนักงาน</option>
                                                         <option value="1">แอดมิน</option>
-                                                        <option value="2">ซูปเปอร์แอดมิน</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-lg-6 col-sm-6">
@@ -142,10 +141,10 @@
                                         <div class="col-lg-3 col-sm-3">
                                             <div class="row">
                                                 <div class="col-lg-12 col-sm-12">
-                                                    <img id="user-emimg"
-                                                        src="https://i.pinimg.com/564x/a5/e8/1f/a5e81f19cf2c587876fd1bb08ae0249f.jpg"
-                                                        class="img-fluid"
-                                                        style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
+                                                            <img id="user-emimg"
+                                                                src="https://i.pinimg.com/564x/a5/e8/1f/a5e81f19cf2c587876fd1bb08ae0249f.jpg"
+                                                                class="img-fluid"
+                                                                style="max-width: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
                                                     <label for="Image" class="form-label"></label>
                                                     {{-- <input class="form-control" type="file" id="user-emimg" disabled
                                                         name="emImg" accept="image/*" onchange="preview()"
@@ -996,7 +995,13 @@
                 // console.log(data.department);
                 $('#user-roleid').val(data.roleid).change();
                 // $('#user-emimg').val(data.emimg);
-                $('#user-emimg').attr("src", "{{ asset('imguse') }}" + "/" + data.emimg);
+                // $('#user-emimg').attr("src", "{{ asset('imguse') }}" + "/" + data.emimg);
+                if (data.emimg != null) {
+                    $('#user-emimg').attr("src", "{{ asset('imguse') }}" + "/" + data.emimg);
+                } else{
+                    $('#user-emimg').attr("src", "https://i.pinimg.com/564x/a5/e8/1f/a5e81f19cf2c587876fd1bb08ae0249f.jpg");
+
+                }
                 // $('#edit_pic').attr("src", "{{ asset('uploads/images') }}" + "/" + data.categoryList.image)
                 $('#user-emid').val(data.emid);
                 $('#user-pnid').val(data.pnid);
@@ -1009,8 +1014,14 @@
                     $('#gender1').prop('checked', true);
                 }
                 // console.log(data.gender);
-                $('#user-bankimg').attr("src", "{{ asset('imgbank') }}" + "/" + data.bankimg);
-                $('#user-bankimg').val(data.bankimg);
+                // $('#user-bankimg').val(data.bankimg);
+                // $('#user-bankimg').attr("src", "{{ asset('imgbank') }}" + "/" + data.bankimg);
+                if (data.bankimg != null) {
+                    $('#user-bankimg').attr("src", "{{ asset('imgbank') }}" + "/" + data.bankimg);
+                } else{
+                    $('#user-bankimg').attr("src", "https://i.pinimg.com/564x/ba/67/aa/ba67aabe7229f0305424138d79e00335.jpg");
+
+                }
                 $('#user-bankname').val(data.bankname).change();
                 $('#user-banknumber').val(data.banknumber);
                 $('#user-salary').val(data.salary);
