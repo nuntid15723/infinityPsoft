@@ -42,9 +42,9 @@ class UseDashController extends Controller
         $count_leavesum3 = 0;
         $count_leavesum4 = 0;
         $leave = Leave::where('leaves.emid', '=', Auth::user()->emid)->get();
-        $leaves1 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [1])->get();
-        $leaves2 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [2])->get();
-        $leaves3 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [3])->get();
+        $leaves1 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [1])->where('pnid',1)->get();
+        $leaves2 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [2])->where('pnid',1)->get();
+        $leaves3 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [3])->where('pnid',1)->get();
         $leaves4 = Salary::where('salaries.emid', '=', Auth::user()->id)->get();
         $count_leavesum1 = $leaves1->count();
         $count_leavesum2 = $leaves2->count();

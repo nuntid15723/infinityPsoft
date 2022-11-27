@@ -133,6 +133,8 @@ Route::middleware([Admin::class])->group(function () {
 
         Route::get('/work', [DashboardController::class, 'work'])->name('work');
 
+        Route::get('/profilee', [DashboardController::class, 'profile'])->name('profilee');
+
         // Route::post('insertform', [TypeofleaveController::class, 'insertform'])->name('insertform');
         Route::post('/sendMail/{id}', [PdfController::class, 'sendMail'])->name('sendMail');
         Route::controller(UserController::class)->group(function () {

@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use DateInterval;
 use DatePeriod;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -47,11 +48,11 @@ class DashboardController extends Controller
     public function index()
     {
         // $data = [];
-        $data['users'] = User::whereNotIn('roleid',[0,2])->get();
+        $data['users'] = User::whereNotIn('roleid', [0, 2])->get();
         $data['leaves'] = Leave::get();
-        $data['stock'] = Stock::whereNotIn('ststatus',[0])->get();
-        $leaves = Leave::where(DB::raw('YEAR(created_at)'), '=', date('Y'))->where('pnid',1)->get();;
-        $user = User::whereNotIn('roleid',[0,2])->get();
+        $data['stock'] = Stock::whereNotIn('ststatus', [0])->get();
+        $leaves = Leave::where(DB::raw('YEAR(created_at)'), '=', date('Y'))->where('pnid', 1)->get();;
+        $user = User::whereNotIn('roleid', [0, 2])->get();
         $stock = Stock::get();
         $data['count_users'] = $user->count();
         $data['count_leavesum'] = $leaves->count();
@@ -81,6 +82,18 @@ class DashboardController extends Controller
             // dd( $data['resultt']);
         }
         return view('admin.dashboard', $data);
+    }
+    public function profile()
+    {
+        $dp = Department::get();
+        $stockList = User::join('stocks', 'stocks.stusers', '=', 'users.id')->where('users.id', '=', Auth::user()->id)->get();
+        $departList = User::join('department', 'department.id', '=', 'users.department')
+            // ->join('stocks', 'stocks.stusers', '=', 'users.id')
+            ->where('users.id', '=', Auth::user()->id)
+            // ->select('stocks.stusers')
+            ->first();
+        // dd($departList);
+        return view('user.profile', compact('departList', 'dp', 'stockList'));
     }
     public function chart($year)
 
@@ -131,7 +144,7 @@ class DashboardController extends Controller
     {
         $data = [];
         $data['unit'] = Unit::where('unstatus', 1)->get();
-        $data['user'] = User::whereNotIn('roleid',[0,2])->get();
+        $data['user'] = User::whereNotIn('roleid', [0, 2])->get();
         $data['stid'] = IdGenerator::generate(['table' => 'stocks', 'field' => 'stid', 'length' => 7, 'prefix' => "IPAS"]);
         $data['inventoryList'] = Inventory::where('ststatus', 1)->get();
         // dd($data['user']);
@@ -256,7 +269,7 @@ class DashboardController extends Controller
     public function work()
     {
         // $user = User::where('roleid', '!=', 2)->get();
-        $user = User::whereNotIn('roleid',[0,2])->get();
+        $user = User::whereNotIn('roleid', [0, 2])->get();
         $lastdate = date('t'); // วันสุดท้ายของเดือน
         $data = [];
         // loop user
