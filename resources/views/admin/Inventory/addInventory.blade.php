@@ -61,7 +61,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form name="frmMain" action="{{ url('/storeInventory') }}" method="POST"
+                                        <form name="frmMain" action="{{ route('storeInventory') }}" method="POST"
                                             enctype="multipart/form-data" class="form form-vertical" id="submitform"
                                             name="submitform" novalidate>
                                             @csrf
@@ -198,7 +198,7 @@
                                                         <div class="form-group">
                                                             <select class="select2 form-control" value=""
                                                                 id="" name="stusers">
-                                                                <option>เลือกผู้ใช้งาน</option>
+                                                                <option selected="" disabled>เลือกผู้ใช้งาน</option>
                                                                 @foreach ($user as $userlist)
                                                                     <option value="{{ $userlist->id }}">
                                                                         {{ $userlist->fullname }}
@@ -438,7 +438,6 @@
             $('#stmath').val(result.toFixed(2));
         }
     </script>
-
     <script>
         function readURL(input) {
             const file = input.files[0];
@@ -548,6 +547,9 @@
                     stageuse: {
                         required: true
                     },
+                    stnumber: {
+                        required: true
+                    },
                 },
                 messages: {
                     stname: {
@@ -575,6 +577,10 @@
                         required: 'กรุณากรอกราคาของทรัพย์สิน !'
                     },
                     stageuse: {
+
+                        required: 'กรุณากรอกอายุการใช้งานทางบัญชี !'
+                    },
+                    stnumber: {
                         required: 'กรุณากรอกอายุการใช้งานทางบัญชี !'
                     },
                 },
@@ -608,7 +614,7 @@
     </script>
     <script>
         $(function() {
-            $("#datepicker").datepicker({
+            $(".datepicker").datepicker({
                 language: 'th-th',
                 format: 'dd/mm/yyyy',
                 autoclose: true

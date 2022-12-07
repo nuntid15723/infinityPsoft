@@ -32,6 +32,7 @@ class LeaveController extends Controller
         Carbon::parse()->thaidate();
         $leaveList = Leave::join('users', 'users.emid', '=', 'leaves.emid')
             ->join('department', 'department.id', '=', 'leaves.ladepartment')
+            ->orderBy('leaves.id', 'DESC')
             ->where('leaves.pnid', [2])
             ->select(
                 'leaves.id as id',
@@ -50,6 +51,7 @@ class LeaveController extends Controller
         // dd($leaveList);
         $leaveList1 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
             ->join('department', 'department.id', '=', 'leaves.ladepartment')
+            ->orderBy('leaves.id', 'DESC')
             ->where('leaves.pnid', [1])
             ->select(
                 'leaves.id as id',
@@ -68,6 +70,7 @@ class LeaveController extends Controller
         // dd($leaveList1);
         $leaveList2 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
             ->join('department', 'department.id', '=', 'leaves.ladepartment')
+            ->orderBy('leaves.id', 'DESC')
             ->where('leaves.pnid', [0])
             ->select(
                 'leaves.id as id',
@@ -142,23 +145,36 @@ class LeaveController extends Controller
 
 
                 // $table->stdaystart = date('Y-m-d', strtotime($request->stdaystart));
-                $dayendla = $request->dayendla;
-                $arry = explode("/", $dayendla);
-                // dd($arry);
-                $year = $arry[2] - 543;
-                $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
 
+                // if ($request->dayendla = null) {
+                //     $table->dayendla = $table->daystartla;
+                // } else {
+                $dayendla = $request->dayendla;
+                if ($dayendla == null) {
+                    $daystartla;
+                    $arry = explode("/", $daystartla);
+                    // dd($arry);
+                    $year = $arry[2] - 543;
+                    $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
+                } else {
+                    $arry = explode("/", $dayendla);
+                    // dd($arry);
+                    $year = $arry[2] - 543;
+
+                    $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
+                }
+                // dd($request->all());
                 // $table->daystartla = date('Y-m-d', strtotime($request->daystartla));
                 // $table->dayendla = date('Y-m-d', strtotime($request->dayendla));
-
+                // dd( $table->dayendla);
                 $table->reasonla =  $request->reasonla;
                 $table->save();
                 DB::commit();
-                // Alert::success('บันทึกเรียบร้อย');
-                // return redirect()->back()->with('success', 'เพิ่มสำเสร็จ');
-                return response()->json([
-                    'successful' => true
-                ]);
+                Alert::success('บันทึกเรียบร้อย');
+                return redirect()->route('absent')->with('success', 'เพิ่มสำเสร็จ');
+                // return response()->json([
+                //     'successful' => true
+                // ]);
                 // DB::commit();
             } catch (\Throwable $th) {
                 DB::rollback();
@@ -308,7 +324,7 @@ class LeaveController extends Controller
         $notify->type = $student->typeleave;
         // dd($request->all($typeleave));
         $notify->save();
-        event(new Userevent($pnid,$typeleave,$notify->user_id));
+        event(new Userevent($pnid, $typeleave, $notify->user_id));
         // dd($pnid);
         Alert::success('บันทึกเรียบร้อย');
 

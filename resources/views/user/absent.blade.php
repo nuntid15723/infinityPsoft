@@ -291,7 +291,7 @@
                                                     </div>
 
                                                     <div class="col-4">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="showinput">
                                                             <label for="email-id-icon">วันที่สิ้นสุด<span
                                                                     style="color: red">*</span></label>
                                                             <fieldset
@@ -419,9 +419,12 @@
         function hour(val) {
             if (val == 2 || val == 3) {
                 $('#hiddenfile2').show();
+                $('#showinput').hide();
 
             } else {
                 $('#hiddenfile2').hide();
+                $('#showinput').show();
+
             }
         }
     </script>

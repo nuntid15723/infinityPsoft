@@ -1,4 +1,4 @@
-@extends('layouts.main_user')
+@extends('layouts.main_admin')
 {{-- css --}}
 {{-- js --}}
 @section('head')
@@ -9,16 +9,14 @@
         use Illuminate\Support\Carbon;
     @endphp
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
             {{-- start form --}}
-            <div class="content">
+            <div class="content-body">
                 <div class="col-sm-12" style="margin: auto">
-                    <div class="row mb-2" style="margin-top: 100px; margin-left: 10px;">
+                    <div class="row mb-2" style=" margin-left: 10px;">
                         <div class="col-sm-6 ">
                             <h1 class="m-0" style="font-family: 'Kanit', sans-serif; font-weight:600; color: #555555;">
                                 <img src="{{ asset('images/boss1.png') }}" alt="" class="mr-1"
@@ -74,7 +72,7 @@
                                                 <br>
                                                 <h3 class="text-center">ชื่อ - นามสกุล : {{ Auth::user()->fullname }}
                                                 </h3>
-                                                <h5 class="text-center" style="color: #555555">เเผนก :
+                                                <h5 class="text-center" style="color: #555555">แผนก :
                                                     {{ $departList->dpname }}
                                                 </h5>
                                                 <br>
@@ -439,9 +437,19 @@
                                                                     <div class="form-group">
                                                                         <label for="inputSex"
                                                                             style="font-size: 1.0rem !important;color:#555555;">เเผนก</label>
-                                                                        <input type="text" name="" readonly
-                                                                            placeholder="" class="form-control"
-                                                                            value=" {{ $departList->dpname }}">
+                                                                            <fieldset
+                                                                            class="form-group position-relative has-icon-left input-divider-left">
+                                                                            <div class="position-relative has-icon-right">
+                                                                                <input type="text" name=""
+                                                                                    readonly placeholder=""
+                                                                                    class="form-control"
+                                                                                    value=" {{ $departList->dpname }}">
+                                                                                <div class="form-control-position">
+                                                                                    <i
+                                                                                        class="ficon feather icon-users"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">

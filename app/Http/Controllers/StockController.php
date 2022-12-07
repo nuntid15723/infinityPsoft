@@ -138,7 +138,7 @@ class StockController extends Controller
         Alert::success('บันทึกสำเร็จ');
         DB::commit();
 
-        return redirect()->back()->with('success', 'เพิ่มสำเสร็จ');
+        return redirect()->route('stock')->with('success', 'เพิ่มสำเสร็จ');
         // return response()->json();
         // DB::commit();
     }

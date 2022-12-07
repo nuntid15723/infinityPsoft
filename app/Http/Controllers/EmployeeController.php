@@ -145,6 +145,7 @@ class EmployeeController extends Controller
             $table->email = $request->email;
             $table->phonenumber =  $request->Phonenumber;
             $table->password = Hash::make($request->password);
+            // dd($request->all());
             $table->save();
             Alert::success('บันทึกเรียบร้อย');
             DB::commit();
@@ -242,9 +243,8 @@ class EmployeeController extends Controller
             $table->birthday = $day1 . '-' . $arry1[1] . '-' . $arry1[0];
             // dd($table->birthday);
             $table->gender = $request->gender;
-            $table->bankimg =  $request->bankImg;
+            // $table->bankimg =  $request->bankImg;
             if ($request->hasfile('bankImg')) {
-
                 $destination = 'imgbank/' . $table->bankimg;
                 if (File::exists($destination)) {
                     File::delete($destination);

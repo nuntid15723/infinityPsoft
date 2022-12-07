@@ -9,16 +9,14 @@
         use Illuminate\Support\Carbon;
     @endphp
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper">
-            <div class="content-header row">
-            </div>
             {{-- start form --}}
-            <div class="content">
+            <div class="content-body">
                 <div class="col-sm-12" style="margin: auto">
-                    <div class="row mb-2" style="margin-top: 100px; margin-left: 10px;">
+                    <div class="row mb-2" style="margin-left: 10px;">
                         <div class="col-sm-6 ">
                             <h1 class="m-0" style="font-family: 'Kanit', sans-serif; font-weight:600; color: #555555;">
                                 <img src="{{ asset('images/boss1.png') }}" alt="" class="mr-1"
@@ -232,7 +230,8 @@
                                                                             <input type="text" id="email-id-icon"
                                                                                 placeholder="เลขบัตรประชาชน"
                                                                                 value="{{ $departList->pnid }}"
-                                                                                class="form-control" readonly name="PnID">
+                                                                                class="form-control" readonly
+                                                                                name="PnID">
                                                                             <div class="form-control-position">
                                                                                 <i class="bi bi-person-badge-fill"></i>
                                                                             </div>
@@ -247,7 +246,8 @@
                                                                         class="form-group position-relative has-icon-left input-divider-left">
 
                                                                         <div class="position-relative has-icon-left">
-                                                                            <input type="text" readonly id="email-id-icon"
+                                                                            <input type="text" readonly
+                                                                                id="email-id-icon"
                                                                                 placeholder="ชื่อ - นามสกุล"
                                                                                 class="form-control"
                                                                                 value="{{ $departList->fullname }}"
@@ -272,7 +272,7 @@
                                                                                 <input type='text'
                                                                                     value="{{ Carbon::parse($departList->birthday)->thaidate('j M Y') }}"
                                                                                     class="form-control fromDate"
-                                                                                    id=""  readonly/>
+                                                                                    id="" readonly />
                                                                                 <div class="form-control-position">
                                                                                     <i
                                                                                         class="ficon feather icon-calendar"></i>
@@ -439,9 +439,19 @@
                                                                     <div class="form-group">
                                                                         <label for="inputSex"
                                                                             style="font-size: 1.0rem !important;color:#555555;">เเผนก</label>
-                                                                        <input type="text" name="" readonly
-                                                                            placeholder="" class="form-control"
-                                                                            value=" {{ $departList->dpname }}">
+                                                                        <fieldset
+                                                                            class="form-group position-relative has-icon-left input-divider-left">
+                                                                            <div class="position-relative has-icon-right">
+                                                                                <input type="text" name=""
+                                                                                    readonly placeholder=""
+                                                                                    class="form-control"
+                                                                                    value=" {{ $departList->dpname }}">
+                                                                                <div class="form-control-position">
+                                                                                    <i
+                                                                                        class="ficon feather icon-users"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-6">
@@ -451,7 +461,8 @@
                                                                         <fieldset
                                                                             class="form-group position-relative has-icon-left input-divider-left">
                                                                             <div class="position-relative has-icon-right">
-                                                                                <input type='text' id="" readonly
+                                                                                <input type='text' id=""
+                                                                                    readonly
                                                                                     value="{{ Carbon::parse($departList->startwork)->thaidate('j M Y') }}"
                                                                                     class="form-control fromDate " />
                                                                                 <div class="form-control-position">

@@ -42,14 +42,16 @@ class UseDashController extends Controller
         $count_leavesum3 = 0;
         $count_leavesum4 = 0;
         $leave = Leave::where('leaves.emid', '=', Auth::user()->emid)->get();
-        $leaves1 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [1])->where('pnid',1)->get();
-        $leaves2 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [2])->where('pnid',1)->get();
-        $leaves3 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [3])->where('pnid',1)->get();
-        $leaves4 = Salary::where('salaries.emid', '=', Auth::user()->id)->get();
+        $leaves1 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [1])->where('pnid', 1)->get();
+        $leaves2 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [2])->where('pnid', 1)->get();
+        $leaves3 = Leave::where('leaves.emid', '=', Auth::user()->emid)->where('leaves.typeleave', [3])->where('pnid', 1)->get();
+        // $leaves4 = Salary::select('amount')->where('salaries.emid', '=', [Auth::user()->id])->orderBy('salaries.id', 'DESC')->first();
+        $leaves4 = User::where('users.id', '=', [Auth::user()->id])->get();
         $count_leavesum1 = $leaves1->count();
         $count_leavesum2 = $leaves2->count();
         $count_leavesum3 = $leaves3->count();
-        $count_leavesum4 = $leaves4->count();
+        // $count_leavesum4 = $leaves4->count();
+        // dd($leaves4);
 
         $leavstatus = Leave::get();
         $leaveListAll = Leave::join('users', 'users.emid', '=', 'leaves.emid')
@@ -73,7 +75,7 @@ class UseDashController extends Controller
         // dd($months);
         // $leavstatus->full_name = $leaveListAll[0]->fullname;
         // dd('leave');
-        return view('user.dashboard', compact('departList', 'leavstatus', 'leaveListAll', 'count_leavesum1', 'count_leavesum2', 'count_leavesum3', 'count_leavesum4', 'leave'));
+        return view('user.dashboard', compact('departList', 'leaves4', 'leavstatus', 'leaveListAll', 'count_leavesum1', 'count_leavesum2', 'count_leavesum3', 'count_leavesum4', 'leave'));
     }
     // public function chart($type, $start_date, $end_date)
     function getDate(Request $request)
@@ -334,10 +336,25 @@ class UseDashController extends Controller
             $arry1 = explode("/", $daystartla);
             $day1 = $arry1[2] - 543;
             $table->daystartla = $day1 . '-' . $arry1[1] . '-' . $arry1[0];
+
             $dayendla = $request->dayendla;
-            $arry = explode("/", $dayendla);
-            $year = $arry[2] - 543;
-            $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
+            if ($dayendla == null) {
+                $daystartla;
+                $arry = explode("/", $daystartla);
+                // dd($arry);
+                $year = $arry[2] - 543;
+                $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
+            } else {
+                $arry = explode("/", $dayendla);
+                // dd($arry);
+                $year = $arry[2] - 543;
+
+                $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
+            }
+            // $dayendla = $request->dayendla;
+            // $arry = explode("/", $dayendla);
+            // $year = $arry[2] - 543;
+            // $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
             $table->reasonla =  $request->reasonla;
             $table->save();
             // $user = Leave::join('users', 'users.id', '=', 'leaves.user_id')->select('users.fullname')->first();
@@ -378,14 +395,14 @@ class UseDashController extends Controller
     public function show()
     {
         $data = NotifyUser::select('notify_users.user_id', 'notify_users.pnid', 'notify_users.type', 'notify_users.created_at')
-        ->where([['status_read', '0'], ['user_id', Auth::user()->id]])
-        ->get();
+            ->where([['status_read', '0'], ['user_id', Auth::user()->id]])
+            ->get();
         // dd($data);
         return response()->json($data);
     }
     public function update(Request $request)
     {
-        NotifyUser::where('status_read', 0)->where('user_id',Auth::user()->id)->update(['status_read' => 1]);
+        NotifyUser::where('status_read', 0)->where('user_id', Auth::user()->id)->update(['status_read' => 1]);
         return response()->json([
             'success' => true
         ]);

@@ -825,7 +825,7 @@
                                                                                                             </td>
                                                                                                             <td>{{ Carbon::parse($List1->daystartla)->thaidate('j M Y') }}
                                                                                                             </td>
-                                                                                                            <td>{{ Carbon::parse($List1->daystartla)->thaidate('j M Y') }}
+                                                                                                            <td>{{ Carbon::parse($List1->dayendla)->thaidate('j M Y') }}
                                                                                                             </td>
                                                                                                             <td>
                                                                                                                 <span>

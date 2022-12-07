@@ -85,7 +85,7 @@ class PdfController extends Controller
                 ];
 
                 Mail::to($value->email)->send(new MailMail($data));
-                sleep(5);
+                sleep(3);
             }
 
             $round->rlstatus = 1;

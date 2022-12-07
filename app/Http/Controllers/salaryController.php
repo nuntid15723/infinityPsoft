@@ -29,7 +29,7 @@ class salaryController extends Controller
         $users = User::whereNotIn('roleid', [2])->get();
         // $sum_salary = $users->sum('salary');
         $lastatus = Roundsalary::orderBy('id', 'DESC')->first();
-        $roundhistory = Roundsalary::get();
+        $roundhistory = Roundsalary::orderBy('id', 'DESC')->get();
         foreach ($roundhistory as $key => $value) {
             $showsalary = Salary::where('roundsalaries_id', $value->id)->sum('amount');
             $downsalary = Salary::where('roundsalaries_id', $value->id)->sum('sumdown');

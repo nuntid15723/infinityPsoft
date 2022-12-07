@@ -93,7 +93,7 @@ class DashboardController extends Controller
             // ->select('stocks.stusers')
             ->first();
         // dd($departList);
-        return view('user.profile', compact('departList', 'dp', 'stockList'));
+        return view('admin.profile', compact('departList', 'dp', 'stockList'));
     }
     public function chart($year)
 
@@ -206,8 +206,8 @@ class DashboardController extends Controller
     {
         // dd('hngjgf');
         $data = [];
-        $data['departList'] = Department::get();
-        $data['user'] = User::get();
+        $data['departList'] = Department::where('dpstatus',1)->get();
+        $data['user'] = User::whereNotIn('roleid', [2, 0])->get();
         $data['stock'] = Stock::get();
         return view('admin.absent', $data);
     }
@@ -216,6 +216,9 @@ class DashboardController extends Controller
         $inventorys = Inventory::get();
         $inventory = [];
         $price = Stock::all();
+        // $sum_stprice = Stock::whereNotIn('stocks.ststatus', [2])->sum('amount');
+        // dd($sum_stprice);
+        // $sumdepreciation = $price->count();
         foreach ($inventorys as $key => $value) {
             $inventory[$key]['id'] = $value->id;
             $inventory[$key]['stname'] = $value->stname;
@@ -224,7 +227,10 @@ class DashboardController extends Controller
             // $data['count_leavesum'] = $user->count();
             // $data['count_leaveover'] = $user->count();
             // $data['count_salary'] = $user->count();
-            //
+            $sumdepreciation = 0;
+            // $sumdepreciation = $price->stmath->count();
+            // dd($sumdepreciation);
+
             foreach ($inventory[$key]['list'] as $key_stock => $stock) {
                 $date = strtotime(date('Y-m-d'));    //วันปัจจุบัน
                 $stdaybuy =  strtotime($stock->stdaybuy);   //วันที่ซื้อ
@@ -240,7 +246,10 @@ class DashboardController extends Controller
                 $inventory[$key]['list'][$key_stock]['depreciation'] = (number_format($depreciation, 2));
                 // dd($depreciation);
             }
+
+
         }
+
         return view('admin.Inventory.stockmath', compact('inventory'));
     }
     public function departsetting()

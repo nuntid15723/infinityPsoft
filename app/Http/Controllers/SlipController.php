@@ -128,7 +128,7 @@ class SlipController extends Controller
             }
             $image = $request->file('pay_imglogo');
             $extention = $image->getClientOriginalExtension();
-            $fileName  = time() . '.' . $extention;
+            $fileName  = '1669113167' . '.' . 'png';
             $location = "imguse/" . $fileName;
             $img = Image::make($image)->save($location);
             $img->resize(500, 500, function ($constraint) {

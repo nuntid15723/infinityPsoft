@@ -855,7 +855,7 @@
                                                                                                                         รายละเอียด
                                                                                                                     </button>
                                                                                                                     <a class="dropdown-item"
-                                                                                                                        href="{{ url('/edit-Inventory', $stocklist->id) }}"
+                                                                                                                        href="{{ route('edit.Inventory', $stocklist->id) }}"
                                                                                                                         style="font-size: 1.1rem;">แก้ไข</a>
                                                                                                                     {{-- <a class="dropdown-item"
                                                                                                                 href="#"
@@ -1039,7 +1039,7 @@
                                                                                                                         รายละเอียด
                                                                                                                     </button>
                                                                                                                     <a class="dropdown-item"
-                                                                                                                        href="{{ url('/edit-Inventory', $stocklist->id) }}"
+                                                                                                                        href="{{ route('edit.Inventory', $stocklist->id) }}"
                                                                                                                         style="font-size: 1.1rem;">แก้ไข</a>
                                                                                                                     {{-- <a class="dropdown-item"
                                                                                                                     href="#"

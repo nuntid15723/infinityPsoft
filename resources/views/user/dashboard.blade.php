@@ -41,6 +41,34 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="card text-center">
                             <div class="card-content rounded-right"
+                                style="border-right: solid;border-color:#3cc873;border-width: 5px;">
+                                <div class="card-body">
+                                    <div class="avatar bg-rgba-warning p-50 m-0 mb-1"
+                                        style="background: #ddfde6 !important;">
+                                        <div class="avatar-content">
+                                            {{-- <i class="bi bi-exclamation-diamond-fill text-danger font-medium-5"
+                                                style="font-size: 1.8rem !important;"></i> --}}
+                                            <i class="bi bi-cash-stack text-success font-medium-5"
+                                                style="font-size: 1.8rem !important;"></i>
+                                        </div>
+                                    </div>
+                                    <h2 class="text-bold-700"
+                                        style="font-family: 'Kanit', sans-serif; font-weight:500;color:#14803f">
+                                        @foreach ($leaves4 as $leaves4)
+                                            {{ number_format($leaves4->salary) }} บาท
+                                        @endforeach
+                                    </h2>
+                                    <p class="mb-0 line-ellipsis"
+                                        style="font-family: 'Kanit', sans-serif; font-weight:500;font-size: 1.2rem;">
+                                        เงินเดือน
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="card text-center">
+                            <div class="card-content rounded-right"
                                 style="border-right: solid;border-color:#6c75f6;border-width: 5px; ">
                                 <div class="card-body">
                                     <div class="avatar bg-rgba-warning p-50 m-0 mb-1"
@@ -92,10 +120,10 @@
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="card text-center">
                             <div class="card-content rounded-right"
-                                style="border-right: solid;border-color:#3cc873;border-width: 5px;">
+                                style="border-right: solid;border-color:#ff9f43;border-width: 5px;">
                                 <div class="card-body">
                                     <div class="avatar bg-rgba-warning p-50 m-0 mb-1"
-                                        style="background: #56ce78 !important;">
+                                        style="background:#ffcc2e !important;">
                                         <div class="avatar-content">
                                             <div class="avatar-content"style="justify-content: normal;">
                                                 <img src="{{ asset('images/coconut-tree.png') }}" class="mr-2">
@@ -105,7 +133,7 @@
                                         </div>
                                     </div>
                                     <h2 class="text-bold-700"
-                                        style="font-family: 'Kanit', sans-serif; font-weight:500;color:#14803f">
+                                        style="font-family: 'Kanit', sans-serif; font-weight:500;color: #ff9f43">
                                         {{ $count_leavesum2 }} วัน
                                     </h2>
                                     <p class="mb-0 line-ellipsis"
@@ -116,30 +144,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="card text-center">
-                            <div class="card-content rounded-right"
-                                style="border-right: solid;border-color:#e34e4e;border-width: 5px;">
-                                <div class="card-body">
-                                    <div class="avatar bg-rgba-warning p-50 m-0 mb-1"
-                                        style="background: #ffddda !important;">
-                                        <div class="avatar-content">
-                                            <i class="bi bi-exclamation-diamond-fill text-danger font-medium-5"
-                                                style="font-size: 1.8rem !important;"></i>
-                                        </div>
-                                    </div>
-                                    <h2 class="text-bold-700"
-                                        style="font-family: 'Kanit', sans-serif; font-weight:500;color:#a20606">
-                                        {{ $count_leavesum4 }} วัน
-                                    </h2>
-                                    <p class="mb-0 line-ellipsis"
-                                        style="font-family: 'Kanit', sans-serif; font-weight:500;font-size: 1.2rem;">
-                                        ลาเกิน
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <section id="chartjs-charts">
                     <!-- Line Chart -->
@@ -387,7 +392,7 @@
                     chart: {
                         height: 350,
                         type: 'bar',
-                        id:'chart1'
+                        id: 'chart1'
                     },
                     colors: themeColors,
                     plotOptions: {

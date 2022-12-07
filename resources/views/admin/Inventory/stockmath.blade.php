@@ -211,7 +211,7 @@
                                                                                                                 </td>
                                                                                                                 <td>{{ $stock->stname }}
                                                                                                                 </td>
-                                                                                                                <td>{{ $stock->stdaystart }}
+                                                                                                                <td>{{ Carbon::parse($stock->stdaystart)->thaidate('j M Y') }}
                                                                                                                 </td>
                                                                                                                 <td>{{ number_format($stock->stprice) }}
                                                                                                                 </td>

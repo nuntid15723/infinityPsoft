@@ -333,6 +333,8 @@
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('profilee') }}"><i
+                                    class="feather icon-user"></i> โปรไฟล์</a>
                                 {{-- <a class="dropdown-item" href="{{ route('logout') }}"><i class="feather icon-user"></i> Edit Profile</a> --}}
                                 {{-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a>
                                 <a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a>

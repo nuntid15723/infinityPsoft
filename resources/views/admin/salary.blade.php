@@ -686,10 +686,10 @@
                                                                                                             @endif
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{ $history->round_salarydown }}
+                                                                                                            {{ number_format($history->round_salarydown, 2) }}
                                                                                                         </td>
                                                                                                         <td>
-                                                                                                            {{$history->round_salary}}
+                                                                                                            {{ number_format($history->round_salary, 2) }}
 
                                                                                                         </td>
                                                                                                     </tr>

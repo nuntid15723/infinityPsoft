@@ -101,7 +101,7 @@
                                                                 <select onchange="getData(this)"
                                                                     class="select2 form-control" value=""
                                                                     id="" name="user_id">
-                                                                    <option>เลือกผู้ใช้งาน</option>
+                                                                    <option  selected="" disabled="">เลือกผู้ใช้งาน</option>
                                                                     @foreach ($user as $userlist)
                                                                         <option value="{{ $userlist->id }}">
                                                                             {{ $userlist->fullname }}
@@ -280,8 +280,8 @@
                                                             <fieldset
                                                                 class="form-group position-relative has-icon-left input-divider-left">
                                                                 <input type='text' id="fromDate"
-                                                                    class="form-control " name="daystartla"
-                                                                    autocomplete="off" />
+                                                                    class="form-control fromDate " name="daystartla"
+                                                                    autocomplete="off" onInput="showDescription(event)" />
                                                                 <div class="form-control-position">
                                                                     <i class="ficon feather icon-calendar"></i>
                                                                 </div>
@@ -290,14 +290,15 @@
                                                     </div>
 
                                                     <div class="col-4">
-                                                        <div class="form-group">
+                                                        <div class="form-group" id="showinput">
                                                             <label for="email-id-icon">วันที่สิ้นสุด<span
                                                                     style="color: red">*</span></label>
                                                             <fieldset
                                                                 class="form-group position-relative has-icon-left input-divider-left">
-                                                                <input type='text' id="toDate"
-                                                                    class="form-control " name="dayendla"
+                                                                <input type='text' id="showinput"
+                                                                    class="form-control toDate " name="dayendla"
                                                                     autocomplete="off" />
+                                                                {{-- <span id="stdescription"></span> --}}
                                                                 <div class="form-control-position">
                                                                     <i class="ficon feather icon-calendar"></i>
                                                                 </div>
@@ -366,38 +367,40 @@
 
             })
         }
+
+
     </script>
     <script>
-        $(function() {
-            $("#datepicker").datepicker({
-                language: 'th-th',
-                format: 'dd/mm/yyyy',
-                autoclose: true
-            });
-        });
-        $(function() {
-            $("#datepicker1").datepicker({
-                language: 'th-th',
-                format: 'dd/mm/yyyy',
-                autoclose: true
-            });
-        });
+         function showDescription(event) {
+            const value = event.target.value;
+            document.getElementById("stdescription").innerText = value;
+        }
     </script>
     <script>
         $(document).ready(function() {
-            $("#fromDate").datepicker({
+            $(".fromDate").datepicker({
+                // startDate: new Date(),
                 language: 'th-th',
                 format: 'dd/mm/yyyy',
                 autoclose: true,
+                keyboardNavigation: false,
+                todayHighlight: true,
+                disableTouchKeyboard: true,
+                orientation: "bottom auto"
             }).on('changeDate', function(selected) {
                 var minDate = new Date(selected.date.valueOf());
                 $('#toDate').datepicker('setStartDate', minDate);
             });
 
-            $("#toDate").datepicker({
+            $(".toDate").datepicker({
                 language: 'th-th',
                 format: 'dd/mm/yyyy',
                 autoclose: true,
+                keyboardNavigation: false,
+                todayHighlight: true,
+                disableTouchKeyboard: true,
+                orientation: "bottom auto"
+
             }).on('changeDate', function(selected) {
                 var minDate = new Date(selected.date.valueOf());
                 $('#fromDate').datepicker('setEndDate', minDate);
@@ -417,9 +420,11 @@
         function hour(val) {
             if (val == 2 || val == 3) {
                 $('#hiddenfile2').show();
+                $('#showinput').hide();
 
             } else {
                 $('#hiddenfile2').hide();
+                $('#showinput').show();
             }
         }
     </script>
@@ -449,9 +454,9 @@
                     daystartla: {
                         required: true
                     },
-                    dayendla: {
-                        required: true,
-                    },
+                    // dayendla: {
+                    //     required: true,
+                    // },
                     timeabsent: {
                         required: true,
                     },
@@ -477,9 +482,9 @@
                     daystartla: {
                         required: 'เลือกวันที่เริ่มลา!'
                     },
-                    dayendla: {
-                        required: 'เลือกวันที่สิ้นสุด!',
-                    },
+                    // dayendla: {
+                    //     required: 'เลือกวันที่สิ้นสุด!',
+                    // },
                     timeabsent: {
                         required: 'เลือกดวลาที่ต้องการลา!'
                     },
@@ -507,20 +512,21 @@
                 submitHandler: function(form) {
                     // $('.loading_submit').css("display", "block");
                     // $('#sumbit_create').prop('disabled', true)
-                    // form.submit()
-                    Swal.fire({
-                        title: 'คุณต้องการบันทึกใช่ไหม',
-                        text: "คุณแน่ใจใช่ไหม",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'ใช่',
-                        cancelButtonText: ' ปิด',
-                        confirmButtonClass: 'btn btn-primary',
-                        cancelButtonClass: 'btn btn-danger ml-1',
-                        buttonsStyling: false,
-                    }).then(function(result) {
+                    form.submit()
+                    // Swal.fire({
+                    //     title: 'คุณต้องการบันทึกใช่ไหม',
+                    //     text: "คุณแน่ใจใช่ไหม",
+                    //     type: 'warning',
+                    //     showCancelButton: true,
+                    //     confirmButtonColor: '#3085d6',
+                    //     cancelButtonColor: '#d33',
+                    //     confirmButtonText: 'ใช่',
+                    //     cancelButtonText: ' ปิด',
+                    //     confirmButtonClass: 'btn btn-primary',
+                    //     cancelButtonClass: 'btn btn-danger ml-1',
+                    //     buttonsStyling: false,
+                    // })
+                    .then(function(result) {
                         let data = new FormData(form);
                         // console.log(data);
                         if (result.value) {
