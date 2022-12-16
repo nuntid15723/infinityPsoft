@@ -49,7 +49,10 @@ class StockController extends Controller
             ->where('stocks.ststatus', [0])
             ->select("stocks.*", 'inventories.stname as inventory_name')->get();
         // dd($data['stock']);
-        return view('admin.Inventory.stock', compact('user', 'user1', 'inventoryList', 'stock1', 'stock2', 'stock0'));
+        $stock3 = Stock::join('inventories', 'inventories.id', '=', 'stocks.sttype')
+            ->where('stocks.ststatus', [3])
+            ->select("stocks.*", 'inventories.stname as inventory_name')->get();
+        return view('admin.Inventory.stock', compact('user', 'user1', 'inventoryList', 'stock1', 'stock2', 'stock0', 'stock3'));
         // dd('dfsdf');
         // $data = Stock::all();
         // $data['inventoryList'] = Inventory::get();
@@ -117,10 +120,18 @@ class StockController extends Controller
 
         // $table->stdaystart = date('Y-m-d', strtotime($request->stdaystart));
         $startyear = $request->stdaystart;
-        $arry = explode("/", $startyear);
-        // dd($arry);
-        $year = $arry[2] - 543;
-        $table->stdaystart = $year . '-' . $arry[1] . '-' . $arry[0];
+        if ($startyear == null) {
+            $table->stdaystart = null;
+        } else {
+            $arry = explode("/", $startyear);
+            // dd($arry);
+            $year = $arry[2] - 543;
+            $table->stdaystart = $year . '-' . $arry[1] . '-' . $arry[0];
+        }
+        // $arry = explode("/", $startyear);
+        // // dd($arry);
+        // $year = $arry[2] - 543;
+        // $table->stdaystart = $year . '-' . $arry[1] . '-' . $arry[0];
 
         $table->stdescription =  $request->stdescription;
         $table->stprice = $request->stprice;

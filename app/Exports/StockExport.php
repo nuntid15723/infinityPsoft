@@ -51,18 +51,20 @@ class StockExport implements FromView, ShouldAutoSize
 {
     public function view(): View
     {
-        $data = Stock::join('inventories', 'inventories.id', '=', 'stocks.sttype')
+        $data = Stock::whereNotIn('stocks.ststatus', [3])->join('inventories', 'inventories.id', '=', 'stocks.sttype')
             ->select(
                 "stocks.*",
                 'inventories.stname as inventory_name',
             )->get();
         $array = [];
         foreach ($data as  $value) {
-            if ($value->ststatus == 0) {
+            if ($value->ststatus == 1) {
                 $status = 'ใช้งานอยู่';
-            } elseif ($value->ststatus == 1) {
+            } elseif ($value->ststatus == 0) {
                 $status = 'พักใช้งาน';
             } elseif ($value->ststatus == 2) {
+                $status = 'ส่งซ่อม';
+            } elseif ($value->ststatus == 3) {
                 $status = 'เลิกใช้งานอยู่';
             }
 

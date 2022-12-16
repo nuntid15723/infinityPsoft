@@ -79,10 +79,13 @@
                         </div>
                         {{-- Modal1 --}}
                         <div class="col-lg-6">
-                            <div class="modal fade text-left" id="defaultSize" tabindex="-1" role="dialog"
+                            {{-- <div class="modal fade text-left" id="defaultSize" tabindex="-1" role="dialog"
                                 aria-labelledby="myModalLabel18" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
-                                    role="document">
+                                    role="document"> --}}
+                            <div class="modal fade" id="defaultSize" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="myModalLabel18"
@@ -96,6 +99,10 @@
                                             <div class="row">
                                                 <div class="table-responsive">
                                                     <table class="table mb-0" style="white-space: nowrap;">
+                                                        <h5
+                                                            style="font-family: 'Kanit', sans-serif;
+                                                        font-weight: 400;color: #878181;margin-left: 12px;">
+                                                            ประวัติการลา</h5>
                                                         <tbody id="getDataleave"
                                                             style="font-family: 'Kanit', sans-serif;
                                                         font-weight: 400; color: #878181">
@@ -103,13 +110,16 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <hr>
+                                            {{-- <hr size="5" color="ff0088"> --}}
+                                            <div class="card"
+                                                style="border: solid 1px;border-color:#8c8888; background-color: #8c8888;margin-top: 15px;">
+                                            </div>
                                             <form action="{{ route('update.absent') }}"method="POST"
                                                 class="form form-vertical" enctype="multipart/form-data" novalidate>
                                                 @csrf
                                                 {{ csrf_field() }}
                                                 <div class="col-lg-12 "
-                                                    style="font-family: 'Kanit', sans-serif; font-weight:400;color: #878181;">
+                                                    style="font-family: 'Kanit', sans-serif; font-weight:400;color: #878181;margin-top: -25px;">
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <input type="text" name="Id" value=""
@@ -265,7 +275,7 @@
                                                         <div class="col-sm-8 col-lg-8 mt-1">
                                                             <div class="form-group">
                                                                 <textarea class="form-control" name="reasonla" value="leave-timeend" id="leave-reasonla" maxlength="100"
-                                                                    rows="3" style="border: 0px; ;"></textarea>
+                                                                    rows="2" style="border: 0px; ;"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -273,7 +283,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer text-center">
-
                                                     <div class="col-12">
                                                         <button type="button" onclick="approve(1)"
                                                             class="btn btn-outline-success round mr-1 mb-1 waves-effect waves-light"
@@ -311,37 +320,43 @@
                                         <div class="modal-body">
                                             <div class="table-responsive">
                                                 <table class="table mb-0"style="white-space: nowrap;">
+                                                    <h5
+                                                        style="font-family: 'Kanit', sans-serif;
+                                                font-weight: 400;color: #878181;margin-left: 12px;">
+                                                        ประวัติการลา</h5>
                                                     <tbody id="getDataleave1"
                                                         style=" font-weight: bold;
                                                     font-family: 'Kanit', sans-serif;
                                                     font-weight: 400;">
                                                 </table>
                                             </div>
-                                            <hr>
+                                            <div class="card"
+                                                style="border: solid 1px;border-color:#8c8888; background-color: #8c8888;margin-top: 15px;">
+                                            </div>
                                             <form action="{{ route('update.absent') }}"method="POST"
                                                 class="form form-vertical" enctype="multipart/form-data" novalidate>
                                                 @csrf
-                                                <div class="col-lg-12">
-                                                    <div class="mb-3" style="text-align: center">
-                                                        <img id="leave-laimg1" {{-- src="{{ asset('images/empty.png') }}" --}} class="img-fluid"
-                                                            style="width: 150px;height: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
-                                                        <label for="Image" class="form-label"
-                                                            style="font-family: 'Kanit', sans-serif; font-weight:500;color:#DE0808"><span
-                                                                style="color:#DE0808">*</span> ใบรับรองเเพทย์</label>
+                                                <div class="col-lg-12" style="margin-top: -20px;">
+                                                    <div class="" style="text-align: center">
+                                                        <img id="leave-laimg1" class="img-fluid"
+                                                            style="max-width: 150px;height: 150px;border-radius: 10px;border: 1px solid #d9d9d9;" />
                                                     </div>
-
-
+                                                    <div class="" style="text-align: center">
+                                                        <label for="Image" class="form-label"
+                                                            style="font-family: 'Kanit', sans-serif; font-weight:500;color:#8c8888"></span>
+                                                            ใบรับรองเเพทย์</label>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="form-group">
                                                             <input type="text" name="Id" value=""
                                                                 id="leave-id1" placeholder="" class="form-control"
                                                                 hidden>
-                                                            <input type="text" name="typeleave" value=""
+                                                            {{-- <input type="text" name="typeleave" value=""
                                                                 id="leave-ladepartment1" placeholder=""
-                                                                class="form-control" hidden>
-                                                            <input type="text" name="user_id" value=""
+                                                                class="form-control" hidden> --}}
+                                                            {{-- <input type="text" name="user_id" value=""
                                                                 id="leave-fullname1" placeholder="" class="form-control"
-                                                                hidden>
+                                                                hidden> --}}
                                                         </div>
                                                         <div class="row col-lg-6 col-sm-12">
                                                             <div class="col-sm-4 col-lg-4">
@@ -354,7 +369,7 @@
                                                             <div class=" col-sm-8 col-lg-8 mt-1">
                                                                 <div class="form-group">
                                                                     <input type="text" value=""
-                                                                        style="border:0px;background-color: #fff; "
+                                                                        style="border:0px;background-color: #fff; font-family: 'Kanit', sans-serif; font-weight:400;"
                                                                         disabled name="user_id" id="leave-fullname1"
                                                                         class="form-control">
                                                                 </div>
@@ -369,7 +384,7 @@
                                                             <div class=" col-sm-8 col-lg-8 mt-1">
                                                                 <select class="form-control" disabled name="department"
                                                                     id="leave-ladepartment1"
-                                                                    style="border: 0px; background-color:#fff">
+                                                                    style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;">
                                                                     @foreach ($departmentList as $val)
                                                                         <option value="{{ $val->id }}">
                                                                             {{ $val->dpname }}
@@ -389,7 +404,7 @@
                                                             <div class=" col-sm-8 col-lg-8 mt-1">
                                                                 <select class="form-control" disabled name="typeleave"
                                                                     id="leave-typeleave1"
-                                                                    style="border: 0px; background-color:#fff">
+                                                                    style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;">
                                                                     <option value="1">ลากิจ</option>
                                                                     <option value="2">ลาพักร้อน</option>
                                                                     <option value="3">ลาป่วย</option>
@@ -405,7 +420,7 @@
                                                             <div class=" col-sm-8 col-lg-7 mt-1">
                                                                 <select class="form-control" disabled name="timestart"
                                                                     id="leave-timestart1"
-                                                                    style="border: 0px; background-color:#fff">
+                                                                    style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;">
                                                                     <option value="1">ทั้งวัน</option>
                                                                     <option value="2">ครึ่งเช้า</option>
                                                                     <option value="3">ครึ่งบ่าย</option>
@@ -424,7 +439,7 @@
                                                                 <div class="form-group">
                                                                     <input class="form-control" id="leave-daystartla1"
                                                                         type="text" name="daystartla"
-                                                                        style="border: 0px; background-color:#fff" />
+                                                                        style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -439,7 +454,7 @@
                                                                 <div class="form-group">
                                                                     <input type="text" value="" name="dayendla"
                                                                         id="leave-dayendla1" class="form-control"
-                                                                        style="border: 0px; background-color:#fff">
+                                                                        style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -454,7 +469,7 @@
                                                             <div class=" col-sm-8 col-lg-10 mt-1">
                                                                 <div class="form-group">
                                                                     <textarea class="form-control" name="reasonla" value="leave-timeend1" id="leave-reasonla1" maxlength="100"
-                                                                        rows="3" style="border: 0px; background-color:#fff"></textarea>
+                                                                        rows="3" style="border: 0px; background-color:#fff;font-family: 'Kanit', sans-serif; font-weight:400;"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1131,7 +1146,15 @@
                 $("#leave-typeleave1").val(data.data.typeleave).change();
                 $('#leave-email1').val(data.data.email);
                 $('#leave-timestart1').val(data.data.timestart);
-                $('#leave-laimg1').attr("src", "{{ asset('imgbank') }}" + "/" + data.data.laimg);
+                // $('#leave-laimg1').attr("src", "{{ asset('imgbank') }}" + "/" + data.data.laimg);
+                if (data.data.laimg != null) {
+                    $('#leave-laimg1').attr("src", "{{ asset('imgbank') }}" + "/" + data.data.laimg);
+                } else {
+                    $('#leave-laimg1').attr("src",
+                        "https://cdn-icons-png.flaticon.com/512/159/159716.png?fbclid=IwAR2BYe371Xr30zSDMureKs29nE0v3IO9Ee04IJJ4CVSlK4FIZkse2cCr1ZY"
+                    );
+
+                }
                 $('#leave-timeend1').val(data.data.timeend);
                 // $("#leave-daystartla1").val(moment(data.daystartla, 'YYYY-MM-DD HH:mm:ss').add(543, 'year').format(
                 //     'DD-MM-YYYY'));

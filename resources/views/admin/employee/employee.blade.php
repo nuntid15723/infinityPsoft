@@ -481,7 +481,7 @@
                                             <a class="nav-link active" id="home-tab-fill" data-toggle="tab"
                                                 href="#home-fill" role="tab" aria-controls="home-fill"
                                                 aria-selected="true" style="font-size: 20px">
-                                                รายชื่อพนักงาน
+                                                พนักงาน
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -495,7 +495,7 @@
                                             <a class="nav-link" id="messages-tab-fill" data-toggle="tab"
                                                 href="#messages-fill" role="tab" aria-controls="messages-fill"
                                                 aria-selected="false" style="font-size: 20px">
-                                                พ้นสภาพการเป็นพนักงาน
+                                                พ้นสภาพ
                                             </a>
                                         </li>
                                         {{-- <li class="nav-item">

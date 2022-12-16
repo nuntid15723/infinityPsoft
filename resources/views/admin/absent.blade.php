@@ -42,6 +42,7 @@
     @php
         use Illuminate\Support\Carbon;
     @endphp
+     @include('sweetalert::alert')
     <!-- Content Header (Page header) -->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -513,19 +514,6 @@
                     // $('.loading_submit').css("display", "block");
                     // $('#sumbit_create').prop('disabled', true)
                     form.submit()
-                    // Swal.fire({
-                    //     title: 'คุณต้องการบันทึกใช่ไหม',
-                    //     text: "คุณแน่ใจใช่ไหม",
-                    //     type: 'warning',
-                    //     showCancelButton: true,
-                    //     confirmButtonColor: '#3085d6',
-                    //     cancelButtonColor: '#d33',
-                    //     confirmButtonText: 'ใช่',
-                    //     cancelButtonText: ' ปิด',
-                    //     confirmButtonClass: 'btn btn-primary',
-                    //     cancelButtonClass: 'btn btn-danger ml-1',
-                    //     buttonsStyling: false,
-                    // })
                     .then(function(result) {
                         let data = new FormData(form);
                         // console.log(data);

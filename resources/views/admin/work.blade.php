@@ -45,13 +45,23 @@
         .dot5 {
             height: 20px;
             width: 20px;
-            background-color: #E83DD7;
+            background-color: #fffefe;
+            border: solid 2px #babfc7;
             border-radius: 50%;
             display: inline-block;
+        }
+
+        .vs-checkbox-con input:disabled+.vs-checkbox {
+            cursor: default;
+            opacity: .5;
+            border-radius: 10px;
         }
     </style>
 @endsection
 @section('content')
+    @php
+        use Illuminate\Support\Carbon;
+    @endphp
     <!-- Content Header (Page header) -->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -96,7 +106,19 @@
                                 </div>
                             </div> --}}
 
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-6 p-3  ">
+                                    <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
+                                        <h2>เดือน<span> {{ Carbon::parse(date('Y-m-d H:i:s'))->thaidate('F Y') }}</span></h2>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row ">
+                                <div class="col-lg-2 col-sm-3 p-3  ">
+                                    <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
+                                        <span class="dot5 mr-1" style=""></span>วันทำงาน
+                                    </div>
+                                </div>
                                 <div class="col-lg-3 col-sm-4 p-3  ">
                                     <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
                                         <span class="dot1 mr-1"></span>วันหยุดประจำสัปดาห์
@@ -105,21 +127,22 @@
 
                                 <div class="col-lg-2 col-sm-3 p-3  ">
                                     <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
-                                        <span class="dot2 mr-1" style=""></span>ลากิจ
+                                        <span class="dot2 mr-1" style=""></span>วันลากิจ
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-sm-3 p-3  ">
                                     <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
-                                        <span class="dot3 mr-1" style=""></span>ลาป่วย
+                                        <span class="dot3 mr-1" style=""></span>วันลาป่วย
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 col-sm-3 p-3  ">
                                     <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
-                                        <span class="dot4 mr-1" style=""></span>ลาพักร้อน
+                                        <span class="dot4 mr-1" style=""></span>วันลาพักร้อน
                                     </div>
                                 </div>
+
 
                                 {{-- <div class="col-lg-2 col-sm-3 p-3  ">
                                     <div class="d-flex" style="font-family: 'Kanit', sans-serif; font-weight:500;">
@@ -169,66 +192,70 @@
                                                 </tr> --}}
 
                                                 @foreach ($data as $item)
-                                                <tr>
-                                                    <th scope="row">{{ $item['fullname'] }}</th>
-                                                    @foreach ($item['date'] as $item2)
-                                                        <td>
-                                                            @php
-                                                                $d = date('l', strtotime($item2['date']));
-                                                            @endphp
-                                                            {{-- หาวันว่าเสาร์หรืออาทิตย์ ถ้าเสาร์ให้โชว์วงกลม ถ้าไม่ใช่โชว์เช้คบล็อกธรรมดา --}}
-                                                            @if ($d == 'Saturday' || $d == 'Sunday')
-                                                                <fieldset>
-                                                                    <div class="vs-radio-con">
-                                                                        <span class="vs-radio cicle">
-                                                                            <span class="dot1 mr-1"></span>
-                                                                        </span>
-                                                                        <span class=""></span>
-                                                                    </div>
-                                                                </fieldset>
-                                                            @else
-                                                                @if ($item2['type'] == 1)
+                                                    <tr>
+                                                        <th scope="row">{{ $item['fullname'] }}</th>
+                                                        @foreach ($item['date'] as $item2)
+                                                            <td>
+                                                                @php
+                                                                    $d = date('l', strtotime($item2['date']));
+                                                                @endphp
+                                                                {{-- หาวันว่าเสาร์หรืออาทิตย์ ถ้าเสาร์ให้โชว์วงกลม ถ้าไม่ใช่โชว์เช้คบล็อกธรรมดา --}}
+                                                                @if ($d == 'Saturday' || $d == 'Sunday')
                                                                     <fieldset>
                                                                         <div class="vs-radio-con">
                                                                             <span class="vs-radio cicle">
-                                                                                <span class="dot2 mr-1" style=""></span>
-                                                                            </span>
-                                                                            <span class=""></span>
-                                                                        </div>
-                                                                    </fieldset>
-                                                                @elseif ($item2['type'] == 2)
-                                                                    <fieldset>
-                                                                        <div class="vs-radio-con">
-                                                                            <span class="vs-radio cicle">
-                                                                                <span class="dot4 mr-1" style=""></span>
-                                                                            </span>
-                                                                            <span class=""></span>
-                                                                        </div>
-                                                                    </fieldset>
-                                                                @elseif ($item2['type'] == 3)
-                                                                    <fieldset>
-                                                                        <div class="vs-radio-con">
-                                                                            <span class="vs-radio cicle">
-                                                                                <span class="dot3 mr-1" style=""></span>
+                                                                                <span class="dot1 mr-1"></span>
                                                                             </span>
                                                                             <span class=""></span>
                                                                         </div>
                                                                     </fieldset>
                                                                 @else
-                                                                    <div class="vs-checkbox-con vs-checkbox-primary">
-                                                                        <input type="checkbox" value="false" disabled>
-                                                                        <span class="vs-checkbox">
-                                                                            <span class="vs-checkbox--check">
-                                                                                <i class="vs-icon feather icon-check"></i>
+                                                                    @if ($item2['type'] == 1)
+                                                                        <fieldset>
+                                                                            <div class="vs-radio-con">
+                                                                                <span class="vs-radio cicle">
+                                                                                    <span class="dot2 mr-1"
+                                                                                        style=""></span>
+                                                                                </span>
+                                                                                <span class=""></span>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    @elseif ($item2['type'] == 2)
+                                                                        <fieldset>
+                                                                            <div class="vs-radio-con">
+                                                                                <span class="vs-radio cicle">
+                                                                                    <span class="dot4 mr-1"
+                                                                                        style=""></span>
+                                                                                </span>
+                                                                                <span class=""></span>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    @elseif ($item2['type'] == 3)
+                                                                        <fieldset>
+                                                                            <div class="vs-radio-con">
+                                                                                <span class="vs-radio cicle">
+                                                                                    <span class="dot3 mr-1"
+                                                                                        style=""></span>
+                                                                                </span>
+                                                                                <span class=""></span>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    @else
+                                                                        <div class="vs-checkbox-con vs-checkbox-primary">
+                                                                            <input type="checkbox" value="false" disabled>
+                                                                            <span class="vs-checkbox">
+                                                                                <span class="vs-checkbox--check">
+                                                                                    <i
+                                                                                        class="vs-icon feather icon-check"></i>
+                                                                                </span>
                                                                             </span>
-                                                                        </span>
-                                                                        <span class=""></span>
-                                                                    </div>
+                                                                            <span class=""></span>
+                                                                        </div>
+                                                                    @endif
                                                                 @endif
-                                                            @endif
-                                                        </td>
-                                                    @endforeach
-                                                </tr>
+                                                            </td>
+                                                        @endforeach
+                                                    </tr>
                                                 @endforeach
 
                                                 {{-- <tr>

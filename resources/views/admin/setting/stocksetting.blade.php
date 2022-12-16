@@ -149,7 +149,7 @@
                                                         :
                                                     </label>
                                                     <div class="form-group">
-                                                        <input type="text" value="" name="stid"
+                                                        <input type="text" value="" name="stid" readonly
                                                             id="stockst-stid" placeholder="รหัสประเภททรัพย์สิน"
                                                             class="form-control">
                                                     </div>

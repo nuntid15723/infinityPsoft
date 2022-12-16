@@ -102,9 +102,9 @@ class UseDashController extends Controller
         );
         foreach ($period as $key => $value) {
             // dump($value->format('m'));
-            $a = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [1,])->count('typeleave');
-            $b = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [2,])->count('typeleave');
-            $c = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [3,])->count('typeleave');
+            $a = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [1,])->count('typeleave');
+            $b = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [2,])->count('typeleave');
+            $c = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('leaves.emid', '=', Auth::user()->emid)->where('typeleave', [3,])->count('typeleave');
 
             // $val = [
             //     'round_l1' => $round_l1,
@@ -146,6 +146,7 @@ class UseDashController extends Controller
             // dd($request->all());
 
             $table = User::find($request->id);
+            // dd($request->all());
             if ($request->hasfile('emImg')) {
                 $destination = 'imguse/' . $table->emimg;
                 $image = $request->file('emImg');

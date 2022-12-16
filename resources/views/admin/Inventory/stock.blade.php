@@ -145,8 +145,8 @@
                                                                 <div class="modal-body"style="margin-top: -25px;">
                                                                     <div style="text-align: center;">
                                                                         <img id="Inventory-stimg"
-                                                                            name="stimg"src="" width="200"
-                                                                            height="200" class="img img-responsive">
+                                                                            name="stimg"src="" max-width="100"
+                                                                           height="200" class="img img-responsive">
                                                                     </div>
                                                                     <div class="row mt-1">
                                                                         <div class="col-6"
@@ -159,7 +159,8 @@
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;color:#525252;">
                                                                             ชื่อทรัพย์สิน
-                                                                            <input type='text' name="stname" disabled style="border: 0px; background-color:#fff;"
+                                                                            <input type='text' name="stname" disabled
+                                                                                style="border: 0px; background-color:#fff;"
                                                                                 id="Inventory-stname"
                                                                                 class="form-control" />
                                                                         </div>
@@ -168,7 +169,8 @@
                                                                         <div class="col-6"
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;color:#525252;">
                                                                             ประเภททรัพย์สิน
-                                                                            <select class="form-control" disabled style="border: 0px; background-color:#fff;"
+                                                                            <select class="form-control" disabled
+                                                                                style="border: 0px; background-color:#fff;"
                                                                                 name="sttype" id="Inventory-sttype">
                                                                                 @foreach ($inventoryList as $val)
                                                                                     <option value="{{ $val->id }}">
@@ -182,7 +184,8 @@
                                                                             วันที่ซื้อ <div class="form-group">
                                                                                 <div
                                                                                     class="position-relative has-icon-right">
-                                                                                    <input type='text' disabled style="border: 0px; background-color:#fff;"
+                                                                                    <input type='text' disabled
+                                                                                        style="border: 0px; background-color:#fff;"
                                                                                         id="Inventory-stdaystart"
                                                                                         name="stdaystart"
                                                                                         class="form-control pickadate" />
@@ -199,11 +202,13 @@
                                                                             style="font-family: 'Kanit', sans-serif; font-weight:500;">
                                                                             <label for="emtype"
                                                                                 style="font-size: 1.0rem !important;color:#525252;">สถานะการใช้งาน</label>
-                                                                            <select class="form-control" disabled style="border: 0px; background-color:#fff;"
+                                                                            <select class="form-control" disabled
+                                                                                style="border: 0px; background-color:#fff;"
                                                                                 name="ststatus" id="Inventory-ststatus">
-                                                                                <option value="0">เลิกใช้งาน</option>
+                                                                                <option value="0">พักการใช้งาน
+                                                                                </option>
                                                                                 <option value="1">ใช้งาน</option>
-                                                                                <option value="2">พักใช้งาน</option>
+                                                                                <option value="2">ส่งซ่อม</option>
                                                                             </select>
                                                                         </div>
                                                                         {{-- <div class="col-6"
@@ -224,7 +229,8 @@
                                                                                 </option>
                                                                             @endforeach
                                                                         </select> --}}
-                                                                                <select class="form-control" disabled style="border: 0px; background-color:#fff;"
+                                                                                <select class="form-control" disabled
+                                                                                    style="border: 0px; background-color:#fff;"
                                                                                     id="Inventory-stusers">
                                                                                     @foreach ($user as $val)
                                                                                         <option
@@ -489,26 +495,26 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="profile-tab-fill" data-toggle="tab"
-                                                href="#profile-fill" role="tab" aria-controls="profile-fill"
+                                            <a class="nav-link" id="messages-tab-fill" data-toggle="tab"
+                                                href="#messages-fill" role="tab" aria-controls="messages-fill"
                                                 aria-selected="false" style="font-size: 20px">
                                                 พักการใช้งาน
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="messages-tab-fill" data-toggle="tab"
-                                                href="#messages-fill" role="tab" aria-controls="messages-fill"
+                                            <a class="nav-link" id="profile-tab-fill" data-toggle="tab"
+                                                href="#profile-fill" role="tab" aria-controls="profile-fill"
                                                 aria-selected="false" style="font-size: 20px">
-                                                เลิกใช้แล้ว
+                                                ส่งซ่อม
                                             </a>
                                         </li>
-                                        {{-- <li class="nav-item">
+                                        <li class="nav-item">
                                             <a class="nav-link" id="settings-tab-fill" data-toggle="tab"
                                                 href="#settings-fill" role="tab" aria-controls="settings-fill"
                                                 aria-selected="false"style="font-size: 20px">
-
+                                                เลิกใช้งาน
                                             </a>
-                                        </li> --}}
+                                        </li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content pt-1"
@@ -624,7 +630,7 @@
                                                                                                                         aria-haspopup="true"
                                                                                                                         aria-expanded="false"
                                                                                                                         style="width: 118px">
-                                                                                                                        พักใช้งาน
+                                                                                                                        ส่งซ่อม
                                                                                                                     </button></a>
 
                                                                                                                 <a class="dropdown-item "
@@ -632,12 +638,12 @@
                                                                                                                     <button
                                                                                                                         type="button"
                                                                                                                         onclick="deprecated(0,{{ $stocklist->id }})"
-                                                                                                                        class="btn btn-outline-danger"
+                                                                                                                        class="btn btn-outline-primary"
                                                                                                                         data-toggle="dropdown"
                                                                                                                         aria-haspopup="true"
                                                                                                                         aria-expanded="false"
                                                                                                                         style="width: 118px">
-                                                                                                                        เลิกใช้งาน
+                                                                                                                        พักการใช้งาน
                                                                                                                     </button></a>
                                                                                                             </div>
                                                                                                             <div
@@ -702,7 +708,7 @@
                                         </div>
                                         <!--End Tab panes1 -->
                                         <!-- Tab panes2 -->
-                                        {{-- พักการใช้งาน --}}
+                                        {{-- ส่งซ่อม --}}
                                         <div class="tab-pane" id="profile-fill" role="tabpanel"
                                             aria-labelledby="profile-tab-fill">
                                             <p>
@@ -795,7 +801,7 @@
                                                                                                                 data-toggle="dropdown"
                                                                                                                 aria-haspopup="true"
                                                                                                                 aria-expanded="false">
-                                                                                                                พักการใช้งาน
+                                                                                                                ส่งซ่อม
                                                                                                             </button>
                                                                                                             {{-- @php
                                                                                                                 dd($stocklist->stid)
@@ -816,19 +822,34 @@
                                                                                                                         {{-- onclick="active(1,{{ $stocklist->id }})" --}}
                                                                                                                         onclick="getDataId({{ $stocklist->id }})">
                                                                                                                         ใช้งานอยู่
-                                                                                                                    </button></a>
+                                                                                                                    </button>
+                                                                                                                </a>
                                                                                                                 <a class="dropdown-item "
                                                                                                                     href="#">
                                                                                                                     <button
                                                                                                                         type="button"
                                                                                                                         onclick="deprecated(0,{{ $stocklist->id }})"
+                                                                                                                        class="btn btn-outline-primary"
+                                                                                                                        data-toggle="dropdown"
+                                                                                                                        aria-haspopup="true"
+                                                                                                                        aria-expanded="false"
+                                                                                                                        style="width: 118px">
+                                                                                                                        พักการใช้งาน
+                                                                                                                    </button>
+                                                                                                                </a>
+                                                                                                                <a class="dropdown-item "
+                                                                                                                    href="#">
+                                                                                                                    <button
+                                                                                                                        type="button"
+                                                                                                                        onclick="deprecated1(3,{{ $stocklist->id }})"
                                                                                                                         class="btn btn-outline-danger"
                                                                                                                         data-toggle="dropdown"
                                                                                                                         aria-haspopup="true"
                                                                                                                         aria-expanded="false"
                                                                                                                         style="width: 118px">
                                                                                                                         เลิกใช้งาน
-                                                                                                                    </button></a>
+                                                                                                                    </button>
+                                                                                                                </a>
                                                                                                             </div>
                                                                                                             <div
                                                                                                                 class="btn-group">
@@ -893,7 +914,7 @@
                                         </div>
                                         <!--End Tab panes2 -->
                                         <!-- Tab panes3 -->
-                                        {{-- เลิกใช้งาน --}}
+                                        {{-- พักการใช้งาน --}}
                                         <div class="tab-pane" id="messages-fill" role="tabpanel"
                                             aria-labelledby="messages-tab-fill">
                                             <p>
@@ -979,11 +1000,11 @@
                                                                                                             class="btn-group dropdown">
                                                                                                             <button
                                                                                                                 type="button"
-                                                                                                                class="btn btn-outline-danger dropdown-toggle"
+                                                                                                                class="btn btn-outline-primary dropdown-toggle"
                                                                                                                 data-toggle="dropdown"
                                                                                                                 aria-haspopup="true"
                                                                                                                 aria-expanded="false">
-                                                                                                                เลิกใช้งาน
+                                                                                                                พักการใช้งาน
                                                                                                             </button>
                                                                                                             <div
                                                                                                                 class="dropdown-menu">
@@ -1001,7 +1022,7 @@
                                                                                                                         style="width: 118px">
                                                                                                                         ใช้งานอยู่
                                                                                                                     </button></a>
-                                                                                                                <a class="dropdown-item "
+                                                                                                                {{-- <a class="dropdown-item "
                                                                                                                     href="#">
                                                                                                                     <button
                                                                                                                         type="button"
@@ -1011,8 +1032,8 @@
                                                                                                                         aria-haspopup="true"
                                                                                                                         aria-expanded="false"
                                                                                                                         style="width: 118px">
-                                                                                                                        พักใช้งาน
-                                                                                                                    </button></a>
+                                                                                                                        ส่งซ่อม
+                                                                                                                    </button></a> --}}
                                                                                                             </div>
                                                                                                             <div
                                                                                                                 class="btn-group">
@@ -1044,6 +1065,191 @@
                                                                                                                     {{-- <a class="dropdown-item"
                                                                                                                     href="#"
                                                                                                                     style="font-size: 1rem;">ลบ</a> --}}
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        @endforeach
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                            <th></th>
+                                                                                        </tr>
+                                                                                    </tfoot>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            </p>
+                                        </div>
+                                        {{-- เลิกใช้งาน --}}
+                                        <div class="tab-pane" id="settings-fill" role="tabpanel"
+                                            aria-labelledby="settings-tab-fill">
+                                            <p>
+                                            <div class="card-content">
+                                                <div class="table-responsive mt-1 dataTables_scroll">
+                                                    <section id="basic-datatable">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        <div class="card-body card-dashboard">
+
+                                                                            <div class="table-responsive  ">
+                                                                                <table class="table zero-configuration"
+                                                                                    style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                    <thead class="thead-secondary ">
+                                                                                        <tr class="dataTables_scroll">
+                                                                                            <th
+                                                                                                style="border-top-left-radius: 14px;font-size: 1rem;">
+                                                                                                ลำดับ</th>
+                                                                                            <th>รหัสทรัพย์สิน</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                วันที่เริ่มใช้งาน
+                                                                                            </th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                ชื่อทรัพย์สิน</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                ประเภททรัพย์สิน</th>
+                                                                                            <th style="font-size: 1rem;">
+                                                                                                มูลค่าทรัพย์สิน</th>
+                                                                                            <th
+                                                                                                style="border-top-right-radius: 14px;font-size: 1rem;">
+                                                                                                <div
+                                                                                                    style="text-align: center;">
+                                                                                                    สถานะทรัพย์สิน</div>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+
+                                                                                        @php
+                                                                                            $i = 0;
+                                                                                        @endphp
+                                                                                        @foreach ($stock3 as $stocklist)
+                                                                                            <tr>
+                                                                                                <td>{{ ++$i }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class=""
+                                                                                                        onclick="getData({{ $stocklist->id }})"
+                                                                                                        data-url="{{ route('Inventory.show', $stocklist->stname) }}">
+                                                                                                        {{ $stocklist->stid }}</a>
+
+                                                                                                    {{-- {{ $stocklist->stid }}
+
+                                                                                                    </td>
+                                                                                                    {{-- <td>
+                                                                                                    <div>
+                                                                                                        <img class="media-object mr-1"
+                                                                                                            img
+                                                                                                            src="{{ asset('imgstock/' . $stocklist->stimg) }}"
+                                                                                                            alt="Avatar"
+                                                                                                            height="100"
+                                                                                                            width="100">
+                                                                                                    </div>
+                                                                                                </td> --}}
+                                                                                                <td>
+                                                                                                    {{ Carbon::parse($stocklist->stdaystart)->thaidate('j M Y') }}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    {{-- {{ $stocklist->stname }} --}}
+                                                                                                    {{ Str::limit($stocklist->stname, '20', '..') }}
+                                                                                                </td>
+                                                                                                <td>{{ $stocklist->inventory_name }}
+                                                                                                </td>
+                                                                                                <td>{{ number_format($stocklist->stprice) }}
+                                                                                                </td>
+                                                                                                <td style="padding: 0;">
+                                                                                                    <div class="d-flex"
+                                                                                                        style="justify-content: end;">
+                                                                                                        <div>
+                                                                                                            {{-- <button disabled type="button"
+                                                                                                                class="btn btn-outline-danger "
+                                                                                                                data-toggle="dropdown"
+                                                                                                                aria-haspopup="true"
+                                                                                                                aria-expanded="false">
+                                                                                                                เลิกใช้งาน
+                                                                                                            </button> --}}
+                                                                                                            <button
+                                                                                                                type="button"
+                                                                                                                class="btn btn-outline-danger "
+                                                                                                                style="border-color: #ff0000;"
+                                                                                                                aria-haspopup="true"
+                                                                                                                aria-expanded="false">
+                                                                                                              เลิกใช้งาน
+                                                                                                            </button>
+                                                                                                            {{-- <div class="dropdown-menu">
+                                                                                                                @include('sweetalert::alert')
+                                                                                                                <a class="dropdown-item "
+                                                                                                                    href="#">
+                                                                                                                    <button
+                                                                                                                        type="button"
+                                                                                                                        onclick="active(1,{{ $stocklist->id }})"
+                                                                                                                        class="btn btn-outline-success"
+                                                                                                                        data-toggle="dropdown"
+                                                                                                                        aria-haspopup="true"
+                                                                                                                        aria-expanded="false"
+                                                                                                                        style="width: 118px">
+                                                                                                                        ใช้งานอยู่
+                                                                                                                    </button></a>
+                                                                                                                <a class="dropdown-item "
+                                                                                                                    href="#">
+                                                                                                                    <button
+                                                                                                                        type="button"
+                                                                                                                        onclick="breakk(2,{{ $stocklist->id }})"
+                                                                                                                        class="btn btn-outline-warning"
+                                                                                                                        data-toggle="dropdown"
+                                                                                                                        aria-haspopup="true"
+                                                                                                                        aria-expanded="false"
+                                                                                                                        style="width: 118px">
+                                                                                                                        ส่งซ่อม
+                                                                                                                    </button></a>
+                                                                                                            </div> --}}
+                                                                                                            <div
+                                                                                                                class="btn-group">
+                                                                                                                <button
+                                                                                                                    class="btn btn-white"
+                                                                                                                    style="background-color: rgb(255, 255, 255)"
+                                                                                                                    data-toggle="dropdown"
+                                                                                                                    aria-haspopup="true"
+                                                                                                                    aria-expanded="false">
+                                                                                                                    <i
+                                                                                                                        class="bi bi-three-dots-vertical"></i>
+                                                                                                                </button>
+                                                                                                                <div
+                                                                                                                    class="dropdown-menu">
+                                                                                                                    <button
+                                                                                                                        class="dropdown-item"type="button"
+                                                                                                                        onclick="getData({{ $stocklist->id }})"
+                                                                                                                        data-url="{{ route('Inventory.show', $stocklist->stname) }}"
+                                                                                                                        {{-- data-toggle="modal"
+                                                                                                                        data-target="#large" --}}
+                                                                                                                        {{-- data-target="#exampleModalCenter" --}}
+                                                                                                                        id="large"
+                                                                                                                        style="width: 100%;font-size: 1.1rem;">
+                                                                                                                        รายละเอียด
+                                                                                                                    </button>
+                                                                                                                    <a class="dropdown-item"
+                                                                                                                        href="{{ route('edit.Inventory', $stocklist->id) }}"
+                                                                                                                        style="font-size: 1.1rem;">แก้ไข</a>
+                                                                                                                    {{-- <a class="dropdown-item"
+                                                                                                                        href="#"
+                                                                                                                        style="font-size: 1rem;">ลบ</a> --}}
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                         </div>
@@ -1123,7 +1329,7 @@
                 } else {
                     $('#Inventory-stimg').attr("src",
                         "https://i.pinimg.com/736x/c5/a7/98/c5a798e162782e1baa3c8a74693204fc.jpg?fbclid=IwAR0Dp9Ls0GZiN4vDiNzunssi3hG4Z6h3u3dpUl9qobIMDko44-kMRDms6WI"
-                        );
+                    );
 
                 }
                 $('#Inventory-stname').val(data.data.stname);
@@ -1224,6 +1430,23 @@
         }
 
         function deprecated(params, id) {
+            $.ajax({
+                type: "post",
+                url: "{{ route('update.statusInventory') }}",
+                data: {
+                    _token: '{!! csrf_token() !!}',
+                    id: id,
+                    ststatus: params,
+                },
+                dataType: "json",
+                success: function(response) {
+                    location.reload();
+                }
+            });
+
+        }
+
+        function deprecated1(params, id) {
             $.ajax({
                 type: "post",
                 url: "{{ route('update.statusInventory') }}",

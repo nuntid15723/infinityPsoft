@@ -150,7 +150,7 @@
                                                     </label>
 
                                                     <div class="form-group">
-                                                        <input type="text" name="unId" value=""
+                                                        <input type="text" name="unId" value="" readonly
                                                             id="unit-unid" placeholder="รหัสหน่วยนับ"
                                                             class="form-control">
                                                     </div>

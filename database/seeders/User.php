@@ -21,7 +21,7 @@ class User extends Seeder
             [
                 'roleid' => '1',
                 'emtype' => '2',
-                'emid' => 'IP004',
+                'emid' => 'IP001',
                 'pnid'=>'0000000000000',
                 'fullname'  => 'superAdmin',
                 'salary'=>'0',

@@ -60,7 +60,7 @@
                     <div class="alert alert-warning" role="alert">
                         <a href="{{ route('sumleavework') }}" style="color: #ff9f43">
                             <i class="bi bi-exclamation-triangle-fill mr-1 align-middle"></i>
-                            <span style="font-family: 'Kanit', sans-serif; font-weight:500;font-size: 1.2rem;">
+                            <span onclick="readAll()" style="font-family: 'Kanit', sans-serif; font-weight:500;font-size: 1.2rem;">
                                 มีคำร้องขอจากสมาชิก <strong class="bellcount"></strong> คำร้อง</span></a>
                     </div>
                     <br>
@@ -186,7 +186,7 @@
                                             <form name="frmMain" action="" class="form form-vertical"
                                                 id="myform" method="GET">
                                                 <input type="text" class="form-control year_pic" name="year"
-                                                    style="text-align: center" {{-- value='{{ (date('Y')) }}' --}} placeholder="เลือกปี"
+                                                    style="text-align: center;font-family: 'Kanit', sans-serif; font-weight:400;" {{-- value='{{ (date('Y')) }}' --}} placeholder="เลือกปี"
                                                     id="datepicker" autocomplete="off"
                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                                     onchange="year_chagne();">

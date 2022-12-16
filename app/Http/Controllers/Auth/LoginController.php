@@ -63,7 +63,7 @@ class LoginController extends Controller
             if (auth::check() && Auth::user()->emtype == 1) {
                 // return redirect()->intended('dashboard')->withSuccess('Signed in');
                 return redirect()->route('dashboard')->withSuccess('Signed in');
-            } else if (auth::check() && Auth::user()->emtype == 0) {
+            } else if (auth::check() && Auth::user()->emtype == 0 ) {
                 // return redirect()->intended('user_dashboard')->withSuccess('Signed in');
                 return redirect()->route('user_dashboard')->withSuccess('Signed in');
             }

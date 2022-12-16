@@ -42,18 +42,18 @@
                                                         <div class="col-12">
                                                             <div class="row">
                                                                 <div class="col-lg-3 col-sm-"></div>
-                                                                <form action="{{ route('update.profile') }}" method="POST"
+                                                                <form action="{{ route('update.profilee') }}" method="POST"
                                                                     enctype="multipart/form-data" class="form form-vertical"
                                                                     id="submitform" novalidate>
                                                                     @csrf
-                                                                    <div class="col-lg-6 col-sm-12">
+                                                                    <div class="col-lg-12 col-sm-12">
                                                                         @if (Auth::user()->emimg != null)
                                                                             <img class="round"src="{{ asset('imguse/' . Auth::user()->emimg) }}"
                                                                                 id="cusImg"
                                                                                 style="max-width: 200px;max-height: 200px;border-radius: 10px;border: 1px solid #d9d9d9;">
                                                                         @else
                                                                             <img class="round"src="https://i.pinimg.com/564x/a5/e8/1f/a5e81f19cf2c587876fd1bb08ae0249f.jpg"
-                                                                                alt="avatar"height="40" width="40">
+                                                                                alt="avatar"height="200" max-width="100">
                                                                         @endif
                                                                         <label for="Image" class="form-label"></label>
                                                                         <input type="text" name="id"

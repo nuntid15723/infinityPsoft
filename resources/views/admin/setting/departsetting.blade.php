@@ -153,7 +153,7 @@
                                                     </label>
 
                                                     <div class="form-group">
-                                                        <input type="text" name="dpId" value=""
+                                                        <input type="text" name="dpId" value="" readonly
                                                             id="department-dpid" placeholder="รหัสประเภทแผนก"
                                                             class="form-control">
                                                     </div>

@@ -119,7 +119,7 @@
                                                             <option selected="" disabled="">
                                                                 เลือกสถานะการใช้งาน</option>
                                                             <option value="1">ใช้งาน</option>
-                                                            <option value="2">พักใช้งาน</option>
+                                                            <option value="0">พักการใช้งาน</option>
                                                         </select>
                                                     </div>
 
@@ -193,7 +193,7 @@
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4">
                                                         <label for="stusers" style="color: #525252;">ผู้ใช้งาน<span
-                                                                style="color: red">*</span>
+                                                                style="color: red"></span>
                                                         </label>
                                                         <div class="form-group">
                                                             <select class="select2 form-control" value=""
@@ -276,8 +276,8 @@
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="first-name-icon">เลขที่เอกสารอ้างอิง<span
-                                                                    style="color: red">*</span></label>
+                                                            <label for="first-name-icon">เลขที่ใบเสร็จ<span
+                                                                    style="color: red"></span></label>
                                                             <input type="text" id="" name="stnumber"
                                                                 class="form-control" placeholder="เลขที่เอกสารอ้างอิง">
                                                         </div>
@@ -319,7 +319,7 @@
                                                                     placeholder="เลือกวันที่เริ่มใช้งาน"
                                                                     name="stdaystart" /> --}}
                                                                 <input type="text" placeholder="เลือกวันที่เริ่มใช้งาน"
-                                                                    name="stdaystart" class="form-control"
+                                                                    name="stdaystart" class="form-control datepicker"
                                                                     id="datepicker" autocomplete="off"
                                                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
                                                                 <div class="form-control-position">
@@ -372,10 +372,10 @@
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6">
                                                         <div class="form-group">
-                                                            <label for="text-icon">ค่าเสื่อมที่คำนวณได้ต่อปี
+                                                            <label for="text-icon">ค่าเสื่อมที่คำนวณได้ต่อวัน
                                                                 <button style="border: solid 0px ;background-color: #fff;"
                                                                     data-toggle="popover"
-                                                                    data-content="ค่าเสื่อมราคารายปีที่คำนวณออกมาได้จะถือเป็นค่าใช้จ่ายที่เกิดขึ้นในปีปัจจุบัน"
+                                                                    data-content="ค่าเสื่อมราคารายวันที่คำนวณออกมาได้จะถือเป็นค่าใช้จ่ายที่เกิดขึ้นในปีปัจจุบัน"
                                                                     data-trigger="hover" data-original-title="">
                                                                     <i style="color: #164176;"
                                                                         class="bi bi-exclamation-circle-fill"></i>
@@ -547,9 +547,9 @@
                     stageuse: {
                         required: true
                     },
-                    stnumber: {
-                        required: true
-                    },
+                    // stnumber: {
+                    //     required: true
+                    // },
                 },
                 messages: {
                     stname: {
@@ -580,9 +580,9 @@
 
                         required: 'กรุณากรอกอายุการใช้งานทางบัญชี !'
                     },
-                    stnumber: {
-                        required: 'กรุณากรอกอายุการใช้งานทางบัญชี !'
-                    },
+                    // stnumber: {
+                    //     required: 'กรุณากรอกอายุการใช้งานทางบัญชี !'
+                    // },
                 },
                 errorPlacement: function(error, element) {
                     if (element.is(":radio")) {

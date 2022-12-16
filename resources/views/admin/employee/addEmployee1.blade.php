@@ -31,11 +31,12 @@
 @endsection
 
 @section('content')
-    @if (session('status'))
+    {{-- @include('sweetalert::alert') --}}
+    {{-- @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
         </div>
-    @endif
+    @endif --}}
     <!-- Content Header (Page header) -->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -47,8 +48,7 @@
                     <div class="row mb-2">
                         <div class="col-sm-6 ">
                             <div>
-                                <h1 class="m-0"
-                                    style="font-family: 'Kanit', sans-serif; font-weight:600; color: #555555;">
+                                <h1 class="m-0" style="font-family: 'Kanit', sans-serif; font-weight:600; color: #555555;">
                                     {{-- <i class="fa fa-plus"></i> --}}
                                     <img src="{{ asset('images/boss.png') }}" alt="" class="mr-2"
                                         style="height: 56px;
@@ -67,9 +67,9 @@
                                     <h4 class="card-title">Vertical Form with Icons</h4>
                                 </div> --}}
                                 <div class="card-content">
-                                    @if (session('status'))
+                                    {{-- @if (session('status'))
                                         <h6 class="alert alert-success">{{ session('status') }}</h6>
-                                    @endif
+                                    @endif --}}
                                     <div class="card-body">
                                         <form action="{{ route('storeEmployee') }}" method="POST"
                                             enctype="multipart/form-data" class="form form-vertical" id="submitform"
@@ -108,8 +108,8 @@
                                                                         เลือกสถานะผู้ใช้งาน</option>
                                                                     <option value="3">ทดลองงาน</option>
                                                                     <option value="1">ผ่านโปร</option>
-                                                                    <option value="0">ไม่ผ่านโปร</option>
-                                                                    <option hidden value="2">ลาออก</option>
+                                                                    {{-- <option hidden value="0">ไม่ผ่านโปร</option>
+                                                                    <option hidden value="2">ลาออก</option> --}}
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -148,7 +148,7 @@
                                                                 <div class="form-group">
                                                                     <label for="emId"
                                                                         style="font-size: 1.0rem !important;color: #525252;">เลขประจำตัวพนักงาน<span
-                                                                            style="color: red">*</span></label>
+                                                                            style="color: red"></span></label>
                                                                     <fieldset
                                                                         class="form-group position-relative has-icon-left input-divider-left">
 
@@ -296,9 +296,9 @@
                                                                     name="bankImg" accept="image/*"
                                                                     onchange="readURL2(this);"
                                                                     style="width: 150px;margin-top: 5px;">
-                                                                {{-- <h6
-                                                                    style="margin-top: 20px;font-family: 'Kanit', sans-serif; font-weight:600; color: #970a0a;">
-                                                                    กรุณาเลือกรูปสมุดบัญชี</h6> --}}
+                                                                <h6
+                                                                    style="margin-top: 20px;font-size:12px; margin-left: 13px; font-family: 'Kanit', sans-serif; font-weight:400; color: #970a0a;">
+                                                                    กรุณาเลือกรูปสมุดบัญชี</h6>
 
                                                             </div>
                                                         </div>
@@ -424,54 +424,6 @@
                                                     </div>
                                                 </div>
                                                 <hr>
-                                                {{-- <div class="row">
-                                                    <div class="col-lg-3">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <h5
-                                                                    style="margin-top: 20px;font-family: 'Kanit', sans-serif; font-weight:600; color: #164176;">
-                                                                    ข้อมูลจ้างงาน</h5>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-9">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="inputSex"
-                                                                        style="font-size: 1.0rem !important;">เเผนก<span
-                                                                            style="color: red">*</span></label>
-                                                                    <select class="form-control" name="department">
-                                                                        <option value="0" selected=""
-                                                                            disabled="">เลือกประเภทเเผนก</option>
-                                                                        <option>UX/UI</option>
-                                                                        <option>แอดมิน</option>
-                                                                        <option>ซูปเปอร์แอดมิน</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="email-id-icon"
-                                                                        style="font-size: 1.0rem !important;">วันที่เริ่มงาน<span
-                                                                            style="color: red">*</span></label>
-                                                                    <fieldset
-                                                                        class="form-group position-relative has-icon-left input-divider-left">
-
-                                                                        <input type='text'
-                                                                            placeholder="เลือกวันที่เรื่มงาน"
-                                                                            class="form-control pickadate"
-                                                                            name="startwork" />
-                                                                        <div class="form-control-position">
-                                                                            <i class="ficon feather icon-calendar"></i>
-                                                                        </div>
-
-                                                                    </fieldset>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="row">
                                                     <div class="col-3">
                                                         <div class="row">
@@ -577,17 +529,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="row" style="top: 0px;margin-top: 30px;">
+                                                    @include('sweetalert::alert')
                                                     <div class="col-12" style="text-align: center;">
                                                         <button type="submit" class="btn btn-outline round mr-1 mb-1"
                                                             data-dismiss="modal"
                                                             style="background-color: #164176;color: white;">ยืนยัน
                                                         </button>
-                                                        {{-- <button id="addRow" class="btn btn-primary mb-2"><i class="feather icon-plus"></i>&nbsp; Add new row</button> --}}
                                                         <a class="btn btn-outline-secondary round mr-1 mb-1"
                                                             href="{{ route('employee') }}" role="button">ยกเลิก</a>
-                                                        {{-- <button type="button" href="{{route('employee')}}"
-                                                            class="btn btn-outline-secondary round mr-1 mb-1"
-                                                            data-dismiss="modal" aria-label="Close">ยกเลิก</button> --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -601,10 +550,211 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+
     </div>
 @endsection
 @section('script')
+    <script>
+        jQuery.validator.addMethod("noSpace", function(value, element) {
+            return value == '' || value.trim().length != 0;
+        }, "No space please and don't leave it empty");
+        jQuery.validator.addMethod("customEmail", function(value, element) {
+            return this.optional(element) || /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(
+                value);
+        }, "Please enter valid email address!");
+        $.validator.addMethod("alphanumeric", function(value, element) {
+            return this.optional(element) || /^\w+$/i.test(value);
+        }, "Letters, numbers, and underscores only please");
+        var $registrationForm = $('#submitform');
+        if ($registrationForm.length) {
+            $registrationForm.validate({
+                rules: {
+                    username: {
+                        required: true,
+                        alphanumeric: true,
+                        max: 10
+                    },
+                    email: {
+                        required: true,
+                        customEmail: true
+                    },
+                    password: {
+                        required: true
+                    },
+                    confirm: {
+                        required: true,
+                        equalTo: '#password'
+                    },
+                    bankname: {
+                        required: true,
+                    },
+                    salary: {
+                        required: true,
+                    },
+                    banknumber: {
+                        required: true,
+                    },
+                    taxname: {
+                        required: true,
+                    },
+                    gender: {
+                        required: true
+                    },
+                    department: {
+                        required: true
+                    },
+                    roleId: {
+                        required: true
+                    },
+                    emType: {
+                        required: true
+                    },
+                    emId: {
+                        required: true
+                    },
+                    PnID: {
+                        required: true
+                    },
+                    fullname: {
+                        required: true,
+                        noSpace: true
+                    },
+                    birthday: {
+                        required: true
+                    },
+                    startwork: {
+                        required: true
+                    },
+                    Phonenumber: {
+                        required: true
+                    },
+                    bankImg: {
+                        required: true
+                    },
+                },
+                messages: {
+                    username: {
+                        required: 'Please enter username !',
+                    },
+                    email: {
+                        required: 'กรุณากรอก อีเมล !',
+                        email: 'กรุณากรอก ที่อยู่อีเมล !'
+                    },
+                    password: {
+                        required: 'กรุณากรอก รหัสผ่าน !'
+                    },
+                    confirm: {
+                        required: 'กรุณายืนยัน รหัสผ่าน !',
+                        equalTo: 'กรุณากรอก รหัสผ่านให้ตรงกัน !'
+                    },
+                    bankname: {
+                        required: 'กรุณาเลือกธนาคาร !',
+                    },
+                    salary: {
+                        required: 'กรุณากรอกฐานเงินเดือน !'
+                    },
+                    banknumber: {
+                        required: 'กรุณากรอกเลขบัญชี !'
+                    },
+                    taxname: {
+                        required: 'กรุณากรอกโรงพยาบาล !'
+                    },
+                    roleId: {
+                        required: 'กรุณาเลือกสถานะผู้ใช้งาน !'
+                    },
+                    emId: {
+                        required: 'กรุณากรอกเลขประจำตัวพนักงาน !'
+                    },
+                    PnID: {
+                        required: 'กรุณากรอกเลขประจำตัวประชาชน !'
+                    },
+                    emType: {
+                        required: 'กรุณาเลือกประเภทผู้ใช้งาน !'
+                    },
+                    fullname: {
+                        required: 'กรุณากรอกชื่อ !'
+                    },
+                    birthday: {
+                        required: 'กรุณาเลือกวันเกิด !'
+                    },
+                    gender: {
+                        required: 'กรุณาเลือกเพศ !'
+                    },
+                    department: {
+                        required: 'กรุณาเลือกเเผนก !'
+                    },
+                    startwork: {
+                        required: 'กรุณาเลือกวันที่เริ่มงาน !'
+                    },
+                    Phonenumber: {
+                        required: 'กรุณากรอกเบอร์โทรศัพท์ !'
+                    },
+                    bankImg: {
+                        required: 'กรุณาอัพโหลดรูปภาพสมุดบัญชี !'
+                    },
+                },
+                errorPlacement: function(error, element) {
+                    if (element.is(":radio")) {
+                        error.appendTo(element.parents('.gender'));
+                    } else if (element.is(":checkbox")) {
+                        error.appendTo(element.parents('.hobbies'));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function(form) {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('storeEmployee') }}",
+                        data: data,
+                        contentType: 'multipart/form-data',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            // console.log(response)
+                            window.location.href =
+                                "{{ route('addEmployee1') }}"
+                        }
+                    });
+                }
+                // submitHandler: function(form) {
+                //     form.submit()
+                //         .then(function(result) {
+                //             let data = new FormData(form);
+                //             // console.log(data);
+                //             if (result.value) {
+                //                 // console.log("asdasdasd")
+                //                 // form.submit()
+                //                 $.ajax({
+                //                     type: "POST",
+                //                     url: "{{ route('storeEmployee') }}",
+                //                     data: data,
+                //                     contentType: 'multipart/form-data',
+                //                     cache: false,
+                //                     contentType: false,
+                //                     processData: false,
+                //                     success: function(response) {
+                //                         console.log(response)
+                //                         if (response.successful == true) {
+                //                             Swal.fire({
+                //                                 type: "success",
+                //                                 title: 'บันทึกสำเร็จ!',
+                //                                 text: '',
+                //                                 confirmButtonClass: 'btn btn-success',
+                //                             }).then(function(result) {
+                //                                 window.location.href =
+                //                                     "{{ route('addEmployee1') }}"
+                //                             })
+                //                         }
+                //                     }
+                //                 });
+                //             }
+                //         })
+                // }
+            })
+        }
+    </script>
     <script>
         $(function() {
             $("#datepicker").datepicker({
@@ -657,15 +807,6 @@
     <script>
         @if (session('success') == true)
             dd("fdgverfg")
-            // Swal.fire({
-            //     title: {{ session('success') }},
-            //     icon: 'success',
-            //     showCancelButton: true,
-            //     confirmButtonColor: '#3085d6',
-            //     confirmButtonText: 'ตกลง'
-            // }).then(function(result) {
-
-            // });
         @endif
         @if (session('error'))
             Swal.fire({
@@ -751,399 +892,5 @@
                 $('#stimgclear').val('');
             }
         })
-    </script>
-    {{-- <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $('#confirm-submit').on('click', function() {
-            Swal.fire({
-                title: 'คุณต้องการบันทึกใช่ไหม',
-                text: "คุณแน่ใจใช่ไหม",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'ใช่',
-                cancelButtonText: ' ปิด',
-                confirmButtonClass: 'btn btn-primary',
-                cancelButtonClass: 'btn btn-danger ml-1',
-                buttonsStyling: false,
-            }).then(function(result) {
-                if (result.value) {
-                    Swal.fire({
-                        type: "success",
-                        title: 'Deleted!',
-                        text: 'Your file has been deleted.',
-                        confirmButtonClass: 'btn btn-success',
-                    })
-                }
-            })
-        });
-    </script> --}}
-    {{-- <script>
-        const togglePassword = document.querySelector("#togglePassword");
-        const password = document.querySelector("#password");
-
-        togglePassword.addEventListener("click", function() {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
-
-        // prevent form submit
-        const form = document.querySelector("form");
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-        });
-    </script> --}}
-    {{-- <script>
-        var summernoteValidator = summernoteForm.validate({
-            // custom validate
-            rules: {
-                // tag name
-                name: {
-                    required: true,
-                    maxlength: 100,
-                    remote: {
-                        // url: "{{ route('check.username') }}",
-                        type: "GET",
-                        data: {
-                            //email:$( "#email" ).val();
-                            name: function() {
-                                return $("#name").val();
-                            }
-                        }
-                    },
-                },
-                confirm_password: {
-                    required: true,
-                    equalTo: "#password"
-                },
-                password: {
-                    required: true,
-                    minlength: 6,
-                },
-                telephone: {
-                    number: true,
-                    minlength: 9,
-                    maxlength: 10,
-                },
-                email: {
-                    remote: {
-                        // url: "{{ route('check.email') }}",
-                        type: "GET",
-                        data: {
-                            //email:$( "#email" ).val();
-                            email: function() {
-                                return $("#email").val();
-                            }
-                        }
-                    },
-                },
-                storeName: {
-                    remote: {
-                        // url: "{{ route('check.store') }}",
-                        type: "GET",
-                        data: {
-                            //email:$( "#email" ).val();
-                            storeName: function() {
-                                return $("#storeName").val();
-                            }
-                        }
-                    },
-                },
-            },
-            messages: {
-                name: {
-                    required: "กรุณากรอก ชื่อผู้ดูแลระบบ",
-                    maxlength: "กรุณากรอก ตัวอักษรไม่เกิน 100 ตัวอักษร",
-                    remote: "อีเมลล์นี้มีผู้ใช้แล้ว",
-                },
-                email: {
-                    required: "กรุณากรอก อีเมล",
-                    remote: "อีเมลล์นี้มีผู้ใช้แล้ว",
-                },
-                password: {
-                    required: "กรุณากรอก รหัสผ่าน",
-                    minlength: "รหัสผ่านไม่ต่ำกว่า 6 ตัวอักษร"
-                },
-                confirm_password: {
-                    required: "กรุณากรอก ยืนยันรหัสผ่าน",
-                    equalTo: "รหัสผ่านไม่ตรงกัน"
-                },
-                telephone: {
-                    required: "กรุณากรอกเบอร์โทรศัพท์",
-                    number: "กรุณากรอกตัวเลข",
-                    minlength: "เบอร์โทรศัพท์ไม่ตำกว่า 9 ตัว",
-                    maxlength: "เบอร์โทรศัพท์ไม่เกิน 10 ตัว",
-                },
-                permission: {
-                    required: "กรุณาเลือกสิทธิ์ของผู้ใช้",
-                },
-                storeName: {
-                    required: "กรุณากรอกชื่อร้านค้า",
-                    remote: "ชื่อร้านนี้มีผู้ใช้แล้ว",
-                },
-                picture: {
-                    required: "กรุณาอัพโหลดรูปภาพ",
-                },
-            },
-            errorElement: "div",
-            errorClass: "is-invalid",
-            validClass: "is-valid",
-            ignore: ":hidden:not(.summernote),.note-editable.card-block",
-            errorPlacement: function(error, element) {
-                // Add the help-block class to the error element
-                error.addClass("invalid-feedback");
-                // console.log(element);
-                if (element.prop("type") === "checkbox") {
-                    error.insertAfter(element.siblings("label"));
-                } else if (element.hasClass("summernote")) {
-                    error.insertAfter(element.siblings(".note-editor"));
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            submitHandler: function(form) {
-                $('.loading_submit').css("display", "block");
-                $('#sumbit_create').prop('disabled', true)
-                form.submit()
-            }
-        });
-    </script> --}}
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script> --}}
-    <script>
-        jQuery.validator.addMethod("noSpace", function(value, element) {
-            return value == '' || value.trim().length != 0;
-        }, "No space please and don't leave it empty");
-        jQuery.validator.addMethod("customEmail", function(value, element) {
-            return this.optional(element) || /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(
-                value);
-        }, "Please enter valid email address!");
-        $.validator.addMethod("alphanumeric", function(value, element) {
-            return this.optional(element) || /^\w+$/i.test(value);
-        }, "Letters, numbers, and underscores only please");
-        var $registrationForm = $('#submitform');
-        if ($registrationForm.length) {
-            $registrationForm.validate({
-                rules: {
-                    username: {
-                        required: true,
-                        alphanumeric: true,
-                        max: 10
-                    },
-                    email: {
-                        required: true,
-                        customEmail: true
-                    },
-                    password: {
-                        required: true
-                    },
-                    confirm: {
-                        required: true,
-                        equalTo: '#password'
-                    },
-                    bankname: {
-                        required: true,
-                        // max: 10,
-                        maxlength: 10,
-                    },
-                    salary: {
-                        required: true,
-                    },
-                    banknumber: {
-                        required: true,
-                    },
-                    taxname: {
-                        required: true,
-                    },
-                    gender: {
-                        required: true
-                    },
-                    department: {
-                        required: true
-                    },
-                    roleId: {
-                        required: true
-                    },
-                    emType: {
-                        required: true
-                    },
-                    emId: {
-                        required: true
-                    },
-                    PnID: {
-                        required: true
-                    },
-                    fullname: {
-                        required: true,
-                        noSpace: true
-                    },
-                    birthday: {
-                        required: true
-                    },
-                    startwork: {
-                        required: true
-                    },
-                    Phonenumber: {
-                        required: true
-                    },
-                    bankImg: {
-                        required: true
-                    },
-                },
-                messages: {
-                    username: {
-                        required: 'Please enter username !',
-                    },
-                    email: {
-                        required: 'กรุณากรอก อีเมล !',
-                        email: 'กรุณากรอก ที่อยู่อีเมล !'
-                    },
-                    password: {
-                        required: 'กรุณากรอก รหัสผ่าน !'
-                    },
-                    confirm: {
-                        required: 'กรุณายืนยัน รหัสผ่าน !',
-                        equalTo: 'กรุณากรอก รหัสผ่านให้ตรงกัน !'
-                    },
-                    bankname: {
-                        required: 'กรุณากรอกชื่อธนาคาร !',
-                        maxlength: 'กรุณากรอกรหัสผ่านให้ตรงกัน !'
-                    },
-                    salary: {
-                        required: 'กรุณากรอกฐานเงินเดือน !'
-                    },
-                    banknumber: {
-                        required: 'กรุณากรอกเลขบัญชี !'
-                    },
-                    taxname: {
-                        required: 'กรุณากรอกโรงพยาบาล !'
-                    },
-                    roleId: {
-                        required: 'กรุณาเลือกสถานะผู้ใช้งาน !'
-                    },
-                    emId: {
-                        required: 'กรุณากรอกเลขประจำตัวพนักงาน !'
-                    },
-                    PnID: {
-                        required: 'กรุณากรอกเลขประจำตัวประชาชน !'
-                    },
-                    emType: {
-                        required: 'กรุณาเลือกประเภทผู้ใช้งาน !'
-                    },
-                    fullname: {
-                        required: 'กรุณากรอกชื่อ !'
-                    },
-                    birthday: {
-                        required: 'กรุณาเลือกวันเกิด !'
-                    },
-                    gender: {
-                        required: 'กรุณาเลือกเพศ !'
-                    },
-                    department: {
-                        required: 'กรุณาเลือกเเผนก !'
-                    },
-                    startwork: {
-                        required: 'กรุณาเลือกวันที่เริ่มงาน !'
-                    },
-                    Phonenumber: {
-                        required: 'กรุณากรอกเบอร์โทรศัพท์ !'
-                    },
-                    bankImg: {
-                        required: 'กรุณาอัพโหลดรูปภาพสมุดบัญชี !'
-                    },
-                },
-                errorPlacement: function(error, element) {
-                    if (element.is(":radio")) {
-                        error.appendTo(element.parents('.gender'));
-                    } else if (element.is(":checkbox")) {
-                        error.appendTo(element.parents('.hobbies'));
-                    } else {
-                        error.insertAfter(element);
-                    }
-                },
-                submitHandler: function(form) {
-                    .then(function(result) {
-                        let data = new FormData(form);
-                        // console.log(data);
-                        if (result.value) {
-                            // console.log("asdasdasd")
-                            form.submit()
-                            $.ajax({
-                                type: "POST",
-                                url: "{{ route('storeEmployee') }}",
-                                data: data,
-                                contentType: 'multipart/form-data',
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                success: function(response) {
-                                    console.log(response)
-                                    if (response.successful == true) {
-                                        Swal.fire({
-                                            type: "success",
-                                            title: 'บันทึกสำเร็จ!',
-                                            text: '',
-                                            confirmButtonClass: 'btn btn-success',
-                                        }).then(function(result) {
-                                            window.location.href =
-                                                "{{ route('addEmployee1') }}"
-                                        })
-                                    }
-                                }
-                            });
-                        }
-                    })
-                }
-            })
-            // .then(function(result) {
-            //     let data = new FormData(form);
-            //     // console.log(data);
-            //     if (result.value) {
-            //         // console.log("asdasdasd")
-            //         form.submit()
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "{{ route('storeEmployee') }}",
-            //             data: data,
-            //             contentType: 'multipart/form-data',
-            //             cache: false,
-            //             contentType: false,
-            //             processData: false,
-            //             success: function(response) {
-            //                 console.log(response)
-            //                 if (response.successful == true) {
-            //                     Swal.fire({
-            //                         type: "success",
-            //                         title: 'บันทึกสำเร็จ!',
-            //                         text: '',
-            //                         confirmButtonClass: 'btn btn-success',
-            //                     }).then(function(result) {
-            //                         window.location.href =
-            //                             "{{ route('addEmployee1') }}"
-            //                     })
-            //                 }
-            //             }
-            //         });
-            //     }
-            // })
-        }
-
-
-
-        // function format_price(price) {
-        //     // console.log(price)
-        //     $('#salary').val(price.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-        //     // console.log("after :"+$('#salary').val())
-
-        // }
     </script>
 @endsection

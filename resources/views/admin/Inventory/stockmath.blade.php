@@ -106,7 +106,12 @@
                                                                 style="color: #5C5C5C;font-family: 'Kanit', sans-serif; font-weight:500;">
                                                                 ค่าเสื่อมทั้งหมด</h3>
                                                             <h1 style="font-family: 'Kanit', sans-serif; font-weight:500;">
-                                                                45,000.00</h1>
+                                                                {{ number_format($sumdepreciation, 2) }}
+                                                                {{-- @foreach ($inventorys as $stock)
+                                                                    <span>{{ $stock->sumdepreciation }}</span>
+                                                                @endforeach --}}
+                                                            </h1>
+
                                                         </div>
                                                     </div>
                                                     <div style="border-right: solid;margin: 10px"></div>
@@ -116,7 +121,7 @@
                                                             ราคาทั้งหมด</h3>
                                                         <h1
                                                             style="color: #164176;font-family: 'Kanit', sans-serif; font-weight:500;">
-                                                            500,000.00</h1>
+                                                            {{ number_format($sum_stprice, 2) }}</h1>
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,13 +155,9 @@
                                                                             aria-controls="collapseOne">
                                                                             <span class="lead collapse-title"
                                                                                 style="font-family: 'Kanit', sans-serif; font-weight:500;font-size:1.3rem;">
-
                                                                                 {{ $inventory['stname'] }}
-
                                                                             </span>
                                                                         </div>
-
-
                                                                         <div id="collapseOne{{ $inventory['id'] }}"
                                                                             class="collapse"
                                                                             aria-labelledby="headingOne_{{ $inventory['id'] }}"
@@ -209,14 +210,15 @@
                                                                                                                 </td>
                                                                                                                 <td>{{ $stock->stid }}
                                                                                                                 </td>
-                                                                                                                <td>{{ $stock->stname }}
-                                                                                                                </td>
+                                                                                                                {{-- <td>{{ $stock->stname }} </td>--}}
+                                                                                                                <td>{{ Str::limit($stock->stname, '20', '..') }}</td>
+
                                                                                                                 <td>{{ Carbon::parse($stock->stdaystart)->thaidate('j M Y') }}
                                                                                                                 </td>
                                                                                                                 <td>{{ number_format($stock->stprice) }}
                                                                                                                 </td>
                                                                                                                 <td>
-                                                                                                                    {{ $stock->depreciation }}
+                                                                                                                    {{ number_format($stock->depreciation, 2) }}
                                                                                                                 </td>
                                                                                                             </tr>
                                                                                                         @endforeach

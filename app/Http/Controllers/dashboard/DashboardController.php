@@ -18,6 +18,8 @@ use DatePeriod;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -95,6 +97,35 @@ class DashboardController extends Controller
         // dd($departList);
         return view('admin.profile', compact('departList', 'dp', 'stockList'));
     }
+    public function updateprofile(Request $request)
+    {
+        try {
+            // dd($request->all());
+            $table = User::find($request->id);
+            if ($request->hasfile('emImg')) {
+                $destination = 'imguse/' . $table->emimg;
+                $image = $request->file('emImg');
+                $extention = $image->getClientOriginalExtension();
+                $fileName  = time() . '.' . $extention;
+                $location = "imguse/" . $fileName;
+                $img = Image::make($image)->save($location);
+                $img->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($location);
+                $table->emimg = $fileName;
+                $table->save();
+                File::delete($destination);
+            }
+            // dd($request->all());
+            // $table->save();
+            //  DB::commit();
+            Alert::success('แก้ไขเรียบร้อย');
+            return redirect()->route('profilee')->with('success', 'เพิ่มสำเสร็จ');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->route('profilee')->with('error', 'ไม่สำเร็จ');
+        }
+    }
     public function chart($year)
 
     {
@@ -114,9 +145,9 @@ class DashboardController extends Controller
         );
         foreach ($period as $key => $value) {
             // dump($value->format('m'));
-            $a = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [1])->count('typeleave');
-            $b = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [2])->count('typeleave');
-            $c = Leave::whereNotIn('pnid', [0, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [3])->count('typeleave');
+            $a = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [1])->count('typeleave');
+            $b = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [2])->count('typeleave');
+            $c = Leave::whereNotIn('pnid', [0, 2, 3])->whereYear('created_at', $value->format('Y'))->whereMonth('created_at', $value->format('m'))->where('typeleave', [3])->count('typeleave');
             // $val = [
             //     'round_l1' => $round_l1,
             //     'round_l2' => $round_l2,
@@ -206,7 +237,7 @@ class DashboardController extends Controller
     {
         // dd('hngjgf');
         $data = [];
-        $data['departList'] = Department::where('dpstatus',1)->get();
+        $data['departList'] = Department::where('dpstatus', 1)->get();
         $data['user'] = User::whereNotIn('roleid', [2, 0])->get();
         $data['stock'] = Stock::get();
         return view('admin.absent', $data);
@@ -216,20 +247,16 @@ class DashboardController extends Controller
         $inventorys = Inventory::get();
         $inventory = [];
         $price = Stock::all();
-        // $sum_stprice = Stock::whereNotIn('stocks.ststatus', [2])->sum('amount');
-        // dd($sum_stprice);
-        // $sumdepreciation = $price->count();
+        $sum_stprice = 0;
+        $sum_stpricee = 0;
+        $sum_stprice = Stock::whereNotIn('stocks.ststatus', [0])->sum('stprice');
+        $sum_stpricee = Stock::whereNotIn('stocks.ststatus', [0])->sum('stmath');
+        $sumdepreciation = 0;
         foreach ($inventorys as $key => $value) {
             $inventory[$key]['id'] = $value->id;
             $inventory[$key]['stname'] = $value->stname;
             $inventory[$key]['list'] = Stock::where('sttype', $value->id)->whereNotIn('stocks.ststatus', [2])->get();
             $data['count_depreciation'] = $price->count();
-            // $data['count_leavesum'] = $user->count();
-            // $data['count_leaveover'] = $user->count();
-            // $data['count_salary'] = $user->count();
-            $sumdepreciation = 0;
-            // $sumdepreciation = $price->stmath->count();
-            // dd($sumdepreciation);
 
             foreach ($inventory[$key]['list'] as $key_stock => $stock) {
                 $date = strtotime(date('Y-m-d'));    //วันปัจจุบัน
@@ -240,17 +267,21 @@ class DashboardController extends Controller
                 $strprice = floatval($stock->stprice);  //ราคาซื้อ
                 $stageuse = floatval($stock->stageuse) - $amont;    //จำนวนวันที่เลือก ลบ วันที่คงเหลือ
                 $depreciation = ($stmath * $amont);     //ค่าเสื่อมเฉลี่ยบต่อวัน คูณ วันที่คงเหลือ
-                // dd($amont);
                 $resultt = (($strprice - $depreciation) - 1) / $stageuse;
-                // dd( $depreciation);
-                $inventory[$key]['list'][$key_stock]['depreciation'] = (number_format($depreciation, 2));
-                // dd($depreciation);
+                $inventory[$key]['list'][$key_stock]['depreciation'] = ($depreciation);
+
+                $sumdepreciation += $depreciation;
+                // $sumdepreciation = $inventory[$key]['list'][$key_stock]->sum('depreciation');
+                // $sumdepreciation = $inventory[$key]['list']->sum('depreciation');
+                // dd($sumdepreciation);
             }
+            // dump($depreciation);
 
-
+            // $sumdepreciation = $inventory[$key]['list']->sum('depreciation');
         }
-
-        return view('admin.Inventory.stockmath', compact('inventory'));
+        // exit;
+        // dd($inventorys);
+        return view('admin.Inventory.stockmath', compact('inventory', 'sum_stprice', 'sumdepreciation', 'sum_stpricee'));
     }
     public function departsetting()
     {

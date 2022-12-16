@@ -10,7 +10,6 @@ use Intervention\Image\ImageManagerStatic as Image;
 use phpDocumentor\Reflection\PseudoTypes\False_;
 use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
-// use Alert;
 use App\Models\Department;
 use Illuminate\Support\Facades\File;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -41,20 +40,20 @@ class EmployeeController extends Controller
     {
         //
         $departmentList = Department::all();
-        $users = User::whereNotIn('roleid',[0,2])->where('emtype',0)->get();
-        $users_not = User::whereNotIn('roleid',[1,3])->get();
-        $users_admin = User::where('emtype',1)->get();
-        return view('admin.employee.Employee', compact('users', 'departmentList','users_not','users_admin'));
+        $users = User::whereNotIn('roleid', [0, 2])->where('emtype', 0)->get();
+        $users_not = User::whereNotIn('roleid', [1, 3])->get();
+        $users_admin = User::where('emtype', 1)->get();
+        return view('admin.employee.Employee', compact('users', 'departmentList', 'users_not', 'users_admin'));
     }
-    public function index1()
-    {
-        //
+    // public function index1()
+    // {
+    //     //
 
-        $departmentList = Department::all();
-        $users_not = User::whereNotIn('roleid',[1,3])->get();
-        // $sum_salary = $users->sum('salary');
-        return view('admin.setting.employeesetting', compact('departmentList','users_not'));
-    }
+    //     $departmentList = Department::all();
+    //     $users_not = User::whereNotIn('roleid', [1, 3])->get();
+    //     // $sum_salary = $users->sum('salary');
+    //     return view('admin.setting.employeesetting', compact('departmentList', 'users_not'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -136,10 +135,8 @@ class EmployeeController extends Controller
             $table->salary =  $request->salary;
             $table->taxname = $request->taxname;
             $table->department = $request->department;
-            // $table->startwork = date('Y-m-d', strtotime($request->startwork));
             $startwork = $request->startwork;
             $arry = explode("/", $startwork);
-            // dd($arry);
             $year = $arry[2] - 543;
             $table->startwork = $year . '-' . $arry[1] . '-' . $arry[0];
             $table->email = $request->email;
@@ -147,20 +144,21 @@ class EmployeeController extends Controller
             $table->password = Hash::make($request->password);
             // dd($request->all());
             $table->save();
-            Alert::success('บันทึกเรียบร้อย');
             DB::commit();
+            Alert::success('บันทึกสำเร็จ');
+
             return redirect()->route('employee')->with('success', 'เพิ่มสำเสร็จ');
             // return response()->json([
             //     'successful' => true
             // ]);
             // DB::commit();
         } catch (\Throwable $th) {
-            // DB::rollback();
-            // // dd($th->getMessage());
-            // return response()->json([
-            //     'successful' => False,
-            //     'msg' => $th->getMessage()
-            // ]);
+            DB::rollback();
+            // dd($th->getMessage());
+            return response()->json([
+                'successful' => False,
+                'msg' => $th->getMessage()
+            ]);
             return redirect()->back()->with('error', 'ไม่สำเร็จ');
         }
     }
@@ -197,7 +195,7 @@ class EmployeeController extends Controller
         $user = User::find($id);
         $imguse =  User::find($id)->where('');
         // dd($user);
-        return view('admin.employee.editEmployee', compact('user', 'departmentList','imguse'));
+        return view('admin.employee.editEmployee', compact('user', 'departmentList', 'imguse'));
     }
 
     /**
@@ -213,6 +211,7 @@ class EmployeeController extends Controller
         try {
 
             // dd($request->all());
+            DB::beginTransaction();
             $table = User::find($id);
             // dd($request->id);
             $table->emtype =  $request->emType;
@@ -282,7 +281,7 @@ class EmployeeController extends Controller
                 $table->password = $request->password;
             }
             $table->save();
-            //  DB::commit();
+             DB::commit();
             Alert::success('แก้ไขเรียบร้อย');
             // Alert::success('แก้ไขเรียบร้อย     ', 'You\'ve Successfully Registered');
             // return redirect()->back()->with('success', 'เพิ่มสำเสร็จ');

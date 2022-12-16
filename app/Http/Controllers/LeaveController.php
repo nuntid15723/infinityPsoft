@@ -169,6 +169,7 @@ class LeaveController extends Controller
                 // dd( $table->dayendla);
                 $table->reasonla =  $request->reasonla;
                 $table->save();
+                // Alert::success('บันทึกเรียบร้อย');
                 DB::commit();
                 Alert::success('บันทึกเรียบร้อย');
                 return redirect()->route('absent')->with('success', 'เพิ่มสำเสร็จ');

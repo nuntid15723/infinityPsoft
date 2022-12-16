@@ -334,7 +334,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item" href="{{ route('profilee') }}"><i
-                                    class="feather icon-user"></i> โปรไฟล์</a>
+                                        class="feather icon-user"></i> โปรไฟล์</a>
                                 {{-- <a class="dropdown-item" href="{{ route('logout') }}"><i class="feather icon-user"></i> Edit Profile</a> --}}
                                 {{-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My Inbox</a>
                                 <a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a>
@@ -489,7 +489,8 @@
                 </li>
                 <li class="{{ Request::routeIs('') ? 'active' : '' }} nav-item">
                     <a href="{{ route('employee') }}"><i class="bi bi-people-fill"style="margin-top: 3px;"></i><span
-                            class="menu-title" data-i18n="Calender"style="font-size: 18px; ">จัดการสมาชิก</span></a>
+                            class="menu-title" data-i18n="Calender"style="font-size: 18px; ">จัดการพนักงาน
+                        </span></a>
                     <ul class="menu-content">
                         <li class="{{ Request::routeIs('employee') ? 'active' : '' }} nav-item"><a
                                 href="{{ route('employee') }}"><i class="feather icon-circle"
@@ -508,7 +509,7 @@
                 </li>
                 <li class="{{ Request::routeIs('work') ? 'active' : '' }} nav-item"><a href="{{ route('work') }}"><i
                             class="bi bi-clock-history"style="margin-top: 3px;"></i><span class="menu-title"
-                            data-i18n="Chat"style="font-size: 18px; ">ตารางพนักงาน</span></a>
+                            data-i18n="Chat"style="font-size: 18px; ">ตารางการทำงาน</span></a>
                 </li>
                 <li class="{{ Request::routeIs('salary') ? 'active' : '' }} nav-item"><a
                         href="{{ route('salary') }}"><i class="bi bi-cash"style="margin-top: 3px;"></i><span
@@ -519,15 +520,15 @@
                             class="bi bi-file-earmark-text"style="margin-top: 3px;"></i><span class="menu-title"
                             data-i18n="Chat"style="font-size: 18px; ">การลา</span></a>
                     <ul class="menu-content">
-                        <li class="{{ Request::routeIs('absent') ? 'active' : '' }} nav-item"><a
-                                href="{{ route('absent') }}"><i
-                                    class="feather icon-circle"style="font-size: 1.2rem;"></i><span class="menu-item"
-                                    data-i18n="Shop">แบบฟอร์มใบลา</span></a>
-                        </li>
                         <li class="{{ Request::routeIs('sumleavework') ? 'active' : '' }} nav-item"><a
                                 href="{{ route('sumleavework') }}"><i
                                     class="feather icon-circle"style="font-size: 1.2rem;"></i><span class="menu-item"
                                     data-i18n="Checkout">ประวัติการลา</span></a>
+                        </li>
+                        <li class="{{ Request::routeIs('absent') ? 'active' : '' }} nav-item"><a
+                                href="{{ route('absent') }}"><i
+                                    class="feather icon-circle"style="font-size: 1.2rem;"></i><span class="menu-item"
+                                    data-i18n="Shop">แบบฟอร์มใบลา</span></a>
                         </li>
                     </ul>
                 </li>
@@ -778,9 +779,9 @@
         Pusher.logToConsole = true;
 
         var pusher = new Pusher('a7d54ae0924576c9efb5', {
-            cluster: 'ap1',
-            // useTLS: true
+            cluster: 'ap1'
         });
+        // useTLS: true
         var channel = pusher.subscribe('channel-admin');
         channel.bind('event-admin', function(data) {
             countbell = countbell + 1;

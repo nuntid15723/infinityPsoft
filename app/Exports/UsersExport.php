@@ -61,8 +61,35 @@ class UsersExport implements FromView, ShouldAutoSize
             // 'users' => User::all()
         ]);
     }
-    // public function export()
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'employee.xlsx');
+    }
+    // public function view(): View
     // {
-    //     return Excel::download(new UsersExport, 'employee.xlsx');
+
+
+    //     $data = User::whereNotIn('roleid', [0, 2])->get();
+    //     $array = [];
+    //     foreach ($data as  $value) {
+    //         if ($value->emtype == 1) {
+    //             $emtype = 'แอดมิน';
+    //         } elseif ($value->emtype == 0) {
+    //             $emtype = 'พนักงาน';
+    //         }
+
+    //         $type = [
+    //             'emid' => $value->emid,
+    //             'fullname' => $value->fullname,
+    //             'phonenumber' => $value->phonenumber,
+    //             'email' => $value->email,
+    //             'salary' => $value->salary,
+    //             'emtype' => $emtype,
+    //         ];
+    //         array_push($array, $type);
+    //     }
+    //     return view('admin.employee.employeeex', [
+    //         'users' => $array
+    //     ]);
     // }
 }

@@ -695,10 +695,8 @@
 
         }
         Pusher.logToConsole = true;
-
         var pusher = new Pusher('a7d54ae0924576c9efb5', {
-            cluster: 'ap1',
-            useTLS: true
+            cluster: 'ap1'
         });
         // moment.locale('th');
         var channel = pusher.subscribe('channel-user');

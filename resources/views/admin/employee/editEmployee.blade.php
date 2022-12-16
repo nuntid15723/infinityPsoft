@@ -198,7 +198,7 @@
                                                                 <div class="form-group">
                                                                     <label for="emId"
                                                                         style="font-size: 1.0rem !important;color:#525252;">เลขประจำตัวพนักงาน<span
-                                                                            style="color: red">*</span></label>
+                                                                            style="color: red"></span></label>
                                                                     <fieldset
                                                                         class="form-group position-relative has-icon-left input-divider-left">
 
@@ -458,7 +458,7 @@
                                                                         <input type="text" placeholder="โรงพยาบาล"
                                                                             class="form-control"
                                                                             value="{{ $user->taxname }}"
-                                                                            name="tax"oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                                                                            name="taxname">
                                                                         <div class="form-control-position">
                                                                             <i class="bi bi-credit-card-2-front-fill"></i>
                                                                         </div>
@@ -695,6 +695,22 @@
 @endsection
 @section('script')
     <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                language: 'th-th',
+                format: 'dd/mm/yyyy',
+                autoclose: true
+            });
+        });
+        $(function() {
+            $("#datepicker1").datepicker({
+                language: 'th-th',
+                format: 'dd/mm/yyyy',
+                autoclose: true
+            });
+        });
+    </script>
+    <script>
         function readURL(input) {
             const file = input.files[0];
             const fileType = file['type'];
@@ -786,6 +802,7 @@
             e.preventDefault();
         });
     </script>
+
 
 
     {{-- <script type="text/javascript">
