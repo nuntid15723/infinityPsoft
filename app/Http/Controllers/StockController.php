@@ -204,7 +204,7 @@ class StockController extends Controller
     {
         //
         // dd('fgvdf');
-        $user = User::get();
+        $user = User::whereNotIn('roleid', [2, 0])->get();
         $unit = Unit::get();
         $inventoryList = Inventory::where('ststatus', [1])->get();
         $stock = Stock::find($id);

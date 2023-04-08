@@ -104,9 +104,9 @@
                                                             {{-- border-right: solid --}}
                                                             <h3
                                                                 style="color: #5C5C5C;font-family: 'Kanit', sans-serif; font-weight:500;">
-                                                                ค่าเสื่อมทั้งหมด</h3>
+                                                                มูลค่าคงเหลือ</h3>
                                                             <h1 style="font-family: 'Kanit', sans-serif; font-weight:500;">
-                                                                {{ number_format($sumdepreciation, 2) }}
+                                                                {{ number_format($sum_stprice - $sumdepreciation, 2) }}
                                                                 {{-- @foreach ($inventorys as $stock)
                                                                     <span>{{ $stock->sumdepreciation }}</span>
                                                                 @endforeach --}}
@@ -210,8 +210,9 @@
                                                                                                                 </td>
                                                                                                                 <td>{{ $stock->stid }}
                                                                                                                 </td>
-                                                                                                                {{-- <td>{{ $stock->stname }} </td>--}}
-                                                                                                                <td>{{ Str::limit($stock->stname, '20', '..') }}</td>
+                                                                                                                {{-- <td>{{ $stock->stname }} </td> --}}
+                                                                                                                <td>{{ Str::limit($stock->stname, '20', '..') }}
+                                                                                                                </td>
 
                                                                                                                 <td>{{ Carbon::parse($stock->stdaystart)->thaidate('j M Y') }}
                                                                                                                 </td>

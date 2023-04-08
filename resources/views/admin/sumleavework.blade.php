@@ -622,8 +622,7 @@
                                                                                         <table
                                                                                             class="table zero-configuration"
                                                                                             style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
-                                                                                            <thead
-                                                                                                class="thead-secondary ">
+                                                                                            <thead class="thead-secondary ">
 
                                                                                                 <tr
                                                                                                     class="dataTables_scroll">
