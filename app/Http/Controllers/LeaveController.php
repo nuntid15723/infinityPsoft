@@ -25,15 +25,79 @@ class LeaveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     //
+    //     // dd('dfvcasdf');
+    //     Carbon::parse()->thaidate();
+    //     $leaveList = Leave::join('users', 'users.emid', '=', 'leaves.emid')
+    //         ->join('department', 'department.id', '=', 'leaves.ladepartment')
+    //         ->orderBy('leaves.id', 'DESC')
+    //         ->where('leaves.pnid', [2])
+    //         ->select(
+    //             'leaves.id as id',
+    //             'leaves.pnid as pnid',
+    //             'leaves.emid as emid',
+    //             'users.fullname as fullname',
+    //             'leaves.ladepartment as department',
+    //             'users.phonenumber as phonenumber',
+    //             'leaves.daystartla as daystartla',
+    //             'leaves.dayendla as dayendla',
+    //             'leaves.typeleave as typeleave',
+    //             'leaves.timestart as timestart',
+    //             'leaves.timeend as timeend',
+    //             'department.dpname as dpname',
+    //         )->get();
+    //     // dd($leaveList);
+    //     $leaveList1 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
+    //         ->join('department', 'department.id', '=', 'leaves.ladepartment')
+    //         ->orderBy('leaves.id', 'DESC')
+    //         ->where('leaves.pnid', [1])
+    //         ->select(
+    //             'leaves.id as id',
+    //             'leaves.pnid as pnid',
+    //             'leaves.emid as emid',
+    //             'users.fullname as fullname',
+    //             'leaves.ladepartment as department',
+    //             'users.phonenumber as phonenumber',
+    //             'leaves.daystartla as daystartla',
+    //             'leaves.dayendla as dayendla',
+    //             'leaves.typeleave as typeleave',
+    //             'leaves.timestart as timestart',
+    //             'leaves.timeend as timeend',
+    //             'department.dpname as dpname',
+    //         )->get();
+    //     // dd($leaveList1);
+    //     $leaveList2 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
+    //         ->join('department', 'department.id', '=', 'leaves.ladepartment')
+    //         ->orderBy('leaves.id', 'DESC')
+    //         ->where('leaves.pnid', [0])
+    //         ->select(
+    //             'leaves.id as id',
+    //             'leaves.pnid as pnid',
+    //             'leaves.emid as emid',
+    //             'users.fullname as fullname',
+    //             'leaves.ladepartment as department',
+    //             'users.phonenumber as phonenumber',
+    //             'leaves.daystartla as daystartla',
+    //             'leaves.dayendla as dayendla',
+    //             'leaves.typeleave as typeleave',
+    //             'leaves.timestart as timestart',
+    //             'leaves.timeend as timeend',
+    //             'department.dpname as dpname',
+    //         )->get();
+    //     // dd($useList);
+    //     // $leaveList = Leave::all();
+    //     // dd($leaveList);
+    //     $departmentList = Department::all();
+    //     return view('admin.sumleavework', compact('leaveList', 'leaveList1', 'leaveList2', 'departmentList'));
+    // }
     public function index()
     {
-        //
-        // dd('dfvcasdf');
-        Carbon::parse()->thaidate();
-        $leaveList = Leave::join('users', 'users.emid', '=', 'leaves.emid')
+        $leaveLists = Leave::join('users', 'users.emid', '=', 'leaves.emid')
             ->join('department', 'department.id', '=', 'leaves.ladepartment')
+            ->whereIn('leaves.pnid', ['2', '1', '0'])
             ->orderBy('leaves.id', 'DESC')
-            ->where('leaves.pnid', [2])
             ->select(
                 'leaves.id as id',
                 'leaves.pnid as pnid',
@@ -46,52 +110,21 @@ class LeaveController extends Controller
                 'leaves.typeleave as typeleave',
                 'leaves.timestart as timestart',
                 'leaves.timeend as timeend',
-                'department.dpname as dpname',
-            )->get();
-        // dd($leaveList);
-        $leaveList1 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
-            ->join('department', 'department.id', '=', 'leaves.ladepartment')
-            ->orderBy('leaves.id', 'DESC')
-            ->where('leaves.pnid', [1])
-            ->select(
-                'leaves.id as id',
-                'leaves.pnid as pnid',
-                'leaves.emid as emid',
-                'users.fullname as fullname',
-                'leaves.ladepartment as department',
-                'users.phonenumber as phonenumber',
-                'leaves.daystartla as daystartla',
-                'leaves.dayendla as dayendla',
-                'leaves.typeleave as typeleave',
-                'leaves.timestart as timestart',
-                'leaves.timeend as timeend',
-                'department.dpname as dpname',
-            )->get();
-        // dd($leaveList1);
-        $leaveList2 = Leave::join('users', 'users.emid', '=', 'leaves.emid')
-            ->join('department', 'department.id', '=', 'leaves.ladepartment')
-            ->orderBy('leaves.id', 'DESC')
-            ->where('leaves.pnid', [0])
-            ->select(
-                'leaves.id as id',
-                'leaves.pnid as pnid',
-                'leaves.emid as emid',
-                'users.fullname as fullname',
-                'leaves.ladepartment as department',
-                'users.phonenumber as phonenumber',
-                'leaves.daystartla as daystartla',
-                'leaves.dayendla as dayendla',
-                'leaves.typeleave as typeleave',
-                'leaves.timestart as timestart',
-                'leaves.timeend as timeend',
-                'department.dpname as dpname',
-            )->get();
-        // dd($useList);
-        // $leaveList = Leave::all();
-        // dd($leaveList);
+                'department.dpname as dpname'
+            )
+            ->get()
+            ->groupBy('pnid');
         $departmentList = Department::all();
-        return view('admin.sumleavework', compact('leaveList', 'leaveList1', 'leaveList2', 'departmentList'));
+
+        if ($leaveLists->count()) {
+            return view('admin.sumleavework', compact('leaveLists', 'departmentList'));
+        } else {
+            return "No results found";
+        }
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -142,13 +175,6 @@ class LeaveController extends Controller
                 $day1 = $arry1[2] - 543;
                 $table->daystartla = $day1 . '-' . $arry1[1] . '-' . $arry1[0];
                 // dd($day1);
-
-
-                // $table->stdaystart = date('Y-m-d', strtotime($request->stdaystart));
-
-                // if ($request->dayendla = null) {
-                //     $table->dayendla = $table->daystartla;
-                // } else {
                 $dayendla = $request->dayendla;
                 if ($dayendla == null) {
                     $daystartla;
@@ -163,32 +189,41 @@ class LeaveController extends Controller
 
                     $table->dayendla = $year . '-' . $arry[1] . '-' . $arry[0];
                 }
-                // dd($request->all());
-                // $table->daystartla = date('Y-m-d', strtotime($request->daystartla));
-                // $table->dayendla = date('Y-m-d', strtotime($request->dayendla));
-                // dd( $table->dayendla);
                 $table->reasonla =  $request->reasonla;
                 $table->save();
                 // Alert::success('บันทึกเรียบร้อย');
+                //     DB::commit();
+                //     Alert::success('บันทึกเรียบร้อย');
+                //     return redirect()->route('absent')->with('success', 'เพิ่มสำเสร็จ');
+                //     // return response()->json([
+                //     //     'successful' => true
+                //     // ]);
+                //     // DB::commit();
+                // } catch (\Throwable $th) {
+                //     DB::rollback();
+                //     // dd($th->getMessage());
+                //     return response()->json([
+                //         'successful' => False,
+                //         'msg' => $th->getMessage()
+                //     ]);
+                //     // return redirect()->back()->with('error', 'ไม่สำเร็จ');
+                // }
                 DB::commit();
                 Alert::success('บันทึกเรียบร้อย');
                 return redirect()->route('absent')->with('success', 'เพิ่มสำเสร็จ');
                 // return response()->json([
                 //     'successful' => true
                 // ]);
-                // DB::commit();
             } catch (\Throwable $th) {
                 DB::rollback();
-                // dd($th->getMessage());
                 return response()->json([
                     'successful' => False,
                     'msg' => $th->getMessage()
                 ]);
-                // return redirect()->back()->with('error', 'ไม่สำเร็จ');
             }
         }
     }
-
+   
     /**
      * Display the specified resource.
      *

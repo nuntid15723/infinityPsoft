@@ -619,11 +619,10 @@
                                                                             <div class="card-content">
                                                                                 <div class="card-body card-dashboard">
                                                                                     <div class="table-responsive  ">
-                                                                                        {{-- <table
+                                                                                        <table
                                                                                             class="table zero-configuration"
                                                                                             style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
-                                                                                            <thead
-                                                                                                class="thead-secondary ">
+                                                                                            <thead class="thead-secondary ">
 
                                                                                                 <tr
                                                                                                     class="dataTables_scroll">
@@ -651,15 +650,16 @@
                                                                                                 @php
                                                                                                     $i = 0;
                                                                                                 @endphp
-                                                                                                @foreach ($leaveLists as $leaveDetall)
+                                                                                                @foreach ($leaveList as $leaveDetall)
                                                                                                     <tr>
                                                                                                         <td>{{ ++$i }}
                                                                                                         </td>
                                                                                                         <td>{{ $leaveDetall->emid }}
                                                                                                         </td>
-                                                                                                         <td>
+                                                                                                        <td>
                                                                                                             <div>
                                                                                                                 {{ Str::limit($leaveDetall->fullname, '20', '..') }}
+                                                                                                                {{-- {{ $leaveDetall->fullname }} --}}
                                                                                                         </td>
                                                                                                         <td class="p-1">
                                                                                                             {{ $leaveDetall->dpname }}
@@ -680,6 +680,7 @@
                                                                                                                     ครึ่งบ่าย
                                                                                                                 @endif
 
+                                                                                                                {{-- {{$leaveDetall->timestart}} --}}
                                                                                                                 (
                                                                                                                 @if ($leaveDetall->timeend == 0)
                                                                                                                     ลาเต็ม
@@ -726,6 +727,9 @@
                                                                                                             @else
                                                                                                                 <div class="chip chip-warning"
                                                                                                                     type="button"
+                                                                                                                    {{-- data-toggle="modal"
+                                                                                                            aria-labelledby="exampleModalScrollableTitle"
+                                                                                                            data-target="#defaultSize" --}}
                                                                                                                     onclick="getData('{{ $leaveDetall->id }}')"
                                                                                                                     aria-hidden="true">
                                                                                                                     <div
@@ -736,160 +740,15 @@
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
+                                                                                                                {{-- @php
+                                                                                                            dd($leaveDetall->id);
+                                                                                                        @endphp --}}
                                                                                                             @endif
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                 @endforeach
                                                                                             </tbody>
-                                                                                        </table> --}}
-                                                                                        @foreach ($leaveLists as $pnid => $leaveList)
-                                                                                            @if ($pnid == 0)
-                                                                                                <table
-                                                                                                    class="table zero-configuration"
-                                                                                                    style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
-                                                                                                    <thead
-                                                                                                        class="thead-secondary ">
-                                                                                                        <tr
-                                                                                                            class="dataTables_scroll">
-                                                                                                            <th
-                                                                                                                style="border-radius: 15px 0px 0px 0px;">
-                                                                                                                ลำดับ
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                รหัสพนักงาน
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                ชื่อ -
-                                                                                                                นามสกุล
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                แผนก
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                เบอร์โทรศัพท์
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                วันที่เริ่มลา
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                วันที่สิ้นสุด
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                ระยะเวลาการลา
-                                                                                                            </th>
-                                                                                                            <th>
-                                                                                                                ประเภทการลา
-                                                                                                            </th>
-                                                                                                            <th
-                                                                                                                style="border-top-right-radius: 15px;">
-                                                                                                                สถานะการลา
-                                                                                                            </th>
-                                                                                                        </tr>
-                                                                                                    </thead>
-                                                                                                    <tbody>
-                                                                                                        @php
-                                                                                                            $i = 0;
-                                                                                                        @endphp
-                                                                                                        @foreach ($leaveList as $leave)
-                                                                                                            <tr>
-                                                                                                                <td>{{ ++$i }}
-                                                                                                                </td>
-                                                                                                                <td>{{ $leave->emid }}
-                                                                                                                </td>
-                                                                                                                <td>
-                                                                                                                    <div>
-                                                                                                                        {{ Str::limit($leave->fullname, '20', '..') }}
-                                                                                                                        {{-- {{ $leave->fullname }} --}}
-                                                                                                                </td>
-                                                                                                                <td
-                                                                                                                    class="p-1">
-                                                                                                                    {{ $leave->dpname }}
-                                                                                                                </td>
-                                                                                                                <td>{{ $leave->phonenumber }}
-                                                                                                                </td>
-                                                                                                                <td>{{ Carbon::parse($leave->daystartla)->thaidate('j M Y') }}
-                                                                                                                </td>
-                                                                                                                <td>{{ Carbon::parse($leave->dayendla)->thaidate('j M Y') }}
-                                                                                                                </td>
-                                                                                                                <td>
-                                                                                                                    <span>
-                                                                                                                        @if ($leave->timestart == 1)
-                                                                                                                            ทั้งวัน
-                                                                                                                        @elseif($leave->timestart == 2)
-                                                                                                                            ครึ่งเช้า
-                                                                                                                        @else
-                                                                                                                            ครึ่งบ่าย
-                                                                                                                        @endif
-
-                                                                                                                        {{-- {{$leave->timestart}} --}}
-                                                                                                                        (
-                                                                                                                        @if ($leave->timeend == 0)
-                                                                                                                            ลาเต็ม
-                                                                                                                        @elseif($leave->timeend == 1)
-                                                                                                                            1
-                                                                                                                            ชั่วโมง
-                                                                                                                        @elseif($leave->timeend == 2)
-                                                                                                                            2
-                                                                                                                            ชั่วโมง
-                                                                                                                        @else
-                                                                                                                            3
-                                                                                                                            ชั่วโมง
-                                                                                                                        @endif
-                                                                                                                        )
-                                                                                                                    </span>
-                                                                                                                </td>
-                                                                                                                <td>
-                                                                                                                    @if ($leave->typeleave == 1)
-                                                                                                                        ลากิจ
-                                                                                                                    @elseif($leave->typeleave == 2)
-                                                                                                                        ลาพักร้อน
-                                                                                                                    @else
-                                                                                                                        ลาป่วย
-                                                                                                                    @endif
-                                                                                                                </td>
-                                                                                                                <td>
-
-                                                                                                                    @if ($leave->typeleave == 3)
-                                                                                                                        <div class="chip chip-warning"
-                                                                                                                            type="button"
-                                                                                                                            data-toggle="modal"
-                                                                                                                            aria-labelledby="exampleModalScrollableTitle"
-                                                                                                                            data-target="#exampleModalScrollable"
-                                                                                                                            onclick="getData1('{{ $leave->id }}')"
-                                                                                                                            aria-hidden="true">
-                                                                                                                            <div
-                                                                                                                                class="chip-body">
-                                                                                                                                <div
-                                                                                                                                    class="chip-text">
-                                                                                                                                    รออนุมัติ
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    @else
-                                                                                                                        <div class="chip chip-warning"
-                                                                                                                            type="button"
-                                                                                                                            {{-- data-toggle="modal"
-                                                                                                            aria-labelledby="exampleModalScrollableTitle"
-                                                                                                            data-target="#defaultSize" --}}
-                                                                                                                            onclick="getData('{{ $leave->id }}')"
-                                                                                                                            aria-hidden="true">
-                                                                                                                            <div
-                                                                                                                                class="chip-body">
-                                                                                                                                <div
-                                                                                                                                    class="chip-text">
-                                                                                                                                    รออนุมัติ
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    @endif
-                                                                                                                </td>
-                                                                                                            </tr>
-                                                                                                        @endforeach
-                                                                                                    </tbody>
-                                                                                                </table>
-                                                                                            @endif
-                                                                                        @endforeach
-
+                                                                                        </table>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -918,128 +777,119 @@
                                                                                 <div class="card-content">
                                                                                     <div class="card-body card-dashboard">
                                                                                         <div class="table-responsive  ">
-                                                                                            @foreach ($leaveLists as $pnid => $leaveList)
-                                                                                                @if ($pnid == 1)
-                                                                                                    <table
-                                                                                                        class="table zero-configuration"
-                                                                                                        style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
-                                                                                                        <thead
-                                                                                                            class="thead-secondary ">
-                                                                                                            <tr
-                                                                                                                class="dataTables_scroll">
-                                                                                                                <th
-                                                                                                                    style="border-radius: 15px 0px 0px 0px;">
-                                                                                                                    ลำดับ
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    รหัสพนักงาน
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ชื่อ -
-                                                                                                                    นามสกุล
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    แผนก
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    เบอร์โทรศัพท์
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    วันที่เริ่มลา
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    วันที่สิ้นสุด
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ระยะเวลาการลา
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ประเภทการลา
-                                                                                                                </th>
-                                                                                                                <th
-                                                                                                                    style="border-top-right-radius: 15px;">
-                                                                                                                    สถานะการลา
-                                                                                                                </th>
+                                                                                            <table
+                                                                                                class="table zero-configuration"
+                                                                                                style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                                <thead
+                                                                                                    class="thead-secondary ">
+                                                                                                    <tr
+                                                                                                        class="dataTables_scroll">
+                                                                                                        <th
+                                                                                                            style="border-radius: 15px 0px 0px 0px;">
+                                                                                                            ลำดับ</th>
+                                                                                                        <th>
+                                                                                                            รหัสพนักงาน</th>
+                                                                                                        <th>
+                                                                                                            ชื่อ - นามสกุล
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            แผนก
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            เบอร์โทรศัพท์
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            วันที่เริ่มลา
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            วันที่สิ้นสุด
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            ระยะเวลาการลา
+                                                                                                        </th>
+                                                                                                        <th>
+                                                                                                            ประเภทการลา</th>
+                                                                                                        <th
+                                                                                                            style="border-top-right-radius: 15px;">
+                                                                                                            สถานะการลา</th>
 
 
-                                                                                                            </tr>
-                                                                                                        </thead>
-                                                                                                        <tbody>
-                                                                                                            @php
-                                                                                                                $i = 0;
-                                                                                                            @endphp
-                                                                                                            @foreach ($leaveList as $leave)
-                                                                                                                <tr>
-                                                                                                                    <td>{{ ++$i }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ $leave->emid }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        {{-- {{ $leave->fullname }} --}}
-                                                                                                                        {{ Str::limit($leave->fullname, '20', '..') }}
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    @php
+                                                                                                        $i = 0;
+                                                                                                    @endphp
+                                                                                                    @foreach ($leaveList1 as $List1)
+                                                                                                        <tr>
+                                                                                                            <td>{{ ++$i }}
+                                                                                                            </td>
+                                                                                                            <td>{{ $List1->emid }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                {{-- {{ $List1->fullname }} --}}
+                                                                                                                {{ Str::limit($List1->fullname, '20', '..') }}
 
-                                                                                                                    </td>
-                                                                                                                    <td
-                                                                                                                        class="p-1">
-                                                                                                                        {{ $leave->dpname }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ $leave->phonenumber }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ Carbon::parse($leave->daystartla)->thaidate('j M Y') }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ Carbon::parse($leave->dayendla)->thaidate('j M Y') }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        <span>
-                                                                                                                            @if ($leave->timestart == 1)
-                                                                                                                                ทั้งวัน
-                                                                                                                            @elseif($leave->timestart == 2)
-                                                                                                                                ครึ่งเช้า
-                                                                                                                            @else
-                                                                                                                                ครึ่งบ่าย
-                                                                                                                            @endif
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                class="p-1">
+                                                                                                                {{ $List1->dpname }}
+                                                                                                            </td>
+                                                                                                            <td>{{ $List1->phonenumber }}
+                                                                                                            </td>
+                                                                                                            <td>{{ Carbon::parse($List1->daystartla)->thaidate('j M Y') }}
+                                                                                                            </td>
+                                                                                                            <td>{{ Carbon::parse($List1->dayendla)->thaidate('j M Y') }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <span>
+                                                                                                                    @if ($List1->timestart == 1)
+                                                                                                                        ทั้งวัน
+                                                                                                                    @elseif($List1->timestart == 2)
+                                                                                                                        ครึ่งเช้า
+                                                                                                                    @else
+                                                                                                                        ครึ่งบ่าย
+                                                                                                                    @endif
 
-                                                                                                                            {{-- {{$leaveDetall->timestart}} --}}
-                                                                                                                            (
-                                                                                                                            @if ($leave->timeend == 0)
-                                                                                                                                ลาเต็ม
-                                                                                                                            @elseif($leave->timeend == 1)
-                                                                                                                                1
-                                                                                                                                ชั่วโมง
-                                                                                                                            @elseif($leave->timeend == 2)
-                                                                                                                                2
-                                                                                                                                ชั่วโมง
-                                                                                                                            @else
-                                                                                                                                3
-                                                                                                                                ชั่วโมง
-                                                                                                                            @endif
-                                                                                                                            )
-                                                                                                                        </span>
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        @if ($leave->typeleave == 1)
-                                                                                                                            ลากิจ
-                                                                                                                        @elseif($leave->typeleave == 2)
-                                                                                                                            ลาพักร้อน
-                                                                                                                        @else
-                                                                                                                            ลาป่วย
-                                                                                                                        @endif
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        <div class="chip-text"
-                                                                                                                            style="color: #2E8B57">
-                                                                                                                            <b>
-                                                                                                                                อนุมัติสำเร็จ</b>
-                                                                                                                        </div>
-                                                                                                                    </td>
+                                                                                                                    {{-- {{$leaveDetall->timestart}} --}}
+                                                                                                                    (
+                                                                                                                    @if ($List1->timeend == 0)
+                                                                                                                        ลาเต็ม
+                                                                                                                    @elseif($List1->timeend == 1)
+                                                                                                                        1
+                                                                                                                        ชั่วโมง
+                                                                                                                    @elseif($List1->timeend == 2)
+                                                                                                                        2
+                                                                                                                        ชั่วโมง
+                                                                                                                    @else
+                                                                                                                        3
+                                                                                                                        ชั่วโมง
+                                                                                                                    @endif
+                                                                                                                    )
+                                                                                                                </span>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                @if ($List1->typeleave == 1)
+                                                                                                                    ลากิจ
+                                                                                                                @elseif($List1->typeleave == 2)
+                                                                                                                    ลาพักร้อน
+                                                                                                                @else
+                                                                                                                    ลาป่วย
+                                                                                                                @endif
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="chip-text"
+                                                                                                                    style="color: #2E8B57">
+                                                                                                                    <b>
+                                                                                                                        อนุมัติสำเร็จ</b>
+                                                                                                                </div>
+                                                                                                            </td>
 
 
-                                                                                                                </tr>
-                                                                                                            @endforeach
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                @endif
-                                                                                            @endforeach
+                                                                                                        </tr>
+                                                                                                    @endforeach
+                                                                                                </tbody>
+                                                                                            </table>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1068,125 +918,111 @@
                                                                                 <div class="card-content">
                                                                                     <div class="card-body card-dashboard">
                                                                                         <div class="table-responsive  ">
-                                                                                            @foreach ($leaveLists as $pnid => $leaveList)
-                                                                                                @if ($pnid == 2)
-                                                                                                    <table
-                                                                                                        class="table zero-configuration"
-                                                                                                        style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
-                                                                                                        <thead
-                                                                                                            class="thead-secondary ">
-                                                                                                            <tr
-                                                                                                                class="dataTables_scroll">
-                                                                                                                <th
-                                                                                                                    style="border-radius: 15px 0px 0px 0px;">
-                                                                                                                    ลำดับ
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    รหัสพนักงาน
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ชื่อ -
-                                                                                                                    นามสกุล
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    แผนก
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    เบอร์โทรศัพท์
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    วันที่เริ่มลา
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    วันที่สิ้นสุด
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ระยะเวลาการลา
-                                                                                                                </th>
-                                                                                                                <th>
-                                                                                                                    ประเภทการลา
-                                                                                                                </th>
-                                                                                                                <th
-                                                                                                                    style="border-top-right-radius: 15px;">
-                                                                                                                    สถานะการลา
-                                                                                                                </th>
-                                                                                                            </tr>
-                                                                                                        </thead>
-                                                                                                        <tbody>
-                                                                                                            @php
-                                                                                                                $i = 0;
-                                                                                                            @endphp
-                                                                                                            @foreach ($leaveList as $leave)
-                                                                                                                <tr>
-                                                                                                                    <td>{{ ++$i }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ $leave->emid }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        {{ Str::limit($leave->fullname, '20', '..') }}
+                                                                                            <table
+                                                                                                class="table zero-configuration "
+                                                                                                style="white-space: nowrap;border-radius: 0px 14px 0px 0px;border:0px solid !important;">
+                                                                                                <thead
+                                                                                                    class="thead-secondary ">
+                                                                                                    <tr
+                                                                                                        class="dataTables_scroll">
+                                                                                                        <th
+                                                                                                            style="border-radius: 15px 0px 0px 0px;">
+                                                                                                            ลำดับ</th>
+                                                                                                        <th>รหัสพนักงาน</th>
+                                                                                                        <th>ชื่อ - นามสกุล
+                                                                                                        </th>
+                                                                                                        <th>แผนก</th>
+                                                                                                        <th>เบอร์โทรศัพท์
+                                                                                                        </th>
+                                                                                                        <th>วันที่เริ่มลา
+                                                                                                        </th>
+                                                                                                        <th>วันที่สิ้นสุด
+                                                                                                        </th>
+                                                                                                        <th>ระยะเวลาการลา
+                                                                                                        </th>
+                                                                                                        <th>ประเภทการลา</th>
+                                                                                                        <th
+                                                                                                            style="border-top-right-radius: 15px;">
+                                                                                                            สถานะการลา</th>
 
-                                                                                                                    </td>
-                                                                                                                    <td
-                                                                                                                        class="p-1">
-                                                                                                                        {{ $leave->dpname }}
-                                                                                                                    </td>
-                                                                                                                    <td>{{ $leave->phonenumber }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        {{ Carbon::parse($leave->daystartla)->thaidate('j M Y') }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        {{ Carbon::parse($leave->dayendla)->thaidate('j M Y') }}
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        <span>
-                                                                                                                            @if ($leave->timestart == 1)
-                                                                                                                                ทั้งวัน
-                                                                                                                            @elseif($leave->timestart == 2)
-                                                                                                                                ครึ่งเช้า
-                                                                                                                            @else
-                                                                                                                                ครึ่งบ่าย
-                                                                                                                            @endif
-                                                                                                                            (
-                                                                                                                            @if ($leave->timeend == 0)
-                                                                                                                                ลาเต็ม
-                                                                                                                            @elseif($leave->timeend == 1)
-                                                                                                                                1
-                                                                                                                                ชั่วโมง
-                                                                                                                            @elseif($leave->timeend == 2)
-                                                                                                                                2
-                                                                                                                                ชั่วโมง
-                                                                                                                            @else
-                                                                                                                                3
-                                                                                                                                ชั่วโมง
-                                                                                                                            @endif
-                                                                                                                            )
-                                                                                                                        </span>
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        @if ($leave->typeleave == 1)
-                                                                                                                            ลากิจ
-                                                                                                                        @elseif($leave->typeleave == 2)
-                                                                                                                            ลาพักร้อน
-                                                                                                                        @else
-                                                                                                                            ลาป่วย
-                                                                                                                        @endif
-                                                                                                                    </td>
-                                                                                                                    <td>
-                                                                                                                        <div class="chip-text"
-                                                                                                                            style="color: #DE0808">
-                                                                                                                            <b>
-                                                                                                                                ไม่อนุมัติ</b>
-                                                                                                                        </div>
-                                                                                                                    </td>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    @php
+                                                                                                        $i = 0;
+                                                                                                    @endphp
+                                                                                                    @foreach ($leaveList2 as $List2)
+                                                                                                        <tr>
+                                                                                                            <td>{{ ++$i }}
+                                                                                                            </td>
+                                                                                                            <td>{{ $List2->emid }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                {{-- {{ $List2->fullname }} --}}
+                                                                                                                {{ Str::limit($List2->fullname, '20', '..') }}
+
+                                                                                                            </td>
+                                                                                                            <td
+                                                                                                                class="p-1">
+                                                                                                                {{ $List2->dpname }}
+                                                                                                            </td>
+                                                                                                            <td>{{ $List2->phonenumber }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                {{ Carbon::parse($List2->daystartla)->thaidate('j M Y') }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                {{ Carbon::parse($List2->dayendla)->thaidate('j M Y') }}
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <span>
+                                                                                                                    @if ($List2->timestart == 1)
+                                                                                                                        ทั้งวัน
+                                                                                                                    @elseif($List2->timestart == 2)
+                                                                                                                        ครึ่งเช้า
+                                                                                                                    @else
+                                                                                                                        ครึ่งบ่าย
+                                                                                                                    @endif
+
+                                                                                                                    {{-- {{$leaveDetall->timestart}} --}}
+                                                                                                                    (
+                                                                                                                    @if ($List2->timeend == 0)
+                                                                                                                        ลาเต็ม
+                                                                                                                    @elseif($List2->timeend == 1)
+                                                                                                                        1
+                                                                                                                        ชั่วโมง
+                                                                                                                    @elseif($List2->timeend == 2)
+                                                                                                                        2
+                                                                                                                        ชั่วโมง
+                                                                                                                    @else
+                                                                                                                        3
+                                                                                                                        ชั่วโมง
+                                                                                                                    @endif
+                                                                                                                    )
+                                                                                                                </span>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                @if ($List2->typeleave == 1)
+                                                                                                                    ลากิจ
+                                                                                                                @elseif($List2->typeleave == 2)
+                                                                                                                    ลาพักร้อน
+                                                                                                                @else
+                                                                                                                    ลาป่วย
+                                                                                                                @endif
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <div class="chip-text"
+                                                                                                                    style="color: #DE0808">
+                                                                                                                    <b>
+                                                                                                                        ไม่อนุมัติ</b>
+                                                                                                                </div>
+                                                                                                            </td>
 
 
-                                                                                                                </tr>
-                                                                                                            @endforeach
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                @endif
-                                                                                            @endforeach
+                                                                                                        </tr>
+                                                                                                    @endforeach
+                                                                                                </tbody>
+                                                                                            </table>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

@@ -306,33 +306,89 @@ class DashboardController extends Controller
     {
         return view('admin.cutSalary');
     }
+    // public function work()
+    // {
+    //     // $user = User::where('roleid', '!=', 2)->get();
+    //     $user = User::whereNotIn('roleid', [0, 2])->get();
+    //     $lastdate = date('t'); // วันสุดท้ายของเดือน
+    //     $data = [];
+    //     // loop user
+    //     foreach ($user  as $key => $value) {
+    //         // $leave = Leave::where([['emid',$value->emid],['pnid',1]])->orderBy('created_at','desc')->first();
+    //         $leave = Leave::where([['emid', $value->emid], ['pnid', 1]])->get();
+    //         $checkdate = collect();
+    //         foreach ($leave as $e => $val) {
+    //             $period = new DatePeriod(
+    //                 new DateTime(date('Y-m-d', strtotime($val->daystartla))),
+    //                 new DateInterval('P1D'),
+    //                 new DateTime(date('Y-m-d', strtotime($val->dayendla . '+1 day')))
+    //             );
+    //             foreach ($period as $k => $perdate) {
+    //                 // dump($perdate->format('Y-m-d'));
+    //                 $checkdate->push([
+    //                     'perdate' => $perdate->format('Y-m-d'),
+    //                     'type' => $val->typeleave
+    //                 ]);
+    //             }
+    //         }
+
+    //     $datemonth = collect(); // สร้าง collection เปล่าๆ (มันก็คือ array เปล่า)
+    //     for ($i = 1; $i <= $lastdate; $i++) {
+    //         $date = date('Y-m-' . $i);
+    //         if ($i < 10) {
+    //             $date = date('Y-m-0' . $i);
+    //         }
+    //         // type 1 ลากิจ 2 ลาพักร้อน 3 ลาป่วย
+    //         $check = $checkdate->where('perdate', $date)->first();
+    //         // dump($check);
+    //         $type = $check == null ? null : $check['type'];
+    //         // push ข้อมูลเข้าไปเก็บไว้ใน array
+    //         $datemonth->push([
+    //             'date' => $date,
+    //             'type' => $type
+    //         ]);
+    //     }
+    //     // exit;
+    //     $data[$key]['id'] = $value->id;
+    //     $data[$key]['fullname'] = $value->fullname;
+    //     $data[$key]['date'] = $datemonth;
+    // }
+    // // dd($data);
+
+    // return view('admin.work', compact('data'));
+    // }
+
     public function work()
     {
-        // $user = User::where('roleid', '!=', 2)->get();
+        // ดึงข้อมูลผู้ใช้ที่มี roleid ไม่เท่ากับ 0 หรือ 2
         $user = User::whereNotIn('roleid', [0, 2])->get();
-        $lastdate = date('t'); // วันสุดท้ายของเดือน
+        // หาวันสุดท้ายของเดือน
+        $lastdate = date('t');
+        // สร้างตัวแปร array ที่เป็นตัวเก็บข้อมูลของแต่ละผู้ใช้
         $data = [];
-        // loop user
-        foreach ($user  as $key => $value) {
-            // $leave = Leave::where([['emid',$value->emid],['pnid',1]])->orderBy('created_at','desc')->first();
+        // วน loop ผู้ใช้
+        foreach ($user as $key => $value) {
+            // ดึงข้อมูลวันลาของผู้ใช้ที่มี id เท่ากับ $value->emid และ pnid เท่ากับ 1 และเรียงลำดับตามวันที่สร้างลาล่าสุด
             $leave = Leave::where([['emid', $value->emid], ['pnid', 1]])->get();
+            // สร้าง collection เปล่าๆ (มันก็คือ array เปล่า)
             $checkdate = collect();
+            // วน loop วันลาของผู้ใช้
             foreach ($leave as $e => $val) {
+                // คำนวณวันที่ของแต่ละวันลาและ push เข้า collection
                 $period = new DatePeriod(
                     new DateTime(date('Y-m-d', strtotime($val->daystartla))),
                     new DateInterval('P1D'),
                     new DateTime(date('Y-m-d', strtotime($val->dayendla . '+1 day')))
                 );
                 foreach ($period as $k => $perdate) {
-                    // dump($perdate->format('Y-m-d'));
                     $checkdate->push([
                         'perdate' => $perdate->format('Y-m-d'),
                         'type' => $val->typeleave
                     ]);
                 }
             }
-
-            $datemonth = collect(); // สร้าง collection เปล่าๆ (มันก็คือ array เปล่า)
+            // สร้าง collection เปล่าๆ (มันก็คือ array เปล่า)
+            $datemonth = collect();
             for ($i = 1; $i <= $lastdate; $i++) {
                 $date = date('Y-m-' . $i);
                 if ($i < 10) {
@@ -353,8 +409,6 @@ class DashboardController extends Controller
             $data[$key]['fullname'] = $value->fullname;
             $data[$key]['date'] = $datemonth;
         }
-        // dd($data);
-
         return view('admin.work', compact('data'));
     }
 }
